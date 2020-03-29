@@ -1,0 +1,6 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+<file alias="images/login.svg">D:/Programming/Qt/MyProjects/e-journal/images/login.svg</file>
+<file alias="images/pass.svg">D:/Programming/Qt/MyProjects/e-journal/images/pass.svg</file>
+</qresource>
+</RCC>

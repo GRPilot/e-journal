@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Authorization.qml</file>
+        <file>AuthBlockPrefab.qml</file>
+        <file>InputBlock.qml</file>
+    </qresource>
+</RCC>
