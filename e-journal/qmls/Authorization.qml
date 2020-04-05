@@ -1,5 +1,5 @@
-import QtQuick 2.12
-import QtGraphicalEffects 1.12
+import QtQuick 2.9
+import QtGraphicalEffects 1.0
 
 Column {
     id: _AuthorizationWindow
@@ -69,6 +69,7 @@ Column {
         color: backColor
 
         Rectangle {
+            id: _buttonRect
 
             anchors.centerIn: parent
             width: parent.width / 2
@@ -88,30 +89,29 @@ Column {
                 acceptedButtons: Qt.LeftButton
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
-                onEntered: animateHovering.start();
-                onExited: animateExiting.start();
+                onEntered: { enteredAnim.start(); }
+                onExited: { exitingAnim.start(); }
                 onClicked: {
+                    //parent.color = 'green'
                     /* метод передачи логина и пароля в класс Authorization
                      * для проверки. А так же при правильности введенных данных
                      * закрытие текущего окна и открытие окна с авторизированным
                      * пользователем.
                      */
                 }
+
             }
 
-            PropertyAnimation {
-                id: animateHovering
-                target: parent
-                properties: "color"
-                to: "green"
-                duration: 500
+            ColorAnimation on color{
+                id: enteredAnim
+                to: "orange"
+                duration: 400
             }
-            PropertyAnimation {
-                id: animateExiting
-                target: parent
-                properties: "color"
+
+            ColorAnimation on color{
+                id: exitingAnim
                 to: "yellow"
-                duration: 500
+                duration: 400
             }
         }
     }
@@ -140,7 +140,9 @@ Column {
                 cursorShape: Qt.PointingHandCursor
                 onEntered: { forgotText.localColor = "white"; }
                 onExited: { forgotText.localColor = "#343464"; }
-                onClicked: { forgotText.localColor = "#AFAEAC" }
+                onClicked: {
+                    forgotText.localColor = "#AFAEAC"
+                }
             }
         }
     }

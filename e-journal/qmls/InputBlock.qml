@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick 2.9
 import QtGraphicalEffects 1.0
 
 Item {
@@ -12,7 +12,7 @@ Item {
     property Gradient localGradient: Gradient {}
 
     Image {
-        id: _loginImage
+        id: _image
         source: imgSource
         height: container.height / 1.5
         width: height
@@ -22,12 +22,12 @@ Item {
         id: space
         anchors.top: container.top
         anchors.bottom: container.bottom
-        anchors.left: _loginImage.right
+        anchors.left: _image.right
         width: 20
         color: "transparent"
     }
     Text {
-        id: _loginText
+        id: _text
 
         text: labelText
         color: localTextColor
@@ -37,9 +37,9 @@ Item {
         font.family: localFontFamily
     }
     Rectangle {
-        id: _loginTextInputContainer
+        id: _textInputContainer
         anchors.verticalCenter: container.verticalCenter
-        anchors.left: _loginText.right
+        anchors.left: _text.right
         anchors.right: parent.right
         anchors.leftMargin: 10
         height: container.height / 2
@@ -48,20 +48,20 @@ Item {
         radius: 5
 
         TextInput {
-            id: loginTextInput
+            id: _textInput
 
-            anchors.verticalCenter: _loginTextInputContainer.verticalCenter
-            anchors.left: _loginTextInputContainer.left
-            anchors.right: _loginTextInputContainer.right
+            anchors.verticalCenter: _textInputContainer.verticalCenter
+            anchors.left: _textInputContainer.left
+            anchors.right: _textInputContainer.right
             anchors.margins: 5
-            font.pointSize: _loginTextInputContainer.height * (3/6)
+            font.pointSize: _textInputContainer.height * (3/6)
             maximumLength: 32
 
             LinearGradient {
-                anchors.fill: loginTextInput
-                start: Qt.point(0, loginTextInput.height)
-                end: Qt.point(loginTextInput.width, 0)
-                source: loginTextInput
+                anchors.fill: _textInput
+                start: Qt.point(0, _textInput.height)
+                end: Qt.point(_textInput.width, 0)
+                source: _textInput
                 gradient: localGradient
             }
             MouseArea {
@@ -72,4 +72,3 @@ Item {
 
     }
 }
-
