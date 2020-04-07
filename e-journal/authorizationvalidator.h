@@ -20,7 +20,6 @@ class AuthorizationValidator : public QObject
  private:
     DBProvider *db;
     QString getHash(const QString password) const;
-    void addNewUser();
 };
 
 #endif // AUTHORIZATIONVALIDATOR_H

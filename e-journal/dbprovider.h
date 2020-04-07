@@ -17,8 +17,12 @@ class DBProvider
     DBProvider(const Tables table);
 
     DBProvider* select(const QString columns);
+    DBProvider* insert();
 
     DBProvider* where(const QString condition);
+    DBProvider* values(const std::vector<QString> values_list);
+
+
     bool exec();//QString query);
 
     QSqlQuery query() const;

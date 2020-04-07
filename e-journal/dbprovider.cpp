@@ -25,6 +25,12 @@ DBProvider *DBProvider::select(const QString columns)
     return this;
 }
 
+DBProvider *DBProvider::insert()
+{
+    m_buildingQuery = QString("INSERT INTO %1 ").arg(currentTabel());
+    return this;
+}
+
 DBProvider *DBProvider::where(const QString condition)
 {
     if (condition.isEmpty() || condition.isNull())
@@ -34,6 +40,23 @@ DBProvider *DBProvider::where(const QString condition)
         return nullptr;
 
     m_buildingQuery += QString("WHERE %1").arg(condition);
+    return this;
+}
+
+DBProvider *DBProvider::values(const std::vector<QString> values_list)
+{
+    if (values_list.empty() || m_buildingQuery.isEmpty() || m_buildingQuery.isNull())
+        return this;
+
+    if (!m_buildingQuery.contains("INSERT INTO"))
+        return this;
+
+    m_buildingQuery += "VALUES (";
+    for (auto&& val : values_list) {
+        m_buildingQuery += QString("'%1', ").arg(val);
+    }
+    m_buildingQuery[m_buildingQuery.size() - 1] = ')';
+
     return this;
 }
 

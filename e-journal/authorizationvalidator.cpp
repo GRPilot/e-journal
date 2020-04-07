@@ -36,7 +36,3 @@ QString AuthorizationValidator::getHash(const QString password) const {
        //QString blah = QString(QCryptographicHash::hash(password, QCryptographicHash::Md5));
        return password;//blah;
 }
-
-void AuthorizationValidator::addNewUser() {
-    //creating new person only for administrations
-}

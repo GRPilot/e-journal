@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>Authorization.qml</file>
         <file>AuthBlockPrefab.qml</file>
+        <file>MainWindow.qml</file>
     </qresource>
 </RCC>

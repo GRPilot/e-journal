@@ -1,15 +1,22 @@
 /* For developing in Qt 5.12: */
 import QtQuick 2.12
+import QtQuick.Window 2.12
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.12
 
 /*
  *  import QtQuick 2.9
+ *  import QtQuick.Window 2.9
  *  import QtQuick.Controls 2.2
  *  import QtGraphicalEffects 1.0
 */
+
+
 Column {
     id: _AuthorizationWindow
+
+    signal signalExit
+    anchors.fill: parent
 
     readonly property int commonScale: 5
     readonly property string commonFontFamily: "arial"
@@ -22,12 +29,6 @@ Column {
         GradientStop { position: 0.5; color: "#FE0069" }
         GradientStop { position: 0.75; color: "#FE00FF" }
         GradientStop { position: 1.0; color: "#F3FEFA" }
-    }
-
-    Connections {
-        target: checkUser;
-
-
     }
 
     // Title
@@ -45,7 +46,6 @@ Column {
             font.family: commonFontFamily
         }
     }
-
     // login
     AuthBlockPrefab {
         heightScale: commonScale
@@ -99,7 +99,7 @@ Column {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    anchors.margins: 5 
+                    anchors.margins: 5
                     font.pointSize: parent.height * (3/6)
                     maximumLength: 32
 
@@ -173,6 +173,9 @@ Column {
                     font.pointSize: parent.height * (3/6)
                     maximumLength: 32
 
+                    passwordCharacter: "*"
+                    echoMode: TextInput.Password
+
                     LinearGradient {
                         anchors.fill: _textPasswordInput
                         start: Qt.point(0, _textPasswordInput.height)
@@ -216,14 +219,14 @@ Column {
                 onExited: { exitingAnim.start(); }
 
                 /* метод передачи логина и пароля в класс AuthorizationValidator
-                 * для проверки. А так же при правильности введенных данных
-                 * закрытие текущего окна и открытие окна с авторизированным
-                 * пользователем.
-                 */
+                     * для проверки. А так же при правильности введенных данных
+                     * закрытие текущего окна и открытие окна с авторизированным
+                     * пользователем.
+                     */
                 onClicked: {
                     console.log(_textLoginInput.text + " " + _textPasswordInput.text);
                     if (!validator.checkUser(_textLoginInput.text, _textPasswordInput.text)) {
-                        //_mainWindow.show();
+                        _AuthorizationWindow.signalExit();
                     } else {
 
                     }
@@ -246,7 +249,6 @@ Column {
             }
         }
     }
-
     // Forgot pass text
     AuthBlockPrefab {
         heightScale: commonScale
@@ -278,8 +280,5 @@ Column {
         }
     }
 
-    /*MainWindow {
-        id: _mainWindow
-    }*/
 }
 
