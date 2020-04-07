@@ -12,8 +12,9 @@ AuthorizationValidator::~AuthorizationValidator()
 
 bool AuthorizationValidator::checkUser(QString login, QString password) const
 {
-    if (login.isEmpty() || login.isNull())
+    if (login.isEmpty() || login.isNull()) {
         return false;
+    }
 
     if (password.size() < minimumLenghtForPasswords)
         return false;

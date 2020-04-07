@@ -8,15 +8,17 @@
 class AuthorizationValidator : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool checkUser READ checkUser READONLY)
  public:
     const int minimumLenghtForPasswords = 4;
     explicit AuthorizationValidator(QObject *parent = nullptr);
     ~AuthorizationValidator();
-    bool checkUser(QString login, QString password) const;
 
  signals:
+    void sendToQml(bool isValid);
 
  public slots:
+    bool checkUser(QString login, QString password) const;
 
  private:
     DBProvider *db;

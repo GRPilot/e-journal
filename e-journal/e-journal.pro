@@ -20,6 +20,7 @@ SOURCES += \
     authorizationvalidator.cpp \
     dbprovider.cpp
 
+
 RESOURCES += \
          $$files(qmls/*.qrc) \
          $$files(images/*.svg)

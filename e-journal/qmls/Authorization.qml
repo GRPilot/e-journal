@@ -1,4 +1,9 @@
+/* For developing in Qt 5.12:
+ * import QtQuick 2.12
+ * import QtGraphicalEffects 1.9
+ */
 import QtQuick 2.9
+import QtQuick.Controls 2.2
 import QtGraphicalEffects 1.0
 
 Column {
@@ -15,6 +20,12 @@ Column {
         GradientStop { position: 0.5; color: "#FE0069" }
         GradientStop { position: 0.75; color: "#FE00FF" }
         GradientStop { position: 1.0; color: "#F3FEFA" }
+    }
+
+    Connections {
+        target: checkUser;
+
+
     }
 
     // Title
@@ -86,7 +97,7 @@ Column {
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    anchors.margins: 5
+                    anchors.margins: 5 
                     font.pointSize: parent.height * (3/6)
                     maximumLength: 32
 
@@ -98,10 +109,6 @@ Column {
                         gradient: textGradient
                     }
 
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.IBeamCursor
-                    }
                 }
 
             }
@@ -171,11 +178,6 @@ Column {
                         source: _textPasswordInput
                         gradient: textGradient
                     }
-
-                    MouseArea {
-                        anchors.fill: parent
-                        cursorShape: Qt.IBeamCursor
-                    }
                 }
             }
         }
@@ -211,6 +213,7 @@ Column {
                 onExited: { exitingAnim.start(); }
                 onClicked: {
                     console.log(_textLoginInput.text + " " + _textPasswordInput.text)
+                    if (checkValid)
                     //parent.color = 'green'
                     /* метод передачи логина и пароля в класс Authorization
                      * для проверки. А так же при правильности введенных данных
