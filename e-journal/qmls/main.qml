@@ -1,5 +1,5 @@
-import QtQuick 2.9
-import QtQuick.Window 2.3
+import QtQuick 2.12
+import QtQuick.Window 2.12
 
 Window {
     visible: true
@@ -8,7 +8,7 @@ Window {
     minimumWidth: 400
     minimumHeight: 500
 
-    title: qsTr("Hello World")
+    title: qsTr("e-journal")
 
     Authorization {
         visible: true

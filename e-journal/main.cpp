@@ -1,5 +1,6 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
 #include "authorizationvalidator.h"
 
 int main(int argc, char *argv[])
@@ -7,8 +8,6 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
-
-    AuthorizationValidator validator;
 
     QQmlApplicationEngine engine;
 
@@ -19,6 +18,8 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
+
+    engine.rootContext()->setContextProperty("validator", new AuthorizationValidator());
 
     return app.exec();
 }

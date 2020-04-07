@@ -1,11 +1,13 @@
-/* For developing in Qt 5.12:
- * import QtQuick 2.12
- * import QtGraphicalEffects 1.9
- */
-import QtQuick 2.9
-import QtQuick.Controls 2.2
+/* For developing in Qt 5.12: */
+import QtQuick 2.12
 import QtGraphicalEffects 1.0
+import QtQuick.Controls 2.12
 
+/*
+ *  import QtQuick 2.9
+ *  import QtQuick.Controls 2.2
+ *  import QtGraphicalEffects 1.0
+*/
 Column {
     id: _AuthorizationWindow
 
@@ -195,7 +197,7 @@ Column {
             width: parent.width / 2
             height: parent.height / 1.5
             radius: height / 2
-            color: "yellow"
+            color: "#c82f63"
 
             Text {
                 anchors.centerIn: parent
@@ -209,30 +211,37 @@ Column {
                 acceptedButtons: Qt.LeftButton
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
+                focus: false
                 onEntered: { enteredAnim.start(); }
                 onExited: { exitingAnim.start(); }
+
+                /* метод передачи логина и пароля в класс AuthorizationValidator
+                 * для проверки. А так же при правильности введенных данных
+                 * закрытие текущего окна и открытие окна с авторизированным
+                 * пользователем.
+                 */
                 onClicked: {
-                    console.log(_textLoginInput.text + " " + _textPasswordInput.text)
-                    if (checkValid)
-                    //parent.color = 'green'
-                    /* метод передачи логина и пароля в класс Authorization
-                     * для проверки. А так же при правильности введенных данных
-                     * закрытие текущего окна и открытие окна с авторизированным
-                     * пользователем.
-                     */
+                    console.log(_textLoginInput.text + " " + _textPasswordInput.text);
+                    if (!validator.checkUser(_textLoginInput.text, _textPasswordInput.text)) {
+                        //_mainWindow.show();
+                    } else {
+
+                    }
+                    parent.color = 'green';
+
                 }
 
             }
 
             ColorAnimation on color{
                 id: enteredAnim
-                to: "orange"
+                to: "#ec7ead"
                 duration: 400
             }
 
             ColorAnimation on color{
                 id: exitingAnim
-                to: "yellow"
+                to: "#c82f63"
                 duration: 400
             }
         }
@@ -269,6 +278,8 @@ Column {
         }
     }
 
-
+    /*MainWindow {
+        id: _mainWindow
+    }*/
 }
 
