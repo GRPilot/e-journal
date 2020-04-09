@@ -10,7 +10,7 @@ AuthorizationValidator::~AuthorizationValidator()
     delete db;
 }
 
-bool AuthorizationValidator::checkUser(QString login, QString password) const
+bool AuthorizationValidator::checkPassWithUser(QString login, QString password) const
 {
     if (login.isEmpty() || login.isNull()) {
         return false;
@@ -21,18 +21,32 @@ bool AuthorizationValidator::checkUser(QString login, QString password) const
 
     if (
         db->select(QString("username, password"))
-          ->where(QString("login='%1' AND password='%2'")
+          ->where(QString("username='%1' AND password='%2'")
                     .arg(login)
                     .arg(getHash(password))
                  )
-          ->exec()
+          ->exist()
        ) {
         return true;
     }
     return false;
 }
 
+bool AuthorizationValidator::checkUser(QString username) const
+{
+    if (username.isNull() || username.isEmpty()) {
+        return false;
+    }
+
+    if (db->select("username")
+          ->where(QString("username='%1'").arg(username))
+          ->exist()) {
+        return true;
+    }
+    return false;
+}
+
 QString AuthorizationValidator::getHash(const QString password) const {
-       //QString blah = QString(QCryptographicHash::hash(password, QCryptographicHash::Md5));
-       return password;//blah;
+    //QString blah = QString(QCryptographicHash::hash(password, QCryptographicHash::Md5));
+    return password;//blah;
 }

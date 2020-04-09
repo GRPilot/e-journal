@@ -1,14 +1,16 @@
 #include "dbprovider.h"
 
 DBProvider::DBProvider(const Tables table)
-    : m_PathToDB{ "/e-journal-database" },
-      m_currentTabel{ table }
+    : m_PathToDB{ "/home/ruslan/Programming/Qt/e-journal/e-journal/e-journal-database" },
+      m_currentTabel{ table },
+      m_dbase(QSqlDatabase::addDatabase("QSQLITE"))
 {
-    m_dbase = QSqlDatabase::addDatabase("QSQLITE");
     m_dbase.setDatabaseName(m_PathToDB);
+    m_dbase.open();
+    m_query = QSqlQuery(m_dbase);
 
-    if (!m_dbase.open()) {
-        qDebug() << m_dbase.lastError().text();
+    if (!m_dbase.isOpen()) {
+        qDebug() << "[ERROR | SQLite] " << m_dbase.lastError().text();
         throw m_dbase.lastError();
     }
 }
@@ -60,20 +62,34 @@ DBProvider *DBProvider::values(const std::vector<QString> values_list)
     return this;
 }
 
+bool DBProvider::exist()
+{
+    if (!m_buildingQuery.contains("SELECT"))
+        return 0;
+
+    m_buildingQuery = QString("SELECT EXISTS (%1)").arg(m_buildingQuery);
+    m_query.prepare(m_buildingQuery);
+    m_query.exec();
+    m_query.next();
+
+    return m_query.value(0) != 0;
+}
+
 bool DBProvider::exec()//QString query = m_buildingQuery)
 {
     QString buildQuery = buildingQuery();
     if (buildQuery.isEmpty() || buildQuery.isNull())
         return false;
 
-    if (query().isNull(buildQuery) || !query().isValid())
-        return false;
 
-    return query().exec();
-}
+    qDebug() << "---------------";
+    qDebug() << "[QUERY] " << buildQuery;
+    qDebug() << "[EXEC] " << m_query.exec(buildQuery);
+    //qDebug() << m_query.lastError();
+    qDebug() << "[LAST] " << m_query.last();
+    //return m_query.exec(buildQuery);
+    return m_query.last();
 
-QSqlQuery DBProvider::query() const {
-    return m_query;
 }
 
 QString DBProvider::currentTabel() const

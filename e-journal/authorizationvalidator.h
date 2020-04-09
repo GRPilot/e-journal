@@ -15,8 +15,8 @@ class AuthorizationValidator : public QObject
     ~AuthorizationValidator();
 
  public slots:
-    bool checkUser(QString login, QString password) const;
-
+    bool checkPassWithUser(QString username, QString password) const;
+    bool checkUser(QString username) const;
  private:
     DBProvider *db;
     QString getHash(const QString password) const;

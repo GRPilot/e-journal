@@ -1,17 +1,17 @@
-import QtQuick 2.0
+import QtQuick 2.12
 import QtQuick.Window 2.12
-import QtQuick.Controls 2.13
+import QtQuick.Controls 2.12
 
 Window {
-    width: 1200
-    height: 800
+    width: 500;
+    height: 300;
     title: qsTr("e-journal")
 
     SwipeView {
         id: _view
         anchors.fill: parent
 
-        Repeater {
+       /* Repeater {
             model: 6
             Loader {
                 active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
@@ -22,6 +22,6 @@ Window {
                     Component.onDestruction: console.log("destroyed:", index)
                 }
             }
-        }
+        }*/
     }
 }

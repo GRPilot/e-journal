@@ -1,15 +1,7 @@
-/* For developing in Qt 5.12: */
 import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.12
-
-/*
- *  import QtQuick 2.9
- *  import QtQuick.Window 2.9
- *  import QtQuick.Controls 2.2
- *  import QtGraphicalEffects 1.0
-*/
 
 
 Column {
@@ -23,6 +15,7 @@ Column {
     readonly property string inputBoxColor: "#222233"
     readonly property string textColor:  "white"
     readonly property string backColor: "#242246"
+    readonly property string incorrectColor: "#ff0022"
     readonly property Gradient textGradient: Gradient {
         GradientStop { position: 0.0; color: "#09479D" }
         GradientStop { position: 0.25; color: "#9949FD" }
@@ -91,6 +84,7 @@ Column {
                 height: parent.height / 2
 
                 color: inputBoxColor
+
                 radius: 5
 
                 TextInput {
@@ -103,16 +97,39 @@ Column {
                     font.pointSize: parent.height * (3/6)
                     maximumLength: 32
 
+                    Keys.onReturnPressed: {
+
+                    }
+
+                    Keys.onTabPressed: {
+                        _textPasswordInput.focus = true;
+                    }
+
+                    Keys.onPressed: {
+                        //console.log("onPressed() ")
+                        _selectLoginAnim.start();
+                    }
+
                     LinearGradient {
                         anchors.fill: _textLoginInput
                         start: Qt.point(0, _textLoginInput.height)
                         end: Qt.point(_textLoginInput.width, 0)
                         source: _textLoginInput
                         gradient: textGradient
-                    }
 
+                    }
+                }
+                ColorAnimation on color {
+                    id: _selectLoginAnim
+                    to: inputBoxColor
+                    duration: 500
                 }
 
+                ColorAnimation on color {
+                    id: incorrectLoginAnim
+                    to: incorrectColor
+                    duration: 500
+                }
             }
         }
 
@@ -162,6 +179,9 @@ Column {
 
                 color: inputBoxColor
                 radius: 5
+                Keys.onTabPressed: {
+                    buttonMouseArea.focus = true;
+                }
 
                 TextInput {
                     id: _textPasswordInput
@@ -176,6 +196,10 @@ Column {
                     passwordCharacter: "*"
                     echoMode: TextInput.Password
 
+                    Keys.onPressed: {
+                        _selectPassAnim.start();
+                    }
+                    //Keys.onReturnPressed: buttonMouseArea.pressed();
                     LinearGradient {
                         anchors.fill: _textPasswordInput
                         start: Qt.point(0, _textPasswordInput.height)
@@ -183,6 +207,18 @@ Column {
                         source: _textPasswordInput
                         gradient: textGradient
                     }
+                }
+
+                ColorAnimation on color {
+                    id: _selectPassAnim
+                    to: inputBoxColor
+                    duration: 500
+                }
+
+                ColorAnimation on color {
+                    id: incorrectPassAnim
+                    to: incorrectColor
+                    duration: 500
                 }
             }
         }
@@ -210,30 +246,34 @@ Column {
                 font.pointSize: parent.height * 0.3
             }
             MouseArea {
+                id: buttonMouseArea
                 anchors.fill: parent
-                acceptedButtons: Qt.LeftButton
+                acceptedButtons: Qt.Key_Enter
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 focus: false
+                Keys.onReturnPressed: {
+                    // click button
+                    //parent.clicked = true;
+                }
+
                 onEntered: { enteredAnim.start(); }
                 onExited: { exitingAnim.start(); }
 
-                /* метод передачи логина и пароля в класс AuthorizationValidator
-                     * для проверки. А так же при правильности введенных данных
-                     * закрытие текущего окна и открытие окна с авторизированным
-                     * пользователем.
-                     */
                 onClicked: {
-                    console.log(_textLoginInput.text + " " + _textPasswordInput.text);
-                    if (!validator.checkUser(_textLoginInput.text, _textPasswordInput.text)) {
-                        _AuthorizationWindow.signalExit();
+                    if (validator.checkUser(qsTr(_textLoginInput.text))) {
+                        if (validator.checkPassWithUser(_textLoginInput.text, _textPasswordInput.text)) {
+                            _AuthorizationWindow.signalExit();
+                        } else {
+                            incorrectPassAnim.start();
+                            _textPasswordInput.focus = true;
+                        }
                     } else {
-
+                        incorrectLoginAnim.start();
+                        _textLoginInput.focus = true;
                     }
                     parent.color = 'green';
-
                 }
-
             }
 
             ColorAnimation on color{
@@ -249,6 +289,7 @@ Column {
             }
         }
     }
+
     // Forgot pass text
     AuthBlockPrefab {
         heightScale: commonScale

@@ -22,10 +22,8 @@ class DBProvider
     DBProvider* where(const QString condition);
     DBProvider* values(const std::vector<QString> values_list);
 
-
+    bool exist();
     bool exec();//QString query);
-
-    QSqlQuery query() const;
 
     QString currentTabel() const;
     QString buildingQuery() const;
