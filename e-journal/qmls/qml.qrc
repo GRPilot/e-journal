@@ -4,5 +4,7 @@
         <file>Authorization.qml</file>
         <file>AuthBlockPrefab.qml</file>
         <file>MainWindow.qml</file>
+        <file>ReductionWindow.qml</file>
+        <file>Hat.qml</file>
     </qresource>
 </RCC>

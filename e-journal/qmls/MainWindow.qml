@@ -2,10 +2,17 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 
-Window {
+ApplicationWindow {
     width: 500;
     height: 300;
     title: qsTr("e-journal")
+
+    // for login out
+    signal signalLogout
+
+    header: Hat {
+
+    }
 
     SwipeView {
         id: _view
@@ -24,4 +31,6 @@ Window {
             }
         }*/
     }
+
+
 }

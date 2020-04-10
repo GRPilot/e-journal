@@ -42,3 +42,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     authorizationvalidator.h \
     dbprovider.h
+
+DISTFILES += \
+    ../ReductionWindow.qml

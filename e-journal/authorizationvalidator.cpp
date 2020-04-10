@@ -47,6 +47,6 @@ bool AuthorizationValidator::checkUser(QString username) const
 }
 
 QString AuthorizationValidator::getHash(const QString password) const {
-    //QString blah = QString(QCryptographicHash::hash(password, QCryptographicHash::Md5));
-    return password;//blah;
+    QString hashOfPass = QString(QCryptographicHash::hash((password.toLocal8Bit()),QCryptographicHash::Md5).toHex());
+    return hashOfPass;//blah;
 }

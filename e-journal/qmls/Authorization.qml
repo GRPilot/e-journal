@@ -8,6 +8,7 @@ Column {
     id: _AuthorizationWindow
 
     signal signalExit
+    signal forgorButtonPressed
     anchors.fill: parent
 
     readonly property int commonScale: 5
@@ -22,6 +23,10 @@ Column {
         GradientStop { position: 0.5; color: "#FE0069" }
         GradientStop { position: 0.75; color: "#FE00FF" }
         GradientStop { position: 1.0; color: "#F3FEFA" }
+    }
+
+    Keys.onReturnPressed: {
+        checkUser();
     }
 
     // Title
@@ -94,12 +99,9 @@ Column {
                     anchors.left: parent.left
                     anchors.right: parent.right
                     anchors.margins: 5
+                    focus: true
                     font.pointSize: parent.height * (3/6)
                     maximumLength: 32
-
-                    Keys.onReturnPressed: {
-
-                    }
 
                     Keys.onTabPressed: {
                         _textPasswordInput.focus = true;
@@ -199,7 +201,6 @@ Column {
                     Keys.onPressed: {
                         _selectPassAnim.start();
                     }
-                    //Keys.onReturnPressed: buttonMouseArea.pressed();
                     LinearGradient {
                         anchors.fill: _textPasswordInput
                         start: Qt.point(0, _textPasswordInput.height)
@@ -238,6 +239,8 @@ Column {
             radius: height / 2
             color: "#c82f63"
 
+
+
             Text {
                 anchors.centerIn: parent
                 color: textColor
@@ -247,31 +250,27 @@ Column {
             }
             MouseArea {
                 id: buttonMouseArea
+
                 anchors.fill: parent
-                acceptedButtons: Qt.Key_Enter
+                acceptedButtons: Qt.Key_Return | Qt.Key_Enter
                 hoverEnabled: true
                 cursorShape: Qt.PointingHandCursor
                 focus: false
-                Keys.onReturnPressed: {
-                    // click button
-                    //parent.clicked = true;
-                }
 
                 onEntered: { enteredAnim.start(); }
                 onExited: { exitingAnim.start(); }
+                onFocusChanged: {
+                    if (buttonMouseArea.focus) {
+                        enteredAnim.start();
+                    } else {
+                        exitingAnim.start();
+                    }
+                }
+
+                Keys.onTabPressed: _textLoginInput.focus = true;
 
                 onClicked: {
-                    if (validator.checkUser(qsTr(_textLoginInput.text))) {
-                        if (validator.checkPassWithUser(_textLoginInput.text, _textPasswordInput.text)) {
-                            _AuthorizationWindow.signalExit();
-                        } else {
-                            incorrectPassAnim.start();
-                            _textPasswordInput.focus = true;
-                        }
-                    } else {
-                        incorrectLoginAnim.start();
-                        _textLoginInput.focus = true;
-                    }
+                    checkUser();
                     parent.color = 'green';
                 }
             }
@@ -312,12 +311,28 @@ Column {
                 hoverEnabled: true
                 acceptedButtons: Qt.LeftButton
                 cursorShape: Qt.PointingHandCursor
+
                 onEntered: { forgotText.localColor = "white"; }
                 onExited: { forgotText.localColor = "#343464"; }
                 onClicked: {
-                    forgotText.localColor = "#AFAEAC"
+                    forgotText.localColor = "#AFAEAC";
+                    _AuthorizationWindow.forgorButtonPressed();
                 }
             }
+        }
+    }
+
+    function checkUser() {
+        if (validator.checkUser(qsTr(_textLoginInput.text))) {
+            if (validator.checkPassWithUser(_textLoginInput.text, _textPasswordInput.text)) {
+                _AuthorizationWindow.signalExit();
+            } else {
+                incorrectPassAnim.start();
+                _textPasswordInput.focus = true;
+            }
+        } else {
+            incorrectLoginAnim.start();
+            _textLoginInput.focus = true;
         }
     }
 

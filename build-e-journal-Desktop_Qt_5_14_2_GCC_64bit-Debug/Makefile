@@ -63,7 +63,8 @@ OBJECTS       = main.o \
 		qrc_qml.o \
 		qrc_qmake_qmake_immediate.o \
 		moc_authorizationvalidator.o
-DIST          = /opt/Qt-5.13/5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
+DIST          = ../ReductionWindow.qml \
+		/opt/Qt-5.13/5.14.2/gcc_64/mkspecs/features/spec_pre.prf \
 		/opt/Qt-5.13/5.14.2/gcc_64/mkspecs/common/unix.conf \
 		/opt/Qt-5.13/5.14.2/gcc_64/mkspecs/common/linux.conf \
 		/opt/Qt-5.13/5.14.2/gcc_64/mkspecs/common/sanitize.conf \
@@ -762,8 +763,10 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../e-journal/qmls/qml.qrc \
 		/opt/Qt-5.13/5.14.2/gcc_64/bin/rcc \
 		../e-journal/qmls/Authorization.qml \
+		../e-journal/qmls/ReductionWindow.qml \
 		../e-journal/qmls/MainWindow.qml \
 		../e-journal/qmls/AuthBlockPrefab.qml \
+		../e-journal/qmls/Hat.qml \
 		../e-journal/qmls/main.qml
 	/opt/Qt-5.13/5.14.2/gcc_64/bin/rcc -name qml ../e-journal/qmls/qml.qrc -o qrc_qml.cpp
 
