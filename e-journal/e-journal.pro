@@ -23,7 +23,8 @@ SOURCES += \
 
 RESOURCES += \
          $$files(qmls/*.qrc) \
-         $$files(images/*.svg)
+         $$files(images/*.svg) \
+         $$files(images/*.png)
 #        qml.qrc \
 #        images/login.svg \
 #        images/pass.svg

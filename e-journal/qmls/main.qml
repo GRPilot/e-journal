@@ -19,6 +19,7 @@ ApplicationWindow {
     }
 
     header: Hat {
+        title: qsTr("e-journal | Authorization")
     }
 
     Authorization {

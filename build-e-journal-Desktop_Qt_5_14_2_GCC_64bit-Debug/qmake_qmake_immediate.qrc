@@ -2,5 +2,10 @@
 <qresource prefix="/">
 <file alias="images/login.svg">/home/ruslan/Programming/Qt/e-journal/e-journal/images/login.svg</file>
 <file alias="images/pass.svg">/home/ruslan/Programming/Qt/e-journal/e-journal/images/pass.svg</file>
+<file alias="images/collaps.png">/home/ruslan/Programming/Qt/e-journal/e-journal/images/collaps.png</file>
+<file alias="images/cross.png">/home/ruslan/Programming/Qt/e-journal/e-journal/images/cross.png</file>
+<file alias="images/expand.png">/home/ruslan/Programming/Qt/e-journal/e-journal/images/expand.png</file>
+<file alias="images/restore.png">/home/ruslan/Programming/Qt/e-journal/e-journal/images/restore.png</file>
+<file alias="images/space.png">/home/ruslan/Programming/Qt/e-journal/e-journal/images/space.png</file>
 </qresource>
 </RCC>

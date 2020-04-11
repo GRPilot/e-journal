@@ -772,8 +772,13 @@ qrc_qml.cpp: ../e-journal/qmls/qml.qrc \
 
 qrc_qmake_qmake_immediate.cpp: qmake_qmake_immediate.qrc \
 		/opt/Qt-5.13/5.14.2/gcc_64/bin/rcc \
+		../e-journal/images/expand.png \
 		../e-journal/images/login.svg \
-		../e-journal/images/pass.svg
+		../e-journal/images/collaps.png \
+		../e-journal/images/cross.png \
+		../e-journal/images/space.png \
+		../e-journal/images/pass.svg \
+		../e-journal/images/restore.png
 	/opt/Qt-5.13/5.14.2/gcc_64/bin/rcc -name qmake_qmake_immediate qmake_qmake_immediate.qrc -o qrc_qmake_qmake_immediate.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
