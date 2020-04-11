@@ -13,6 +13,8 @@ ApplicationWindow {
 
     title: qsTr("e-journal | Authorization")
 
+    readonly property string commonBackColor: "#242246"
+
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
         setY(Screen.height / 2 - height / 2);
@@ -20,6 +22,8 @@ ApplicationWindow {
 
     header: Hat {
         title: qsTr("e-journal | Authorization")
+        hatColor: commonBackColor
+
     }
 
     Authorization {
@@ -39,6 +43,8 @@ ApplicationWindow {
 
     MainWindow {
         id: _MainWindow
+        bg_color: commonBackColor
+        flags: Qt.FramelessWindowHint
 
         onSignalLogout: {
             _AuthWindow.show();
@@ -47,6 +53,8 @@ ApplicationWindow {
 
     ReductionWindow {
         id: _ReductionWindow
+        bg_color: commonBackColor
+        flags: Qt.FramelessWindowHint
 
         onSignalClose: {
             _AuthWindow.show();

@@ -1,36 +1,24 @@
 import QtQuick 2.12
 import QtQuick.Window 2.12
-import QtQuick.Controls 2.12
+//import QtQuick.Controls 2.12
+import QtQuick.Controls 1.4
+import QtQuick.Controls.Styles 1.4
 
 ApplicationWindow {
-    width: 500;
-    height: 300;
+    width: 1024;
+    height: 720;
     title: qsTr("e-journal")
 
+    property string bg_color: "#242246"
+    color: bg_color
     // for login out
     signal signalLogout
 
-    header: Hat {
-
+    //header:
+    Hat {
+        id: _header
+        title: "e-journal"
+        hatColor: bg_color
     }
-
-    SwipeView {
-        id: _view
-        anchors.fill: parent
-
-       /* Repeater {
-            model: 6
-            Loader {
-                active: SwipeView.isCurrentItem || SwipeView.isNextItem || SwipeView.isPreviousItem
-                sourceComponent: Text {
-                    anchors.fill: parent
-                    text: index
-                    Component.onCompleted: console.log("created:", index)
-                    Component.onDestruction: console.log("destroyed:", index)
-                }
-            }
-        }*/
-    }
-
 
 }

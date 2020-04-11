@@ -8,8 +8,8 @@ Rectangle {
     anchors.top: parent.top
     height: 25
 
-    readonly property string hatColor: "#242246"
     readonly property int speedOfAnim: 200
+    property string hatColor: "#242246"
     property string title: "New window"
     property string iconImg: "images/space.png"
 
@@ -17,7 +17,12 @@ Rectangle {
     property int previousX
     property int previousY
 
+
     color: hatColor
+
+    function quit() {
+        Qt.quit();
+    }
 
     //TODO: correct this shit also
     MouseArea {
@@ -101,7 +106,7 @@ Rectangle {
                 onEntered: enterCrossAnim.start()
                 onExited: exitCrossAnim.start()
                 onClicked: {
-                    Qt.quit();
+                    quit();
                 }
             }
 
