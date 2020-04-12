@@ -23,12 +23,13 @@ ApplicationWindow {
     header: Hat {
         title: qsTr("e-journal | Authorization")
         hatColor: commonBackColor
-
     }
 
     Authorization {
         visible: true
         anchors.fill: parent
+
+        backColor: commonBackColor
 
         onSignalExit: {
             _AuthWindow.close();

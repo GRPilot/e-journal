@@ -11,11 +11,12 @@ Column {
     signal forgorButtonPressed
     anchors.fill: parent
 
+    property string backColor: "#242246"
+
     readonly property int commonScale: 5
     readonly property string commonFontFamily: "arial"
     readonly property string inputBoxColor: "#222233"
     readonly property string textColor:  "white"
-    readonly property string backColor: "#242246"
     readonly property string incorrectColor: "#ff0022"
     readonly property Gradient textGradient: Gradient {
         GradientStop { position: 0.0; color: "#09479D" }
@@ -87,14 +88,14 @@ Column {
                 anchors.right: parent.right
                 anchors.leftMargin: 10
                 height: parent.height / 2
-
+                clip: true
                 color: inputBoxColor
 
                 radius: 5
 
                 TextInput {
                     id: _textLoginInput
-                    text: qsTr("login")
+                    text: qsTr("test")
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.right: parent.right
@@ -178,7 +179,7 @@ Column {
                 anchors.right: parent.right
                 anchors.leftMargin: 10
                 height: parent.height / 2
-
+                clip: true
                 color: inputBoxColor
                 radius: 5
                 Keys.onTabPressed: {
@@ -187,7 +188,7 @@ Column {
 
                 TextInput {
                     id: _textPasswordInput
-                    text: qsTr("password")
+                    text: qsTr("testest")
                     anchors.verticalCenter: parent.verticalCenter
                     anchors.left: parent.left
                     anchors.right: parent.right

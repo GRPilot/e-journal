@@ -3,9 +3,11 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 2.12
 
 Rectangle {
+    id: _hat
     anchors.left: parent.left
     anchors.right: parent.right
     anchors.top: parent.top
+
     height: 25
 
     readonly property int speedOfAnim: 200
@@ -16,7 +18,6 @@ Rectangle {
     // Свойства, которые будут хранить позицию зажатия курсора мыши
     property int previousX
     property int previousY
-
 
     color: hatColor
 
@@ -29,6 +30,16 @@ Rectangle {
 
         anchors.fill: parent
 
+        onDoubleClicked: {
+            if (visibility != ApplicationWindow.Maximized) {
+                visibility = ApplicationWindow.Maximized;
+                maximizeImg.source = "images/restore.png"
+            } else {
+                visibility = ApplicationWindow.Windowed
+                maximizeImg.source = "images/expand.png"
+            }
+        }
+
         onPressed: {
             previousX = mouseX
             previousY = mouseY
@@ -36,13 +47,14 @@ Rectangle {
 
         onMouseXChanged: {
             var dx = mouseX - previousX
-            setX(parent.x + dx)
+            setX(x + dx)
         }
 
         onMouseYChanged: {
             var dy = mouseY - previousY
-            setY(parent.y + dy)
+            setY(y + dy)
         }
+
     }
 
     Rectangle {

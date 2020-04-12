@@ -766,7 +766,10 @@ qrc_qml.cpp: ../e-journal/qmls/qml.qrc \
 		../e-journal/qmls/ReductionWindow.qml \
 		../e-journal/qmls/MainWindow.qml \
 		../e-journal/qmls/AuthBlockPrefab.qml \
+		../e-journal/qmls/Setting.qml \
 		../e-journal/qmls/Hat.qml \
+		../e-journal/qmls/Profile.qml \
+		../e-journal/qmls/Statistics.qml \
 		../e-journal/qmls/main.qml
 	/opt/Qt-5.13/5.14.2/gcc_64/bin/rcc -name qml ../e-journal/qmls/qml.qrc -o qrc_qml.cpp
 
@@ -777,6 +780,7 @@ qrc_qmake_qmake_immediate.cpp: qmake_qmake_immediate.qrc \
 		../e-journal/images/collaps.png \
 		../e-journal/images/cross.png \
 		../e-journal/images/space.png \
+		../e-journal/images/user.png \
 		../e-journal/images/pass.svg \
 		../e-journal/images/restore.png
 	/opt/Qt-5.13/5.14.2/gcc_64/bin/rcc -name qmake_qmake_immediate qmake_qmake_immediate.qrc -o qrc_qmake_qmake_immediate.cpp

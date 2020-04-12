@@ -14,6 +14,7 @@ ApplicationWindow {
     header: Hat {
         title: qsTr("Reduction of password")
         hatColor: bg_color
+
         function quit() {
             signalClose();
             _ReductionWindow.close();
