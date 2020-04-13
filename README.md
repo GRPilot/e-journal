@@ -10,7 +10,7 @@ Authorization page:
 Main menu:
 --------------------------------
 Main menu, profile page:
-![Screenshot](Screenshots/MainWindow_profile.jpeg)
+![Screenshot](Screenshots/MainWindow_Profile.jpeg)
 
 Main menu with minimized left buttons:
 ![Screenshot](Screenshots/MinimizeLeftPanel.jpeg)
@@ -19,4 +19,6 @@ Main menu with minimized left buttons:
 
 The scheme of database:
 ![Screenshot](Screenshots/e_journal_db_view.jpg)
+
+***
 Other pages are in process.
