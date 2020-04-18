@@ -1,7 +1,7 @@
 #include "dbprovider.h"
 
 DBProvider::DBProvider(const Tables table)
-    : m_PathToDB{ "/home/ruslan/Programming/Qt/e-journal/e-journal/e-journal-database" },
+    : m_PathToDB{ "e-journal-database" },
       m_currentTabel{ table },
       m_dbase(QSqlDatabase::addDatabase("QSQLITE"))
 {

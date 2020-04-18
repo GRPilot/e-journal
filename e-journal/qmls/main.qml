@@ -54,10 +54,9 @@ ApplicationWindow {
 
     ReductionWindow {
         id: _ReductionWindow
-        bg_color: commonBackColor
-        flags: Qt.FramelessWindowHint
+        backColor: commonBackColor
 
-        onSignalClose: {
+        onClosing: {
             _AuthWindow.show();
         }
     }

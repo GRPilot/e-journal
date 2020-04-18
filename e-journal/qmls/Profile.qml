@@ -130,7 +130,7 @@ Rectangle {
                 id: groups
 
                 width: parent.width - groups_block.width
-                wrapMode: Text.Warp
+                wrapMode: Text.WrapAnywhere
                 text: userGroups
                 color: "white"
                 font.pointSize: 18

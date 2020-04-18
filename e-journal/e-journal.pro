@@ -17,8 +17,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-    authorizationvalidator.cpp \
-    dbprovider.cpp
+        authorizationvalidator.cpp \
+        dbprovider.cpp
 
 
 RESOURCES += \
@@ -44,5 +44,4 @@ HEADERS += \
     authorizationvalidator.h \
     dbprovider.h
 
-DISTFILES += \
-    ../ReductionWindow.qml
+DISTFILES +=
