@@ -9,15 +9,15 @@ Authorization page:
 ***
 Main menu:
 --------------------------------
-Main menu, profile page:
+###Main menu, profile page:
 ![Screenshot](Screenshots/MainWindow_Profile.jpeg)
 
-Main menu with minimized left buttons:
+###Main menu with minimized left buttons:
 ![Screenshot](Screenshots/MinimizeLeftPanel.jpeg)
 
 ***
 
-The scheme of database:
+###The scheme of database:
 ![Screenshot](Screenshots/e_journal_db_view.jpg)
 
 ***
