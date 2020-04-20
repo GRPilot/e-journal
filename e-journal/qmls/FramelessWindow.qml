@@ -13,7 +13,9 @@ ApplicationWindow {
 
     property string headerColor: "#242246"
     property string backColor:   "#242246"
-    property string borderColor: "red"
+    property string borderColor: "transparent"
+    property bool isBorderEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
+    property bool isDragWindowEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
 
     property string title: "New window"
     property string iconImg: qsTr("none")
@@ -43,34 +45,33 @@ ApplicationWindow {
 
         color: hatColor
 
-        //TODO: correct this shit also
         MouseArea {
-
             anchors.fill: parent
 
             onDoubleClicked: {
-                if (visibility != ApplicationWindow.Maximized) {
-                    visibility = ApplicationWindow.Maximized;
-                    maximizeImg.source = "images/restore.png"
-                } else {
-                    visibility = ApplicationWindow.Windowed
-                    maximizeImg.source = "images/expand.png"
-                }
+                if (visibility != ApplicationWindow.Maximized)
+                    maximizing();
+                else
+                    normolizing();
             }
 
             onPressed: {
-                previousX = mouseX
-                previousY = mouseY
+                previousX = mouseX;
+                previousY = mouseY;
             }
 
             onMouseXChanged: {
-                var dx = mouseX - previousX
-                _framelessWin.setX(_framelessWin.x + dx)
+                if (isDragWindowEnabled) {
+                    var dx = mouseX - previousX;
+                    _framelessWin.setX(_framelessWin.x + dx);
+                }
             }
 
             onMouseYChanged: {
-                var dy = mouseY - previousY
-                _framelessWin.setY(_framelessWin.y + dy)
+                if (isDragWindowEnabled) {
+                    var dy = mouseY - previousY;
+                    _framelessWin.setY(_framelessWin.y + dy);
+                }
             }
 
         }
@@ -82,7 +83,7 @@ ApplicationWindow {
             anchors.top: parent.top
             anchors.bottom: parent.bottom
 
-            color: "red"
+            color: "transparent"
 
             Image {
                 id: icon
@@ -181,13 +182,10 @@ ApplicationWindow {
                     onEntered: enterMaximizeAnim.start()
                     onExited: exitMaximizeAnim.start()
                     onClicked: {
-                        if (visibility != ApplicationWindow.Maximized) {
-                            visibility = ApplicationWindow.Maximized;
-                            maximizeImg.source = "images/restore.png"
-                        } else {
-                            visibility = ApplicationWindow.Windowed
-                            maximizeImg.source = "images/expand.png"
-                        }
+                        if (visibility != ApplicationWindow.Maximized)
+                            maximizing();
+                         else
+                            normolizing();
                     }
                 }
 
@@ -225,7 +223,7 @@ ApplicationWindow {
                     onEntered: enterMinimizeAnim.start()
                     onExited: exitMinimizeAnim.start()
                     onClicked: {
-                        visibility = ApplicationWindow.Minimized
+                        visibility = ApplicationWindow.Minimized;
                     }
                 }
 
@@ -243,16 +241,119 @@ ApplicationWindow {
         }
     }
 
-    // top scale anchor
+// #### CORNERS ####
+
+    // left top corner
     Rectangle {
+        id: leftTopCorner
         anchors.left: parent.left
+        anchors.top: parent.top
+
+        width: borderSize
+        height: borderSize
+
+        color: borderColor
+        enabled: isBorderEnabled
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.SizeFDiagCursor
+            onEntered: {
+                previousY = mouseY;
+                previousX = mouseX;
+            }
+
+            onMouseYChanged: grabTopBorder(this)
+            onMouseXChanged: grabLeftBorder(this)
+        }
+    }
+
+    // right top corner
+    Rectangle {
+        id: rightTopCorner
+
         anchors.right: parent.right
+        anchors.top: parent.top
+
+        width: borderSize
+        height: borderSize
+
+        color: borderColor
+        enabled: isBorderEnabled
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.SizeBDiagCursor
+            onEntered: {
+                previousX = mouseX;
+                previousY = mouseY;
+            }
+
+            onMouseXChanged: grabRightBorder(this);
+            onMouseYChanged: grabTopBorder(this);
+        }
+    }
+
+    // right bottom corner
+    Rectangle {
+        id: rightBottomCorner
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        width: borderSize
+        height: borderSize
+
+        color: borderColor
+        enabled: isBorderEnabled
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.SizeFDiagCursor
+
+            onEntered: {
+                previousX = mouseX;
+                previousY = mouseY;
+            }
+
+            onMouseXChanged: grabRightBorder(this)
+            onMouseYChanged: grabBottomBorder(this);
+        }
+    }
+
+    // left bottom corner
+    Rectangle {
+        id: leftBottomCorner
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+
+        width: borderSize
+        height: borderSize
+
+        color: borderColor
+        enabled: isBorderEnabled
+        MouseArea {
+            anchors.fill: parent
+            cursorShape: Qt.SizeBDiagCursor
+            onEntered: {
+                previousY = mouseY;
+                previousX = mouseX;
+            }
+
+            onMouseYChanged: grabBottomBorder(this)
+            onMouseXChanged: grabLeftBorder(this)
+        }
+    }
+
+// #### BORDERS ####
+
+    // top border
+    Rectangle {
+        id: topBorder
+        anchors.left: leftTopCorner.right
+        anchors.right: rightTopCorner.left
         anchors.top: parent.top
 
         height: borderSize
 
         color: borderColor
-
+        enabled: isBorderEnabled
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.SizeVerCursor
@@ -260,89 +361,59 @@ ApplicationWindow {
                 previousY = mouseY;
             }
 
-            onMouseYChanged: {
-                var dy = mouseY - previousY;
-                var maxHeight = _framelessWin.maximumHeight;
-                var minHeight = _framelessWin.minimumHeight;
-                var curHeight = _framelessWin.height;
-
-                if (curHeight - dy <= minHeight || curHeight - dy >= maxHeight)
-                    dy = 0
-
-                _framelessWin.setY(_framelessWin.y + dy)
-                _framelessWin.setHeight(curHeight - dy);
-
-            }
+            onMouseYChanged: grabTopBorder(this);
         }
     }
 
-    // right scale anchor
+    // right border
     Rectangle {
+        id: rightBorder
         anchors.right: parent.right
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.top: rightTopCorner.bottom
+        anchors.bottom: rightBottomCorner.top
         color: borderColor
         width: borderSize
-
+        enabled: isBorderEnabled
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.SizeHorCursor
             onEntered: {
                 previousX = mouseX
             }
-            onMouseXChanged: {
-                var dx = mouseX - previousX;
-                var maxWidth = _framelessWin.maximumWidth;
-                var minWidth = _framelessWin.minimumWidth;
-                var curWidth = _framelessWin.width;
-
-                if (curWidth + dx <= minWidth || curWidth + dx >= maxWidth)
-                    dx = 0;
-
-                _framelessWin.setWidth(curWidth + dx)
-            }
+            onMouseXChanged: grabRightBorder(this)
         }
     }
 
-    // left scale anchor
+    // left border
     Rectangle {
+        id: leftBorder
         anchors.left: parent.left
-        anchors.top: parent.top
-        anchors.bottom: parent.bottom
+        anchors.top: leftTopCorner.bottom
+        anchors.bottom: leftBottomCorner.top
         color: borderColor
         width: borderSize
-
+        enabled: isBorderEnabled
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.SizeHorCursor
             onEntered: {
                 previousX = mouseX
             }
-            onMouseXChanged: {
-                var dx = mouseX - previousX;
-                var maxWidth = _framelessWin.maximumWidth;
-                var minWidth = _framelessWin.minimumWidth;
-                var curWidth = _framelessWin.width;
-
-                if (curWidth - dx <= minWidth || curWidth - dx >= maxWidth)
-                    dx = 0;
-
-                _framelessWin.setX(_framelessWin.x + dx);
-                _framelessWin.setWidth(curWidth - dx)
-            }
+            onMouseXChanged: grabLeftBorder(this)
         }
     }
 
-    // bottom scale anchor
+    // bottom border
     Rectangle {
-        anchors.left: parent.left
-        anchors.right: parent.right
+        id: bottomBorder
+        anchors.left: leftBottomCorner.right
+        anchors.right: rightBottomCorner.left
         anchors.bottom: parent.bottom
 
         height: borderSize
 
         color: borderColor
-
+        enabled: isBorderEnabled
         MouseArea {
             anchors.fill: parent
             cursorShape: Qt.SizeVerCursor
@@ -350,17 +421,71 @@ ApplicationWindow {
                 previousY = mouseY;
             }
 
-            onMouseYChanged: {
-                var dy = mouseY - previousY;
-                var maxHeight = _framelessWin.maximumHeight;
-                var minHeight = _framelessWin.minimumHeight;
-                var curHeight = _framelessWin.height;
-
-                if (curHeight + dy <= minHeight || curHeight + dy >= maxHeight)
-                    dy = 0
-
-                _framelessWin.setHeight(curHeight + dy);
-            }
+            onMouseYChanged: grabBottomBorder(this);
         }
     }
+
+    function grabTopBorder(mouseArea) {
+        var dy = mouseArea.mouseY - previousY;
+        var maxHeight = _framelessWin.maximumHeight;
+        var minHeight = _framelessWin.minimumHeight;
+        var curHeight = _framelessWin.height;
+
+        if (curHeight - dy <= minHeight || curHeight - dy >= maxHeight)
+            dy = 0
+
+        _framelessWin.setY(_framelessWin.y + dy)
+        _framelessWin.setHeight(curHeight - dy);
+
+    }
+    function grabRightBorder(mouseArea) {
+        var dx = mouseArea.mouseX - previousX;
+        var maxWidth = _framelessWin.maximumWidth;
+        var minWidth = _framelessWin.minimumWidth;
+        var curWidth = _framelessWin.width;
+
+        if (curWidth + dx <= minWidth || curWidth + dx >= maxWidth)
+            dx = 0;
+
+        _framelessWin.setWidth(curWidth + dx)
+    }
+    function grabLeftBorder(mouseArea) {
+        var dx = mouseArea.mouseX - previousX;
+        var maxWidth = _framelessWin.maximumWidth;
+        var minWidth = _framelessWin.minimumWidth;
+        var curWidth = _framelessWin.width;
+
+        if (curWidth - dx <= minWidth || curWidth - dx >= maxWidth)
+            dx = 0;
+
+        _framelessWin.setX(_framelessWin.x + dx);
+        _framelessWin.setWidth(curWidth - dx)
+    }
+    function grabBottomBorder(mouseArea) {
+        var dy = mouseArea.mouseY - previousY;
+        var maxHeight = _framelessWin.maximumHeight;
+        var minHeight = _framelessWin.minimumHeight;
+        var curHeight = _framelessWin.height;
+
+        if (curHeight + dy <= minHeight || curHeight + dy >= maxHeight)
+            dy = 0
+
+        _framelessWin.setHeight(curHeight + dy);
+    }
+
+    function maximizing() {
+        _framelessWin.visibility = ApplicationWindow.Maximized;
+        isBorderEnabled = false;
+        isDragWindowEnabled = false;
+        maximizeImg.source = "images/restore.png";
+    }
+
+    function normolizing() {
+        _framelessWin.visibility = ApplicationWindow.Windowed;
+        isBorderEnabled = true;
+        isDragWindowEnabled = true;
+        maximizeImg.source = "images/expand.png";
+    }
+
+
 }
