@@ -501,6 +501,5 @@ ApplicationWindow {
         setHeight(defaultWindowHeight);
         setX(defaultWindowPositionX);
         setY(defaultWindowPositionY);
-        console.log("width: " + width + "\nheight: " + height);
     }
 }
