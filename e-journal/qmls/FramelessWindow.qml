@@ -1,5 +1,6 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtQuick.Window 2.12
 
 //TODO: Доделать масштабирование кнопок
 //TODO: Добавить возможность изменение размера окна потянув за угол
@@ -9,7 +10,7 @@ ApplicationWindow {
     id: _framelessWin
     flags: Qt.FramelessWindowHint
 
-    /// Properties
+/// Properties
 
     property string headerColor: "#242246"
     property string backColor:   "#242246"
@@ -26,7 +27,13 @@ ApplicationWindow {
     property int previousX: 0
     property int previousY: 0
 
-    /// Content
+    // Начальные параметры
+    property int defaultWindowWidth: -1
+    property int defaultWindowHeight: -1
+    readonly property int defaultWindowPositionX: Screen.width / 2 - width / 2
+    readonly property int defaultWindowPositionY: Screen.height / 2 - height / 2
+
+/// Content
 
     // Custom header with exit button and also
     Rectangle {
@@ -222,9 +229,7 @@ ApplicationWindow {
                     hoverEnabled: true
                     onEntered: enterMinimizeAnim.start()
                     onExited: exitMinimizeAnim.start()
-                    onClicked: {
-                        visibility = ApplicationWindow.Minimized;
-                    }
+                    onClicked: showMinimized();
                 }
 
                 ColorAnimation on color{
@@ -241,7 +246,7 @@ ApplicationWindow {
         }
     }
 
-// #### CORNERS ####
+ // #### CORNERS ####
 
     // left top corner
     Rectangle {
@@ -341,7 +346,7 @@ ApplicationWindow {
         }
     }
 
-// #### BORDERS ####
+ // #### BORDERS ####
 
     // top border
     Rectangle {
@@ -474,18 +479,28 @@ ApplicationWindow {
     }
 
     function maximizing() {
-        _framelessWin.visibility = ApplicationWindow.Maximized;
+        showMaximized();
         isBorderEnabled = false;
         isDragWindowEnabled = false;
         maximizeImg.source = "images/restore.png";
     }
-
     function normolizing() {
-        _framelessWin.visibility = ApplicationWindow.Windowed;
+        showNormal();
         isBorderEnabled = true;
         isDragWindowEnabled = true;
         maximizeImg.source = "images/expand.png";
     }
 
+    onVisibleChanged: {
+        if (defaultWindowHeight === -1)
+            defaultWindowHeight = height;
+        if (defaultWindowWidth === -1)
+            defaultWindowWidth = width;
 
+        setWidth(defaultWindowWidth);
+        setHeight(defaultWindowHeight);
+        setX(defaultWindowPositionX);
+        setY(defaultWindowPositionY);
+        console.log("width: " + width + "\nheight: " + height);
+    }
 }

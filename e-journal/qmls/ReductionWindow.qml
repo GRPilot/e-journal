@@ -9,4 +9,5 @@ FramelessWindow {
     minimumWidth: 100
     maximumWidth: Screen.width
 
+
 }
