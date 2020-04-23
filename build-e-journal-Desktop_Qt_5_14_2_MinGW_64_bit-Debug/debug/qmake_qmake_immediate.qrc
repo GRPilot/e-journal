@@ -1,0 +1,12 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="/">
+<file alias="images/login.svg">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/login.svg</file>
+<file alias="images/pass.svg">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/pass.svg</file>
+<file alias="images/collaps.png">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/collaps.png</file>
+<file alias="images/cross.png">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/cross.png</file>
+<file alias="images/expand.png">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/expand.png</file>
+<file alias="images/restore.png">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/restore.png</file>
+<file alias="images/space.png">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/space.png</file>
+<file alias="images/user.png">D:/Programming/Qt/MyProjects/E-Journal/e-journal/images/user.png</file>
+</qresource>
+</RCC>

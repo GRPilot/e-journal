@@ -3,9 +3,6 @@
         <file>main.qml</file>
         <file>Authorization.qml</file>
         <file>AuthBlockPrefab.qml</file>
-        <file>MainWindow.qml</file>
-        <file>ReductionWindow.qml</file>
-        <file>Hat.qml</file>
         <file>Profile.qml</file>
         <file>Setting.qml</file>
         <file>Statistics.qml</file>

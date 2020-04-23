@@ -3,8 +3,6 @@ import QtQuick.Controls 2.12
 import QtQuick.Window 2.12
 
 //TODO: Доделать масштабирование кнопок
-//TODO: Добавить возможность изменение размера окна потянув за угол
-//TODO: Сделать при каждом открытии стандартный размер и позицию
 
 ApplicationWindow {
     id: _framelessWin
@@ -35,13 +33,14 @@ ApplicationWindow {
 
 /// Content
 
+
     // Custom header with exit button and also
-    Rectangle {
+    header: Rectangle {
         id: _hat
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.top: parent.top
-
+        z: 1
         height: 25
 
         readonly property int speedOfAnim: 200

@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/">
         <file>FramelessWindow.qml</file>
+        <file>SignInWindow.qml</file>
+        <file>ReductionWindow.qml</file>
+        <file>MainWindow.qml</file>
     </qresource>
 </RCC>

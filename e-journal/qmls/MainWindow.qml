@@ -4,10 +4,13 @@ import QtQuick.Window 2.12
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
-ApplicationWindow {
+FramelessWindow {
     width: 1024;
     height: 512;
     title: qsTr("e-journal")
+
+    // for login out
+    signal signalLogout
 
     property string bg_color: "#242246"
     readonly property string page_color: "#332258"
@@ -25,27 +28,13 @@ ApplicationWindow {
             "images/cross.png",
             "images/cross.png",
             "images/collaps.png", // setting
-
     ]
 
     color: bg_color
-    // for login out
-    signal signalLogout
-
-    //header:
-    Hat {
-        id: _header
-        title: "e-journal"
-        hatColor: bg_color
-        height: 25
-
-    }
 
     Row {
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.bottom: parent.bottom
-        anchors.top: _header.bottom
+        anchors.fill: parent
+
 
         Column {
             id: columns

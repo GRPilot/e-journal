@@ -14,8 +14,6 @@ Rectangle {
     property string userSubject: qsTr("Аппаратно-программные средства, Технические средства информатизации")
     property string userGroups: qsTr("ИП-18-4, ИП-18-3")
 
-
-
     Column {
         id: row
         anchors.fill: parent
@@ -31,17 +29,17 @@ Rectangle {
 
             Rectangle {
                 id: mask
-                height: commonHeight
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
+
+                height: commonHeight
                 width: height
                 radius: width / 2
                 color: "grey"
 
                 Image {
                     id: img
-
                     source: userImg
 
                     anchors.fill: parent
@@ -55,7 +53,6 @@ Rectangle {
                 //TODO: Сделать возможность изменения фотографии
                 MouseArea {
                     cursorShape: Qt.PointingHandCursor
-
                 }
             }
 
@@ -73,17 +70,7 @@ Rectangle {
                 font.italic: true
                 verticalAlignment: Text.AlignVCenter
             }
-            /*Item {
-                anchors.left: mask.right
-                anchors.right: parent.right
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.margins: 10
-                clip: true
 
-
-
-            }*/
         }
 
         Grid {

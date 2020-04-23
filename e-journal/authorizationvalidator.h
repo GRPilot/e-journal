@@ -19,7 +19,6 @@ class AuthorizationValidator : public QObject
 
  private:
     DBProvider *m_db;
-    HashHelper m_hashHelper;
 };
 
 #endif // AUTHORIZATIONVALIDATOR_H
