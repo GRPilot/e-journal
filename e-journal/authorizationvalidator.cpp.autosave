@@ -22,7 +22,6 @@ bool AuthorizationValidator::checkPassWithUser(QString login, QString password) 
 
     HashHelper helper(password);
 
-
     if (
         m_db->select(QString("username, password"))
             ->where(QString("username='%1' AND password='%2'")
