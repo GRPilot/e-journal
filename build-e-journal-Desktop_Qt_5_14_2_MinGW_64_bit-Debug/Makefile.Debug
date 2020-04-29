@@ -121,6 +121,7 @@ debug/qrc_qml.cpp: ../e-journal/qmls/qml.qrc \
 		../e-journal/qmls/Setting.qml \
 		../e-journal/qmls/Profile.qml \
 		../e-journal/qmls/Statistics.qml \
+		../e-journal/qmls/SettingBlockPrefub.qml \
 		../e-journal/qmls/main.qml
 	D:\PROGRAMS\Qt\5.14.2\mingw73_64\bin\rcc.exe -name qml ..\e-journal\qmls\qml.qrc -o debug\qrc_qml.cpp
 
@@ -129,6 +130,7 @@ debug/qrc_Windows.cpp: ../e-journal/qmls/Windows.qrc \
 		../e-journal/qmls/SignInWindow.qml \
 		../e-journal/qmls/ReductionWindow.qml \
 		../e-journal/qmls/FramelessWindow.qml \
+		../e-journal/qmls/GlobalSettingWindow.qml \
 		../e-journal/qmls/MainWindow.qml
 	D:\PROGRAMS\Qt\5.14.2\mingw73_64\bin\rcc.exe -name Windows ..\e-journal\qmls\Windows.qrc -o debug\qrc_Windows.cpp
 

@@ -5,6 +5,7 @@ import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
 
 FramelessWindow {
+    id: _mainWin
     width: 1024;
     height: 512;
     title: qsTr("e-journal")
@@ -71,13 +72,10 @@ FramelessWindow {
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         if (isMinimize) {
-                            widthOfTabs = 150;
-
+                            tabMaximize();
                         } else {
-                            widthOfTabs = heightOfTabs;
-
+                            tabMinimize();
                         }
-                        isMinimize = !isMinimize
                     }
                 }
             }
@@ -225,5 +223,24 @@ FramelessWindow {
                 }
             }
         }
+    }
+
+    onWidthChanged: {
+        if (width <= widthOfTabs)
+            tabMinimize();
+    }
+
+    onSignalLogout: {
+        _mainWin.close();
+    }
+
+    function tabMinimize() {
+        isMinimize = true;
+        widthOfTabs = heightOfTabs;
+    }
+
+    function tabMaximize() {
+        isMinimize = false;
+        widthOfTabs = 150;
     }
 }

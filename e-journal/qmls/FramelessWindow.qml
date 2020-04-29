@@ -7,6 +7,10 @@ import QtQuick.Window 2.12
 ApplicationWindow {
     id: _framelessWin
     flags: Qt.FramelessWindowHint
+    minimumHeight: 100
+    minimumWidth: 100
+
+    signal settingShow
 
 /// Properties
 
@@ -20,7 +24,7 @@ ApplicationWindow {
     property string iconImg: qsTr("none")
 
     property int borderSize: 5
-
+    property int commonMenuItemHeight: 25
     // Свойства, которые будут хранить позицию зажатия курсора мыши
     property int previousX: 0
     property int previousY: 0
@@ -28,6 +32,7 @@ ApplicationWindow {
     // Начальные параметры
     property int defaultWindowWidth: -1
     property int defaultWindowHeight: -1
+    readonly property int zOfBorders: 2
     readonly property int defaultWindowPositionX: Screen.width / 2 - width / 2
     readonly property int defaultWindowPositionY: Screen.height / 2 - height / 2
 
@@ -39,7 +44,6 @@ ApplicationWindow {
         id: _hat
         anchors.left: parent.left
         anchors.right: parent.right
-        anchors.top: parent.top
         z: 1
         height: 25
 
@@ -114,7 +118,35 @@ ApplicationWindow {
                 text: qsTr(title)
                 color: "white"
 
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.LeftButton
+                    onClicked: _menu.open();
+                }
+                Menu {
+                    id: _menu
+                    y: parent.height
+                    background.opacity: 20
+
+                    MenuItem {
+                        text: qsTr("Settings")
+                        height: commonMenuItemHeight
+                        onTriggered: settingShow();
+                    }
+
+                    MenuSeparator {
+                        height: 5
+                    }
+
+                    MenuItem {
+                        text: qsTr("Exit")
+                        height: commonMenuItemHeight
+                        onTriggered: close();
+                    }
+                }
             }
+
+
         }
 
         Rectangle {
@@ -251,8 +283,8 @@ ApplicationWindow {
     Rectangle {
         id: leftTopCorner
         anchors.left: parent.left
-        anchors.top: parent.top
-
+        anchors.top: _hat.top
+        z: zOfBorders
         width: borderSize
         height: borderSize
 
@@ -276,8 +308,8 @@ ApplicationWindow {
         id: rightTopCorner
 
         anchors.right: parent.right
-        anchors.top: parent.top
-
+        anchors.top: _hat.top
+        z: zOfBorders
         width: borderSize
         height: borderSize
 
@@ -301,7 +333,7 @@ ApplicationWindow {
         id: rightBottomCorner
         anchors.right: parent.right
         anchors.bottom: parent.bottom
-
+        z: zOfBorders
         width: borderSize
         height: borderSize
 
@@ -326,7 +358,7 @@ ApplicationWindow {
         id: leftBottomCorner
         anchors.left: parent.left
         anchors.bottom: parent.bottom
-
+        z: zOfBorders
         width: borderSize
         height: borderSize
 
@@ -352,8 +384,8 @@ ApplicationWindow {
         id: topBorder
         anchors.left: leftTopCorner.right
         anchors.right: rightTopCorner.left
-        anchors.top: parent.top
-
+        anchors.top: _hat.top
+        z: zOfBorders
         height: borderSize
 
         color: borderColor
@@ -375,6 +407,7 @@ ApplicationWindow {
         anchors.right: parent.right
         anchors.top: rightTopCorner.bottom
         anchors.bottom: rightBottomCorner.top
+        z: zOfBorders
         color: borderColor
         width: borderSize
         enabled: isBorderEnabled
@@ -394,6 +427,7 @@ ApplicationWindow {
         anchors.left: parent.left
         anchors.top: leftTopCorner.bottom
         anchors.bottom: leftBottomCorner.top
+        z: zOfBorders
         color: borderColor
         width: borderSize
         enabled: isBorderEnabled
@@ -413,7 +447,7 @@ ApplicationWindow {
         anchors.left: leftBottomCorner.right
         anchors.right: rightBottomCorner.left
         anchors.bottom: parent.bottom
-
+        z: zOfBorders
         height: borderSize
 
         color: borderColor

@@ -22,8 +22,8 @@ Rectangle {
 
         Rectangle {
             id: _FIO_block
-            anchors.right: parent.right
-            anchors.left: parent.left
+            //anchors.right: parent.right
+            //anchors.left: parent.left
             height: commonHeight
             color: "transparent"
 

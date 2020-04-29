@@ -4,5 +4,6 @@
         <file>SignInWindow.qml</file>
         <file>ReductionWindow.qml</file>
         <file>MainWindow.qml</file>
+        <file>GlobalSettingWindow.qml</file>
     </qresource>
 </RCC>

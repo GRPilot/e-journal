@@ -5,9 +5,7 @@ FramelessWindow {
     width: 600
     height: 600
     minimumHeight: 100
-    maximumHeight: Screen.height
     minimumWidth: 100
-    maximumWidth: Screen.width
 
 
 }

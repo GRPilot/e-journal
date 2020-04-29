@@ -20,6 +20,11 @@ e-journal
   <img src ="Screenshots/MinimizeLeftPanel.jpeg" />
 </div>
 
+##Global setting window:
+<div style="text-align:center">
+  <img src ="Screenshots/GlobalSettingWindow.jpg" />
+</div>
+
 ##Schemes:
 
 #### The scheme of qml side:

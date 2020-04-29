@@ -6,5 +6,6 @@
         <file>Profile.qml</file>
         <file>Setting.qml</file>
         <file>Statistics.qml</file>
+        <file>SettingBlockPrefub.qml</file>
     </qresource>
 </RCC>
