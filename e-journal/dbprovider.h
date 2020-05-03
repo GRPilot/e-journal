@@ -1,39 +1,56 @@
 #ifndef DBPROVIDER_H
 #define DBPROVIDER_H
 
+//#include <QtSql/QSqlDatabase>
+//#include <QtSql/QSqlQuery>
+
 #include <QtSql>
 
+
 enum Tables {
-    USERS = 0,
-    TEACHERS,
-    STUDENTS,
-    MARKS
+    Groups = 0,
+    Marks,
+    Students,
+    Subjects,
+    Teachers,
+    Users
 };
 
 class DBProvider
 {
- public:
+    using Val_List = std::vector<QString>;
 
+ public:
     DBProvider(const Tables table);
 
-    DBProvider* select(const QString columns);
+    DBProvider* select();
+    DBProvider* select(Val_List columns);
     DBProvider* insert();
+    DBProvider* insert(Val_List columns);
+    DBProvider* update(Val_List values);
+    DBProvider* delete_from();
 
     DBProvider* where(const QString condition);
-    DBProvider* values(const std::vector<QString> values_list);
+    DBProvider* values(Val_List values);
 
     bool exist();
-    bool exec();//QString query);
+    bool exec();
+    int last_id();
+    void clearQuery();
 
     QString currentTabel() const;
     QString buildingQuery() const;
 
+    QSqlQuery query() const;
+
 private:
-    const QString m_PathToDB;
-    const Tables m_currentTabel;
-    QSqlDatabase m_dbase;
-    QSqlQuery m_query;
-    QString m_buildingQuery;
+    const QString m_nameOfDB;
+    const Tables  m_currentTabel;
+    QSqlDatabase  m_dbase;
+    QSqlQuery     m_query;
+    QString       m_buildingQuery;
+
+    QString valListToQString(Val_List vals);
 };
 
 #endif // DBPROVIDER_H

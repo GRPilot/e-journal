@@ -2,7 +2,7 @@
 
 AuthorizationValidator::AuthorizationValidator(QObject *parent)
     : QObject(parent),
-      m_db{ new DBProvider( Tables::USERS ) }
+      m_db{ new DBProvider( Tables::Users ) }
 {
 
 }
@@ -22,8 +22,13 @@ bool AuthorizationValidator::checkPassWithUser(QString login, QString password) 
 
     HashHelper helper(password);
 
+    std::vector columns = {
+        QString("username"),
+        QString("password")
+    };
+
     if (
-        m_db->select(QString("username, password"))
+        m_db->select(columns)
             ->where(QString("username='%1' AND password='%2'")
                       .arg(login)
                       .arg(helper.hash())
@@ -41,7 +46,11 @@ bool AuthorizationValidator::checkUser(QString username) const
         return false;
     }
 
-    if (m_db->select("username")
+    std::vector column = {
+        QString(username)
+    };
+
+    if (m_db->select(column)
             ->where(QString("username='%1'").arg(username))
             ->exist()) {
         return true;
