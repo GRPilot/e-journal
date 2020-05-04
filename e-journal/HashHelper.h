@@ -6,8 +6,10 @@
 
 class HashHelper
 {
+    using Algorithm_t = QCryptographicHash::Algorithm;
+    static const Algorithm_t m_defaultAlgorithmType = QCryptographicHash::Md5;
 public:
-    HashHelper(const QString &data);
+    HashHelper(const QString &data, const Algorithm_t type = m_defaultAlgorithmType);
 
     QString hash() const;
 
@@ -17,6 +19,7 @@ public:
 private:
     QString m_data;
     QString m_hash;
+    Algorithm_t m_type;
 };
 
 #endif // HASHHELPER_H

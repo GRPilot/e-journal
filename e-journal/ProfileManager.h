@@ -9,10 +9,10 @@ public:
     ProfileManager();
     ~ProfileManager();
 
-    bool createNewUser(const QString login, const QString password, const QString name);
-    bool deleteUser(const QString login, const QString password);
-    bool changePassword(const QString login, const QString newPassword);
-    QString userLogin(const QString password, const QString name);
+    bool createNewUser(const QString &login, const QString &password, const QString &name);
+    bool deleteUser(const QString &login, const QString &password);
+    bool changePassword(const QString &login, const QString &newPassword);
+    QString userLogin(const QString &password, const QString &name);
 
 private:
     DBProvider *m_db_teachers;

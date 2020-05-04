@@ -1,8 +1,11 @@
 #include "HashHelper.h"
 
 
-HashHelper::HashHelper(const QString &data) {
-    setData(data);
+HashHelper::HashHelper(const QString &data,
+                       const Algorithm_t type)
+    : m_data{ data },
+      m_type{ type }
+{
     setHash(m_data);
 }
 
@@ -16,5 +19,5 @@ QString HashHelper::hash() const {
 }
 
 void HashHelper::setHash(const QString &hash){
-    m_hash =  QString(QCryptographicHash::hash((hash.toLocal8Bit()),QCryptographicHash::Md5).toHex());
+    m_hash = QString(QCryptographicHash::hash((hash.toLocal8Bit()), m_type).toHex());
 }

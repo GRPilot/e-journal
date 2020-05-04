@@ -8,13 +8,21 @@ DBProvider::DBProvider(const Tables table)
     m_dbase.setDatabaseName(QDir::currentPath() + '/' + m_nameOfDB);
     m_dbase.open();
 
-    qDebug() << QDir::currentPath();
-
     if (!m_dbase.isOpen()) {
         qDebug() << "[ERROR | SQLite] " << m_dbase.lastError().text();
         throw m_dbase.lastError();
     }
     m_dbase.close();
+}
+
+DBProvider::DBProvider(const DBProvider &other)
+    : m_nameOfDB{ other.m_nameOfDB },
+      m_currentTabel{ other.m_currentTabel },
+      m_dbase{ other.m_dbase },
+      m_query{ other.m_query },
+      m_buildingQuery{ other.m_buildingQuery }
+{
+
 }
 
 DBProvider *DBProvider::select_all() {
@@ -164,7 +172,7 @@ QSqlQuery DBProvider::query() const {
     return m_query;
 }
 
-QString DBProvider::valListToQString(DBProvider::Val_List vals) {
+QString DBProvider::valListToQString(Val_List vals) {
     QString result{""};
     if (vals.empty())
         return result;

@@ -7,11 +7,14 @@ AuthorizationValidator::AuthorizationValidator(QObject *parent)
 
 }
 
+AuthorizationValidator::AuthorizationValidator(const AuthorizationValidator &other)
+    : AuthorizationValidator{ other.parent() } {}
+
 AuthorizationValidator::~AuthorizationValidator() {
     delete m_db;
 }
 
-bool AuthorizationValidator::checkPassWithUser(QString login, QString password) const
+bool AuthorizationValidator::checkPassWithUser(const QString& login, const QString& password) const
 {
     if (login.isEmpty() || login.isNull()) {
         return false;
@@ -20,7 +23,7 @@ bool AuthorizationValidator::checkPassWithUser(QString login, QString password) 
     if (password.size() < minimumLenghtForPasswords)
         return false;
 
-    HashHelper helper(password);
+    HashHelper hHelper(password);
 
     std::vector columns = {
         QString("username"),
@@ -31,7 +34,7 @@ bool AuthorizationValidator::checkPassWithUser(QString login, QString password) 
         m_db->select(columns)
             ->where(QString("username='%1' AND password='%2'")
                       .arg(login)
-                      .arg(helper.hash())
+                      .arg(hHelper.hash())
                    )
             ->exist()
        ) {
@@ -40,7 +43,7 @@ bool AuthorizationValidator::checkPassWithUser(QString login, QString password) 
     return false;
 }
 
-bool AuthorizationValidator::checkUser(QString username) const
+bool AuthorizationValidator::checkUser(const QString& username) const
 {
     if (username.isNull() || username.isEmpty()) {
         return false;

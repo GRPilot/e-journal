@@ -11,11 +11,13 @@ class AuthorizationValidator : public QObject
  public:
     const int minimumLenghtForPasswords = 4;
     explicit AuthorizationValidator(QObject *parent = nullptr);
+    explicit AuthorizationValidator(const AuthorizationValidator& other);
+
     ~AuthorizationValidator();
 
  public slots:
-    bool checkPassWithUser(QString username, QString password) const;
-    bool checkUser(QString username) const;
+    bool checkPassWithUser(const QString& username, const QString& password) const;
+    bool checkUser(const QString& username) const;
 
  private:
     DBProvider *m_db;

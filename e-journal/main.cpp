@@ -6,10 +6,12 @@
 int main(int argc, char *argv[])
 {
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
     QGuiApplication app(argc, argv);
 
     QQmlApplicationEngine engine;
+
+    QQmlContext *context = engine.rootContext();
+    context->setContextProperty("validator", new AuthorizationValidator());
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -18,8 +20,6 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
-    engine.rootContext()->setContextProperty("validator", new AuthorizationValidator());
 
     return app.exec();
 }

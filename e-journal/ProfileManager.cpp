@@ -12,9 +12,9 @@ ProfileManager::~ProfileManager() {
     delete(m_db_teachers);
 }
 
-bool ProfileManager::createNewUser(const QString login,
-                                   const QString password,
-                                   const QString name) {
+bool ProfileManager::createNewUser(const QString &login,
+                                   const QString &password,
+                                   const QString &name) {
 
     if (login.length() <= 4 || password.length() <= 4)
         return false;
@@ -59,7 +59,7 @@ bool ProfileManager::createNewUser(const QString login,
     return state;
 }
 
-bool ProfileManager::deleteUser(const QString login, const QString password)
+bool ProfileManager::deleteUser(const QString &login, const QString &password)
 {
     if (login <= 4 || password <= 4)
         return false;
@@ -87,7 +87,7 @@ bool ProfileManager::deleteUser(const QString login, const QString password)
     return status;
 }
 
-bool ProfileManager::changePassword(const QString login, const QString newPassword)
+bool ProfileManager::changePassword(const QString &login, const QString &newPassword)
 {
     if (login <= 4 || newPassword <= 4)
         return false;
@@ -108,7 +108,7 @@ bool ProfileManager::changePassword(const QString login, const QString newPasswo
 }
 
 //Maybe it works incorrect
-QString ProfileManager::userLogin(const QString password, const QString name)
+QString ProfileManager::userLogin(const QString &password, const QString &name)
 {
     if (password <= 4)
         return QString{ "Sorry, but Your password lenght less than 4!" };

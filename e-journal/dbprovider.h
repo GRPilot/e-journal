@@ -22,8 +22,9 @@ class DBProvider
 
  public:
     DBProvider(const Tables table);
+    DBProvider(const DBProvider& other);
 
-    DBProvider* select();
+    DBProvider* select_all();
     DBProvider* select(Val_List columns);
     DBProvider* insert();
     DBProvider* insert(Val_List columns);
@@ -43,7 +44,7 @@ class DBProvider
 
     QSqlQuery query() const;
 
-private:
+ private:
     const QString m_nameOfDB;
     const Tables  m_currentTabel;
     QSqlDatabase  m_dbase;
