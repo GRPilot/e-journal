@@ -75,9 +75,9 @@ void AuthorizationValidator::qt_static_metacall(QObject *_o, QMetaObject::Call _
         auto *_t = static_cast<AuthorizationValidator *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: { bool _r = _t->checkPassWithUser((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< QString(*)>(_a[2])));
+        case 0: { bool _r = _t->checkPassWithUser((*reinterpret_cast< const QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 1: { bool _r = _t->checkUser((*reinterpret_cast< QString(*)>(_a[1])));
+        case 1: { bool _r = _t->checkUser((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }

@@ -120,7 +120,6 @@ compiler_rcc_clean:
 	-$(DEL_FILE) release\qrc_qml.cpp release\qrc_Windows.cpp release\qrc_qmake_qmake_immediate.cpp
 release/qrc_qml.cpp: ../e-journal/qmls/qml.qrc \
 		D:/PROGRAMS/Qt/5.14.2/mingw73_64/bin/rcc.exe \
-		../e-journal/qmls/Authorization.qml \
 		../e-journal/qmls/AuthBlockPrefab.qml \
 		../e-journal/qmls/Setting.qml \
 		../e-journal/qmls/Profile.qml \
@@ -135,7 +134,8 @@ release/qrc_Windows.cpp: ../e-journal/qmls/Windows.qrc \
 		../e-journal/qmls/ReductionWindow.qml \
 		../e-journal/qmls/FramelessWindow.qml \
 		../e-journal/qmls/GlobalSettingWindow.qml \
-		../e-journal/qmls/MainWindow.qml
+		../e-journal/qmls/MainWindow.qml \
+		../e-journal/qmls/SignupWindow.qml
 	D:\PROGRAMS\Qt\5.14.2\mingw73_64\bin\rcc.exe -name Windows ..\e-journal\qmls\Windows.qrc -o release\qrc_Windows.cpp
 
 release/qrc_qmake_qmake_immediate.cpp: release/qmake_qmake_immediate.qrc \

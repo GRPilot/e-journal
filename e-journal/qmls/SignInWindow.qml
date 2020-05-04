@@ -10,14 +10,20 @@ FramelessWindow {
 
     signal signalExit
     signal forgorButtonPressed
+    signal signupButtomPressed
 
     property string backColor: "#242246"
 
     readonly property int commonScale: 5
     readonly property string commonFontFamily: "arial"
-    readonly property string inputBoxColor: "#222233"
-    readonly property string textColor:  "white"
-    readonly property string incorrectColor: "#ff0022"
+    readonly property string inputBoxColor:     "#222233"
+    readonly property string textColor:         "white"
+    readonly property string incorrectColor:    "#ff0022"
+    readonly property string buttonColor:       "#c82f63"
+    readonly property string buttonHoverColor:  "#912247"
+    readonly property string buttonClickColor:  "green"
+    readonly property string forgotButtonText: qsTr("Забыл логин или пароль")
+    readonly property string signupButtonText: qsTr("Зарегистрироваться")
     readonly property Gradient textGradient: Gradient {
         GradientStop { position: 0.0; color: "#09479D" }
         GradientStop { position: 0.25; color: "#9949FD" }
@@ -116,6 +122,8 @@ FramelessWindow {
                         font.pointSize: parent.height * (3/6)
                         maximumLength: 32
 
+                        inputMethodHints: Qt.ImhEmailCharactersOnly
+
                         Keys.onTabPressed: {
                             _textPasswordInput.focus = true;
                         }
@@ -133,6 +141,7 @@ FramelessWindow {
 
                         }
                     }
+
                     ColorAnimation on color {
                         id: _selectLoginAnim
                         to: inputBoxColor
@@ -207,7 +216,6 @@ FramelessWindow {
                         font.pointSize: parent.height * (3/6)
                         maximumLength: 32
 
-                        passwordCharacter: "*"
                         echoMode: TextInput.Password
 
                         Keys.onPressed: {
@@ -249,7 +257,7 @@ FramelessWindow {
                 width: parent.width / 2
                 height: parent.height / 1.5
                 radius: height / 2
-                color: "#c82f63"
+                color: buttonColor
 
                 Text {
                     anchors.centerIn: parent
@@ -282,33 +290,32 @@ FramelessWindow {
                         }
                     }
 
-                    //TODO: Поправить отображение цвета кнопки
-                    onHoveredChanged: exitingAnim.start();
-
                     Keys.onTabPressed: _textLoginInput.focus = true;
 
                     onClicked: {
                         checkUser();
-                        parent.color = 'green';
+                        parent.color = buttonClickColor;
                     }
                 }
 
                 ColorAnimation on color{
                     id: enteredAnim
-                    to: "#912247"
+                    running: false
+                    to: buttonHoverColor
                     duration: 200
                 }
 
                 ColorAnimation on color{
                     id: exitingAnim
-                    to: "#c82f63"
+                    running: false
+                    to: buttonColor
                     duration: 400
                 }
 
 
             }
         }
-        // Forgot pass text
+        // Forgot pass and signup text
         AuthBlockPrefab {
             heightScale: commonScale
             color: backColor
@@ -324,7 +331,7 @@ FramelessWindow {
                 font.family: commonFontFamily
                 font.pointSize: 12
 
-                text: qsTr("I forgot login or password.")
+                text: forgotButtonText
                 MouseArea {
                     anchors.fill: parent
                     hoverEnabled: true
@@ -339,9 +346,35 @@ FramelessWindow {
                     }
                 }
             }
+
+            Text {
+                id: signupText
+
+                anchors.top: forgotText.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+
+                property string localColor: "#343464"
+
+                color: localColor
+                font.family: commonFontFamily
+                font.pointSize: 12
+
+                text: signupButtonText
+                MouseArea {
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    acceptedButtons: Qt.LeftButton
+                    cursorShape: Qt.PointingHandCursor
+
+                    onEntered: { signupText.localColor = "white"; }
+                    onExited: { signupText.localColor = "#343464"; }
+                    onClicked: {
+                        signupText.localColor = "#AFAEAC";
+                        _SignInWindow.signupButtomPressed();
+                    }
+                }
+            }
         }
-
-
     }
 
     function checkUser() {

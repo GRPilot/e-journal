@@ -17,6 +17,7 @@ Loader {
     GlobalSettingWindow {
         id: _GlobalSettingWindow
         title: qsTr("e-journal | Global Settings")
+
     }
 
     SignInWindow {
@@ -36,6 +37,11 @@ Loader {
             _ReductionWindow.show();
         }
 
+        onSignupButtomPressed: {
+            _SignInWin.hide();
+            _SignUpWin.show();
+        }
+
         onSettingShow: {
             _GlobalSettingWindow.show();
         }
@@ -43,7 +49,15 @@ Loader {
 
     ReductionWindow {
         id: _ReductionWindow
+        title: "e-journal | Rediction login or password"
+        onClosing: {
+            _SignInWin.show();
+        }
+    }
 
+    SignupWindow {
+        id: _SignUpWin
+        title: "e-journal | Sign up"
         onClosing: {
             _SignInWin.show();
         }
