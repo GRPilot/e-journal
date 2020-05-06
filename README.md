@@ -1,45 +1,39 @@
-e-journal
-===
-####It's just my current individual project from my college practice
+#e-journal
+***
+It's just my current individual project from my college practice
 
 ##Sign in window:
 
-<div style="text-align:center">
-  <img src ="Screenshots/AuthPage.jpeg" />
-</div>
+![SigninWindow.qml]("Screenshots/AuthPage.jpeg")
 
 ##Main menu:
 
 #### Main menu, profile page:
-<div style="text-align:center">
-  <img src ="Screenshots/MainWindow_Profile.jpeg" />
-</div>
+
+![MainWindow.qml/profile]("Screenshots/MainWindow_Profile.jpeg")
 
 #### Main menu with minimized left buttons:
-<div style="text-align:center">
-  <img src ="Screenshots/MinimizeLeftPanel.jpeg" />
-</div>
+
+![MainWindow.qml (minimized left panel)]("Screenshots/MinimizeLeftPanel.jpeg")
 
 ##Global setting window:
-<div style="text-align:center">
-  <img src ="Screenshots/GlobalSettingWindow.jpg" />
-</div>
+
+![GlobalSettingWindow.qml](Screenshots/GlobalSettingWindow.jpg")
 
 ##Schemes:
+#### The scheme of all project:
+
+![The scheme of full project]("Screenshots/All system.svg")
 
 #### The scheme of qml side:
-<div style="text-align:center">
-  <img src ="Screenshots/Front-End.svg" />
-</div>
+
+![The scheme of qml windows ierarchey]("Screenshots/Front-End.svg")
 
 #### The scheme of database:
-<div style="text-align:center">
-  <img src ="Screenshots/e_journal_db_view.svg" />
-</div>
 
-#### The scheme of all project:
-<div style="text-align:center">
-  <img src ="Screenshots/All system.svg" />
-</div>
+![The scheme of database]("Screenshots/e_journal_db_view.svg")
+
+
 ***
+
 Other pages are in process.
