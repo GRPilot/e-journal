@@ -4,34 +4,42 @@ It's just my current individual project from my college practice
 
 ##Sign in window:
 
-![SigninWindow.qml]("Screenshots/AuthPage.jpeg")
+<p align="center">
+  <img src="Screenshots/AuthPage.jpeg" alt="LoginWindow.qml"/>
+</p>
 
 ##Main menu:
 
 #### Main menu, profile page:
-
-![MainWindow.qml/profile]("Screenshots/MainWindow_Profile.jpeg")
+<p align="center">
+  <img src="Screenshots/MainWindow_Profile.jpeg" alt="MainWindow.qml/profile"/>
+</p>
 
 #### Main menu with minimized left buttons:
-
-![MainWindow.qml (minimized left panel)]("Screenshots/MinimizeLeftPanel.jpeg")
+<p align="center">
+  <img src="Screenshots/MinimizeLeftPanel.jpeg" alt="MainWindow.qml (minimized left panel)"/>
+</p>
 
 ##Global setting window:
-
-![GlobalSettingWindow.qml](Screenshots/GlobalSettingWindow.jpg")
+<p align="center">
+  <img src="Screenshots/GlobalSettingWindow.jpg" alt="GlobalSettingWindow.qml"/>
+</p>
 
 ##Schemes:
 #### The scheme of all project:
-
-![The scheme of full project]("Screenshots/All system.svg")
+<p align="center">
+  <img src="Screenshots/All system.svg" alt="The scheme of full project"/>
+</p>
 
 #### The scheme of qml side:
-
-![The scheme of qml windows ierarchey]("Screenshots/Front-End.svg")
+<p align="center">
+  <img src="Screenshots/Front-End.svg" alt="The scheme of qml windows ierarchy"/>
+</p>
 
 #### The scheme of database:
-
-![The scheme of database]("Screenshots/e_journal_db_view.svg")
+<p align="center">
+  <img src="Screenshots/e_journal_db_view.jpeg" alt="The scheme of database"/>
+</p>
 
 
 ***
