@@ -27,7 +27,7 @@ Loader {
 
         title: qsTr("e-journal | Authorization")
 
-        onSignalExit: {
+        onLogined: {
             _SignInWin.close();
             _MainWindow.show();
         }

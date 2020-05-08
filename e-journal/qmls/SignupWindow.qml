@@ -1,4 +1,4 @@
-import QtQuick 2.12
+import QtQuick 2.14
 import QtQuick.Controls 2.12
 
 FramelessWindow {
@@ -131,17 +131,22 @@ FramelessWindow {
                     to: inputBoxActiveColor
                     duration: 200
                 }
-
                 ColorAnimation on color {
                     running: !_blockNameTextInput.activeFocus
                     to: inputBoxColor
                     duration: 200
                 }
-
+                ColorAnimation on color {
+                    id: incorNameAnim
+                    running: false
+                    to: inputBoxIncorrectColor
+                    duration: 200
+                }
                 Keys.onTabPressed: {
                     _blockLoginTextInput.forceActiveFocus();
+                    if (_blockNameTextInput.text.length <= 0)
+                        incorNameAnim.start();
                 }
-
             }
         }
         // Login Text Imput
@@ -184,13 +189,12 @@ FramelessWindow {
                     anchors.margins: commonMargins
                     verticalAlignment: Text.AlignVCenter
                     maximumLength: 32
-                    inputMethodHints: Qt.ImhEmailCharactersOnly
                     color: textColor
 
                     font.pixelSize: Math.min(parent.width, parent.height) / fontInputTextScale
 
-                    onFocusChanged: {
-
+                    validator: RegExpValidator {
+                        regExp: /^(\S)+/
                     }
                 }
 
@@ -199,12 +203,12 @@ FramelessWindow {
                     to: inputBoxActiveColor
                     duration: 200
                 }
-
                 ColorAnimation on color {
                     running: !_blockLoginTextInput.activeFocus
                     to: inputBoxColor
                     duration: 200
                 }
+
 
                 Keys.onTabPressed: {
                     _blockPassTextInput.forceActiveFocus();
@@ -222,7 +226,7 @@ FramelessWindow {
             clip: true
 
             Text {
-                id: _blockpPassText
+                id: _blockPassText
                 anchors.left: parent.left
                 anchors.right: parent.right
                 anchors.top: parent.top
@@ -237,7 +241,7 @@ FramelessWindow {
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
-                anchors.top: _blockpPassText.bottom
+                anchors.top: _blockPassText.bottom
                 anchors.topMargin: commonMargins
 
                 color: inputBoxColor
@@ -398,9 +402,11 @@ FramelessWindow {
                     onExited:  exitingAnim.start();
                     onClicked: {
                         clickedAnimColor.start();
-                        if (isPasswordValid(_blockPassTextInput.text.toString())
+
+
+                        if (isPasswordValid(_blockPassTextInput.text)
                                 && isPasswordsEqual()) {
-                            // создание нового пользователя
+                            createUser();
                         } else {
                             incorPassAnim.start();
                             incorPassComfAnim.start();
@@ -442,4 +448,17 @@ FramelessWindow {
     function isPasswordsEqual() {
         return (_blockPassTextInput.text === _blockPassComfirmTextInput.text);
     }
+
+
+    function createUser() {
+        var name = _blockNameTextInput.text;
+        var login = _blockLoginTextInput.text;
+        var password = _blockPassTextInput.text;
+
+        var status = false;
+
+        console.log(status);
+    }
+
+
 }

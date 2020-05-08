@@ -8,7 +8,7 @@ FramelessWindow {
     minimumWidth: 400
     minimumHeight: 500
 
-    signal signalExit
+    signal logined
     signal forgorButtonPressed
     signal signupButtomPressed
 
@@ -32,6 +32,9 @@ FramelessWindow {
         GradientStop { position: 1.0; color: "#F3FEFA" }
     }
 
+    Connections {
+        target: validator
+    }
 
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
@@ -122,10 +125,12 @@ FramelessWindow {
                         font.pointSize: parent.height * (3/6)
                         maximumLength: 32
 
-                        inputMethodHints: Qt.ImhEmailCharactersOnly
+                        validator: RegExpValidator {
+                            regExp: /^(\S)+/
+                        }
 
                         Keys.onTabPressed: {
-                            _textPasswordInput.focus = true;
+                            _textPasswordInput.forceActiveFocus();
                         }
 
                         Keys.onPressed: {
@@ -138,7 +143,6 @@ FramelessWindow {
                             end: Qt.point(_textLoginInput.width, 0)
                             source: _textLoginInput
                             gradient: textGradient
-
                         }
                     }
 
@@ -290,7 +294,7 @@ FramelessWindow {
                         }
                     }
 
-                    Keys.onTabPressed: _textLoginInput.focus = true;
+                    Keys.onTabPressed: _textLoginInput.forceActiveFocus();
 
                     onClicked: {
                         checkUser();
@@ -380,14 +384,14 @@ FramelessWindow {
     function checkUser() {
         if (validator.checkUser(qsTr(_textLoginInput.text))) {
             if (validator.checkPassWithUser(_textLoginInput.text, _textPasswordInput.text)) {
-                _SignInWindow.signalExit();
+                _SignInWindow.logined();
             } else {
                 incorrectPassAnim.start();
-                _textPasswordInput.focus = true;
+                _textPasswordInput.forceActiveFocus();
             }
         } else {
             incorrectLoginAnim.start();
-            _textLoginInput.focus = true;
+            _textLoginInput.forceActiveFocus();
         }
     }
 
