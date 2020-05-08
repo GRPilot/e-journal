@@ -2,10 +2,16 @@
 ***
 It's just my current individual project from my college practice
 
-### Sign in window:
+### Sign-in window:
 
 <p align="center">
   <img src="Screenshots/AuthPage.jpeg" alt="LoginWindow.qml"/>
+</p>
+
+### Sign-up window:
+
+<p align="center">
+  <img src="Screenshots/SignupWindow.jpg" alt="SignupWindow.qml"/>
 </p>
 
 ### Main menu:
