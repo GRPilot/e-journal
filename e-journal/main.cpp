@@ -1,7 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+
 #include "authorizationvalidator.h"
+#include "SignupProfile.h"
 
 int main(int argc, char *argv[])
 {
@@ -10,8 +12,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    //AuthorizationValidator validator;
     qmlRegisterType<AuthorizationValidator>("loc.validator", 1, 0, "Validator");
+    qmlRegisterType<SignupProfile>("loc.SignupProfile", 1, 0, "SignupHelper");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,

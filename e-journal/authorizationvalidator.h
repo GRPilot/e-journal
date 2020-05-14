@@ -2,8 +2,7 @@
 
 #include <QObject>
 #include <QtSql>
-#include "DBHelper.h"
-#include "HashHelper.h"
+#include "ProfileManager.h"
 
 class AuthorizationValidator : public QObject
 {
@@ -20,7 +19,7 @@ class AuthorizationValidator : public QObject
     Q_INVOKABLE bool checkUser(const QString& username);
 
  private:
-    DBHelper m_db_helper;
-    bool existQuery(const QString& query);
+    //DBHelper m_db_helper;
+    ProfileManager *m_manager;
 };
 

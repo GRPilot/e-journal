@@ -1,22 +1,30 @@
-#ifndef PROFILEMANAGER_H
-#define PROFILEMANAGER_H
+#pragma once
 
-#include "dbprovider.h"
+#include "DBHelper.h"
 #include "HashHelper.h"
+#include <QtSql>
 
 class ProfileManager {
-public:
+ public:
     ProfileManager();
-    ~ProfileManager();
 
-    bool createNewUser(const QString &login, const QString &password, const QString &name);
-    bool deleteUser(const QString &login, const QString &password);
-    bool changePassword(const QString &login, const QString &newPassword);
-    QString userLogin(const QString &password, const QString &name);
+    bool createNewUser(const QString &username, const QString &password);
+    bool deleteUser(const QString &username, const QString &password);
 
-private:
-    DBProvider *m_db_teachers;
-    DBProvider *m_db_users;
+    bool checkUser(const QString &username);
+    bool checkPassAndUser(const QString& username, const QString& password);
+
+    bool setUserName(const QString &username, const QString& newName);
+
+//    bool setUserLogin(const QString &login);
+//    bool changePassword(const QString &login, const QString &newPassword);
+//    QString userLogin(const QString &password, const QString &name);
+
+ private:
+    DBHelper m_db_teachers_helper;
+    DBHelper m_db_users_helper;
+
+    bool execQuery(const QString& query, const QString& pathToDatabase);
+    bool existQuery(const QString& query, const QString& pathToDatabase);
+    int  getUserID(const QString& username);
 };
-
-#endif // PROFILEMANAGER_H

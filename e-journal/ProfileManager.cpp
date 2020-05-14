@@ -1,155 +1,176 @@
 #include "ProfileManager.h"
 
 ProfileManager::ProfileManager()
-    : m_db_teachers{ new DBProvider(Teachers) },
-      m_db_users{ new DBProvider(Users) }
-{
+    : m_db_teachers_helper{ Tables::Teachers },
+      m_db_users_helper   { Tables::Users }
+{}
 
-}
-
-ProfileManager::~ProfileManager() {
-    delete(m_db_users);
-    delete(m_db_teachers);
-}
-
-bool ProfileManager::createNewUser(const QString &login,
-                                   const QString &password,
-                                   const QString &name) {
-
-    if (login.length() <= 4 || password.length() <= 4)
+bool ProfileManager::createNewUser(const QString& username,
+                                   const QString& password) {
+    if (username.length() <= 4 || password.length() <= 4)
         return false;
 
-    std::vector user_columns = {
-        QString("username")
+    std::vector tables {
+        QString{ "username" },
+        QString{ "password" }
     };
 
-    if (m_db_users->select(user_columns)->where(login)->exist())
-        return false;
+    HashHelper hHelper{ password };
 
-    bool state{ false };
-    user_columns.push_back(QString("password"));
-
-    HashHelper hHelper(password);
-
-    std::vector user_values = {
-        login,
-        hHelper.hash()
+    std::vector values {
+        QString{ "'%1'" }.arg(username.toLower()),
+        QString{ "'%1'" }.arg(hHelper.hash())
     };
 
-    state = m_db_users->insert(user_columns)
-                      ->values(user_values)
-                      ->exec();
+    m_db_users_helper.insert(tables).values(values);
 
-    if (state) {
-        std::vector teachers_values = {
-            QString("full_name=%1").arg(name)
-        };
-        int id_user = m_db_users->last_id();
+    QString query{ m_db_users_helper.query() };
 
-        state = m_db_teachers->update(teachers_values)
-                             ->where(QString("id_user=%1").arg(QString::number(id_user)))
-                             ->exec();
-        // Если не получиться добавить, то ошибка
-        if (!state) {
-            qDebug() << m_db_teachers->query().lastError();
-            m_db_users->delete_from()->where(QString("id=%1").arg(id_user))->exec();
-        }
-    }
-
-    return state;
+    bool status{ execQuery(query, m_db_users_helper.path()) };
+    return status;
 }
 
-bool ProfileManager::deleteUser(const QString &login, const QString &password)
-{
-    if (login <= 4 || password <= 4)
+bool ProfileManager::deleteUser(const QString& username,
+                                const QString& password) {
+    if (username.length() <= 4 || password.length() <= 4)
         return false;
-
-    std::vector tables = {
-        QString("username"),
-        QString("password")
-    };
 
     bool status{ false };
-
-    HashHelper hHelper(password);
-    QString condition = QString("username=%1 AND password=%2")
-                        .arg(login).arg(hHelper.hash());
-
-    if (m_db_users->select(tables)
-                  ->where(condition)
-                  ->exist()) {
-
-        status = m_db_users->delete_from()
-                           ->where(condition)
-                           ->exec();
-    }
 
     return status;
 }
 
-bool ProfileManager::changePassword(const QString &login, const QString &newPassword)
-{
-    if (login <= 4 || newPassword <= 4)
+bool ProfileManager::checkUser(const QString& username) {
+    if (username.isNull() || username.isEmpty()) {
         return false;
-
-    std::vector user_columns = {
-        QString("username")
-    };
-
-    const QString condition = QString("username=%1").arg(login);
-    bool status{ false };
-    if (m_db_users->select(user_columns)
-            ->where(condition)
-            ->exist()) {
-        status = m_db_users->delete_from()->where(condition)->exec();
     }
+
+    m_db_users_helper.select_all()
+                     .where(QString("username='%1'").arg(username.toLower()))
+                     .exist();
+
+    QString query{ m_db_users_helper.query() };
+    bool status { existQuery(query, m_db_users_helper.path()) };
+
+    m_db_users_helper.clearQuery();
 
     return status;
 }
 
-//Maybe it works incorrect
-QString ProfileManager::userLogin(const QString &password, const QString &name)
-{
-    if (password <= 4)
-        return QString{ "Sorry, but Your password lenght less than 4!" };
-
-    if (name.isEmpty() || name.isNull())
-        return QString{ "Who are you? I don't klow you..." };
-
-    int id_user{ -1 };
-    QString full_name{ "Ops! Something is incorrect." };
-    QString condition = QString("full_name LIKE '%1' ").arg('%' + name + '%');
-
-
-    if (m_db_teachers->select_all()
-                     ->where(condition)
-                     ->exist()) {
-        std::vector teachers_columns = {
-            QString("id_user"),
-        };
-
-        m_db_teachers->select(teachers_columns)
-                     ->where(condition)
-                     ->exec();
-
-        id_user = m_db_teachers->query().value(0).toInt();
+bool ProfileManager::checkPassAndUser(const QString& username,
+                                      const QString& password) {
+    if (username.isEmpty() || username.isNull()) {
+        return false;
     }
 
     HashHelper hHelper(password);
 
-    condition = QString("password='%1' AND id=%2").arg(hHelper.hash()).arg(id_user);
 
-    if(m_db_users->select_all()->where(condition)->exist()) {
-        std::vector teachers_columns = {
-            QString("full_name"),
-        };
+    m_db_users_helper.select_all()
+                     .where(QString("username='%1' AND password='%2'")
+                            .arg(username.toLower()).arg(hHelper.hash()))
+                     .exist();
 
-        m_db_teachers->select(teachers_columns)
-                     ->where(condition)
-                     ->exec();
+    QString query{ m_db_users_helper.query() };
+    bool status { existQuery(query, m_db_users_helper.path()) };
 
-        full_name = m_db_teachers->query().value(0).toString();
+    m_db_users_helper.clearQuery();
+
+    return status;
+}
+
+bool ProfileManager::setUserName(const QString& username,
+                                 const QString& newName) {
+    if (username.isEmpty() || newName.isEmpty())
+        return false;
+
+    if (!checkUser(username))
+        return false;
+
+    int user_id{ getUserID(username) };
+    QString condition{ QString{"id_user='%1'"}.arg(user_id) };
+    QString updateTarget{ QString{ "full_name='%1'" }.arg(newName) };
+
+    m_db_teachers_helper.update(std::vector<QString>{ updateTarget })
+                        .values(std::vector<QString>{ newName })
+                        .where(condition);
+
+    QString query{ m_db_teachers_helper.query() };
+    bool status{ execQuery(query, m_db_teachers_helper.path()) };
+
+    return status;
+}
+
+
+bool ProfileManager::execQuery(const QString& query, const QString& pathToDatabase) {
+    if (query.isEmpty() || pathToDatabase.isEmpty())
+        return false;
+
+    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
+    dbase.setDatabaseName(pathToDatabase);
+
+    if (!dbase.open()) {
+        qDebug() << "[QtSql] Cannot open the database: " << pathToDatabase;
+        return false;
     }
 
-    return full_name;
+    QSqlQuery sqlQuery;
+    bool status{ sqlQuery.exec(query) };
+    dbase.close();
+    return status;
+}
+
+bool ProfileManager::existQuery(const QString& query, const QString& pathToDatabase) {
+    if (query.isEmpty())
+        return false;
+
+    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
+    dbase.setDatabaseName(pathToDatabase);
+
+    if (!dbase.open()) {
+        return false;
+    }
+
+    QSqlQuery sqlQuery;
+
+    bool status{ false };
+
+    sqlQuery.exec(query);
+    if (sqlQuery.next()) {
+        status = sqlQuery.value(0).toBool();
+    }
+
+    dbase.close();
+    return status;
+}
+
+int ProfileManager::getUserID(const QString& username) {
+    if (username.isEmpty())
+        return -1;
+
+    QString condition{ QString("username='%1'").arg(username.toLower()) };
+
+    m_db_users_helper.select(
+                    std::vector<QString>{"id"}
+                ).where(condition);
+
+    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
+    dbase.setDatabaseName(m_db_users_helper.path());
+
+    if (!dbase.open()) {
+        return false;
+    }
+
+    QSqlQuery sqlQuery;
+
+    int user_id{ -1 };
+
+    sqlQuery.exec(m_db_users_helper.query());
+
+    if (sqlQuery.next()) {
+        user_id = sqlQuery.value(0).toInt();
+    }
+
+    dbase.close();
+    return user_id;
 }

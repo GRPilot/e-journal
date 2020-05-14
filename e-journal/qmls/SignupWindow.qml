@@ -1,11 +1,16 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.12
+import loc.SignupProfile 1.0
 
 FramelessWindow {
     width: 500
     height: 650
     minimumWidth: 500
     minimumHeight: 500
+
+    SignupHelper {
+        id: _signupHelper
+    }
 
     property string backColor:              "#242246"
     property string blockColor:             "#32305C"
@@ -404,8 +409,8 @@ FramelessWindow {
                         clickedAnimColor.start();
 
 
-                        if (isPasswordValid(_blockPassTextInput.text)
-                                && isPasswordsEqual()) {
+                        if (isPasswordValid(_blockPassTextInput.text) &&
+                            isPasswordsEqual()) {
                             createUser();
                         } else {
                             incorPassAnim.start();
@@ -455,9 +460,10 @@ FramelessWindow {
         var login = _blockLoginTextInput.text;
         var password = _blockPassTextInput.text;
 
-        var status = false;
+        var status = _signupHelper.newUser(login, password, name);
 
         console.log(status);
+        return status;
     }
 
 

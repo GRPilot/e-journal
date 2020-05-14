@@ -58,11 +58,11 @@ static const uint qt_meta_data_AuthorizationValidator[] = {
        0,       // flags
        0,       // signalCount
 
- // slots: name, argc, parameters, tag, flags
-       1,    2,   24,    2, 0x0a /* Public */,
-       5,    1,   29,    2, 0x0a /* Public */,
+ // methods: name, argc, parameters, tag, flags
+       1,    2,   24,    2, 0x02 /* Public */,
+       5,    1,   29,    2, 0x02 /* Public */,
 
- // slots: parameters
+ // methods: parameters
     QMetaType::Bool, QMetaType::QString, QMetaType::QString,    3,    4,
     QMetaType::Bool, QMetaType::QString,    3,
 

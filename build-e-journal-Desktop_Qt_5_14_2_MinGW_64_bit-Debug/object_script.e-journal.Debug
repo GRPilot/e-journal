@@ -1,0 +1,11 @@
+debug/DBHelper.o
+debug/HashHelper.o
+debug/ProfileManager.o
+debug/SignupProfile.o
+debug/main.o
+debug/authorizationvalidator.o
+debug/qrc_qml.o
+debug/qrc_Windows.o
+debug/qrc_qmake_qmake_immediate.o
+debug/moc_SignupProfile.o
+debug/moc_authorizationvalidator.o

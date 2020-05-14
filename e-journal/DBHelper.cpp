@@ -17,7 +17,7 @@ DBHelper &DBHelper::select(Val_List columns) {
     QString curTabel = currentTabel();
     QString cols = valListToQString(columns);
 
-    m_query = QString("SELECT '%1' FROM %2 ")
+    m_query = QString("SELECT %1 FROM %2 ")
               .arg(cols).arg(curTabel);
 
     return *this;
