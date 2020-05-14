@@ -3,6 +3,8 @@ import QtQuick.Window 2.12
 import QtGraphicalEffects 1.0
 import QtQuick.Controls 2.12
 
+import loc.validator 1.0
+
 FramelessWindow {
     id: _SignInWindow
     minimumWidth: 400
@@ -32,8 +34,8 @@ FramelessWindow {
         GradientStop { position: 1.0; color: "#F3FEFA" }
     }
 
-    Connections {
-        target: validator
+    Validator {
+        id: _validator
     }
 
     Component.onCompleted: {
@@ -382,8 +384,8 @@ FramelessWindow {
     }
 
     function checkUser() {
-        if (validator.checkUser(qsTr(_textLoginInput.text))) {
-            if (validator.checkPassWithUser(_textLoginInput.text, _textPasswordInput.text)) {
+        if (_validator.checkUser(_textLoginInput.text.toString())) {
+            if (_validator.checkPassWithUser(_textLoginInput.text.toString(), _textPasswordInput.text.toString())) {
                 _SignInWindow.logined();
             } else {
                 incorrectPassAnim.start();

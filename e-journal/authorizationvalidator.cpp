@@ -2,19 +2,17 @@
 
 AuthorizationValidator::AuthorizationValidator(QObject *parent)
     : QObject(parent),
-      m_db{ new DBProvider( Tables::Users ) }
-{
-
-}
+      m_db_helper{ Tables::Users }
+{}
 
 AuthorizationValidator::AuthorizationValidator(const AuthorizationValidator &other)
     : AuthorizationValidator{ other.parent() } {}
 
 AuthorizationValidator::~AuthorizationValidator() {
-    delete m_db;
+    //delete m_db;
 }
 
-bool AuthorizationValidator::checkPassWithUser(const QString& login, const QString& password) const
+bool AuthorizationValidator::checkPassWithUser(const QString& login, const QString& password)
 {
     if (login.isEmpty() || login.isNull()) {
         return false;
@@ -30,20 +28,21 @@ bool AuthorizationValidator::checkPassWithUser(const QString& login, const QStri
         QString("password")
     };
 
-    if (
-        m_db->select(columns)
-            ->where(QString("username='%1' AND password='%2'")
-                      .arg(login)
-                      .arg(hHelper.hash())
-                   )
-            ->exist()
-       ) {
-        return true;
-    }
-    return false;
+
+    m_db_helper.select(columns)
+        .where(QString("username='%1' AND password='%2'")
+               .arg(login).arg(hHelper.hash()))
+        .exist();
+
+    QString query{ m_db_helper.query() };
+    bool status { existQuery(query) };
+
+    m_db_helper.clearQuery();
+
+    return status;
 }
 
-bool AuthorizationValidator::checkUser(const QString& username) const
+bool AuthorizationValidator::checkUser(const QString& username)
 {
     if (username.isNull() || username.isEmpty()) {
         return false;
@@ -53,10 +52,38 @@ bool AuthorizationValidator::checkUser(const QString& username) const
         QString(username)
     };
 
-    if (m_db->select(column)
-            ->where(QString("username='%1'").arg(username))
-            ->exist()) {
-        return true;
+    m_db_helper.select(column)
+        .where(QString("username='%1'").arg(username))
+        .exist();
+
+    QString query{ m_db_helper.query() };
+    bool status { existQuery(query) };
+
+    m_db_helper.clearQuery();
+
+    return status;
+}
+
+bool AuthorizationValidator::existQuery(const QString& query) {
+    if (query.isEmpty())
+        return false;
+
+    QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
+    dbase.setDatabaseName(m_db_helper.path());
+
+    if (!dbase.open()) {
+        return false;
     }
-    return false;
+
+    QSqlQuery sqlQuery;
+
+    bool status{ false };
+
+    sqlQuery.exec(query);
+    if (sqlQuery.next()) {
+        status = sqlQuery.value(0).toBool();
+    }
+
+    dbase.close();
+    return status;
 }

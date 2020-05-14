@@ -10,8 +10,8 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    QQmlContext *context = engine.rootContext();
-    context->setContextProperty("validator", new AuthorizationValidator());
+    //AuthorizationValidator validator;
+    qmlRegisterType<AuthorizationValidator>("loc.validator", 1, 0, "Validator");
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -19,6 +19,8 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
+
+
     engine.load(url);
 
     return app.exec();
