@@ -15,6 +15,7 @@ FramelessWindow {
     signal signupButtomPressed
 
     property string backColor: "#242246"
+    property string login: ""
 
     readonly property int commonScale: 5
     readonly property string commonFontFamily: "arial"
@@ -118,7 +119,7 @@ FramelessWindow {
 
                     TextInput {
                         id: _textLoginInput
-                        text: qsTr("")
+                        text: login
                         anchors.verticalCenter: parent.verticalCenter
                         anchors.left: parent.left
                         anchors.right: parent.right

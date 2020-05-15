@@ -38,7 +38,7 @@ Loader {
         }
 
         onSignupButtomPressed: {
-            _SignInWin.hide();
+            _SignInWin.close();
             _SignUpWin.show();
         }
 
@@ -59,6 +59,9 @@ Loader {
         id: _SignUpWin
         title: "e-journal | Sign up"
         onClosing: {
+            _SignInWin.login = lastRegProfile;
+            lastRegProfile = "";
+            clearFields();
             _SignInWin.show();
         }
     }

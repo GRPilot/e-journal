@@ -21,19 +21,23 @@ FramelessWindow {
     property string buttonColor:            "#c82f63"
     property string buttonHoverColor:       "#912247"
     property string buttonClickColor:       "green"
+    property string correctCollor:          "green"
     property string blockTitle:             "РЕГИСТРАЦИЯ"
     property string blockName:              "Введите ФИО:"
     property string blockLogin:             "Введите логин:"
     property string blockPassword:          "Введите пароль:"
     property string blockPasswordComfirm:   "Подтвердите пароль:"
     property string buttonTitle:            "зарегистрироваться"
+    property string backButtonTitle:        "назад"
+
+    property string lastRegProfile;
 
     readonly property string commonFontFamily: "arial"
     readonly property int blockSizeScale:     4
     readonly property int fontInputTextScale: 2
     readonly property int fontTitleScale:     3
     readonly property int fontScale:          5
-    readonly property int fontButtonScale:    4
+    readonly property int fontButtonScale:    3
     readonly property int countOfBlocks:      6
     readonly property int heightOfLine:       5
     readonly property int commonRadius:      20
@@ -45,14 +49,16 @@ FramelessWindow {
         id: _block
         anchors.centerIn: parent
         width: parent.width - parent.width / blockSizeScale
-        height: parent.height - parent.height / blockSizeScale
+        height: parent.height - parent.height / blockSizeScale + heightOfLine;
         color: blockColor
         radius: commonRadius
+
+        Keys.onReturnPressed: buttonPressed();
 
         // Title
         Item {
             id: _blockTitle
-            height: parent.height / countOfBlocks - heightOfLine
+            height: parent.height / countOfBlocks - heightOfLine * 3
             anchors.top: parent.top
             anchors.left: parent.left
             anchors.right: parent.right
@@ -104,6 +110,7 @@ FramelessWindow {
             }
 
             Rectangle {
+                id: _blockNameForm
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -147,6 +154,7 @@ FramelessWindow {
                     to: inputBoxIncorrectColor
                     duration: 200
                 }
+
                 Keys.onTabPressed: {
                     _blockLoginTextInput.forceActiveFocus();
                     if (_blockNameTextInput.text.length <= 0)
@@ -177,6 +185,7 @@ FramelessWindow {
             }
 
             Rectangle {
+                id: _blockLoginForm
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -214,6 +223,11 @@ FramelessWindow {
                     duration: 200
                 }
 
+                ColorAnimation on color {
+                    id: incorLoginComfAnim
+                    to: inputBoxIncorrectColor
+                    duration: 200
+                }
 
                 Keys.onTabPressed: {
                     _blockPassTextInput.forceActiveFocus();
@@ -243,6 +257,7 @@ FramelessWindow {
             }
 
             Rectangle {
+                id: _blockPassForm
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -316,6 +331,7 @@ FramelessWindow {
             }
 
             Rectangle {
+                id: _blockPassComfirmForm
                 anchors.bottom: parent.bottom
                 anchors.left: parent.left
                 anchors.right: parent.right
@@ -369,19 +385,21 @@ FramelessWindow {
                 }
             }
         }
-        // Button
+        // Buttons
         Item {
             id: _blockButton
-            height: parent.height / countOfBlocks - heightOfLine
+            height: parent.height / countOfBlocks - heightOfLine * 2
             anchors.top: _blockPassComfirm.bottom
             anchors.left: parent.left
             anchors.right: parent.right
 
             Rectangle {
                 id: _button
-                anchors.centerIn: parent
+                anchors.top: parent.top;
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: heightOfLine
                 width: parent.width - parent.width / blockSizeScale
-                height: parent.height - parent.height / blockSizeScale
+                height: parent.height - (parent.height * 1.5) / blockSizeScale
 
                 color: buttonColor
                 radius: commonRadius
@@ -405,19 +423,7 @@ FramelessWindow {
 
                     onEntered: enteringAnim.start();
                     onExited:  exitingAnim.start();
-                    onClicked: {
-                        clickedAnimColor.start();
-
-
-                        if (isPasswordValid(_blockPassTextInput.text) &&
-                            isPasswordsEqual()) {
-                            createUser();
-                        } else {
-                            incorPassAnim.start();
-                            incorPassComfAnim.start();
-                        }
-                    }
-
+                    onClicked: buttonPressed();
                 }
 
                 ColorAnimation on color {
@@ -440,7 +446,116 @@ FramelessWindow {
                     duration: 700
                 }
             }
+
+            Rectangle {
+                id: _backButton
+                anchors.top: _button.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.topMargin: heightOfLine * 2
+                width: (parent.width - parent.width / blockSizeScale) / 1.5
+                height: parent.height - (parent.height * 2.5) / blockSizeScale
+
+                color: buttonColor
+                radius: commonRadius
+
+                Text {
+                    id: _blockBackButtonText
+                    anchors.centerIn: parent
+                    color: textColor
+
+                    text: backButtonTitle
+
+                    font.pointSize: (Math.min(parent.width, parent.height) * 1.5) / fontButtonScale
+                    font.family: commonFontFamily
+                }
+
+                MouseArea {
+                    anchors.fill: parent;
+                    cursorShape: Qt.PointingHandCursor
+                    acceptedButtons: Qt.Key_Return | Qt.Key_Enter
+                    hoverEnabled: true
+
+                    onEntered: enteringBackAnim.start();
+                    onExited:  exitingBackAnim.start();
+                    onClicked: buttonBackPressed();
+
+                }
+
+                ColorAnimation on color {
+                    id: enteringBackAnim
+                    running: false
+                    to: buttonHoverColor
+                    duration: 200
+                }
+                ColorAnimation on color {
+                    id: exitingBackAnim
+                    running: false
+                    to: buttonColor
+                    duration: 400
+                }
+                ColorAnimation on color {
+                    id: clickedBackAnimColor
+                    running: false
+                    from: buttonClickColor
+                    to: buttonColor
+                    duration: 700
+                }
+            }
         }
+
+    }
+
+    ColorAnimation on color {
+        id: userCreatedSuccessAnim
+        targets: [
+            _blockNameForm,
+            _blockLoginForm,
+            _blockPassForm,
+            _blockPassComfirmForm
+        ]
+        properties: "color"
+        running: false
+        to: correctCollor
+        duration: 200
+    }
+    ColorAnimation on color {
+        id: setStandartColors
+        targets: [
+            _blockNameForm,
+            _blockLoginForm,
+            _blockPassForm,
+            _blockPassComfirmForm
+        ]
+        properties: "color"
+        running: false
+        to: inputBoxColor
+        duration: 200
+    }
+
+    function buttonPressed() {
+        clickedAnimColor.start();
+
+        var status = false;
+        var login = _blockLoginTextInput.text
+
+        var passChecker = isPasswordValid(_blockPassTextInput.text) && isPasswordsEqual();
+        var loginChecker = !_signupHelper.checkUser(login);
+
+        if (!loginChecker) {
+            incorLoginComfAnim.start();
+        } else if (!passChecker) {
+            incorPassAnim.start();
+            incorPassComfAnim.start();
+        } else {
+            status = createUser();
+            userCreatedSuccessAnim.start()
+        }
+
+        return status;
+    }
+    function buttonBackPressed() {
+        clickedBackAnimColor.start();
+        this.close();
     }
 
     function isPasswordValid(password) {
@@ -449,11 +564,9 @@ FramelessWindow {
 
         return true;
     }
-
     function isPasswordsEqual() {
         return (_blockPassTextInput.text === _blockPassComfirmTextInput.text);
     }
-
 
     function createUser() {
         var name = _blockNameTextInput.text;
@@ -462,9 +575,17 @@ FramelessWindow {
 
         var status = _signupHelper.newUser(login, password, name);
 
-        console.log(status);
+        if (status) lastRegProfile = login;
+
         return status;
     }
 
+    function clearFields() {
+        _blockNameTextInput.text = "";
+        _blockLoginTextInput.text = "";
+        _blockPassTextInput.text = "";
+        _blockPassComfirmTextInput.text = "";
 
+        setStandartColors.start();
+    }
 }

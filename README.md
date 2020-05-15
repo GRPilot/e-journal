@@ -12,6 +12,8 @@ It's just my current individual project from my college practice
 
 <p align="center">
   <img src="Screenshots/SignupWindow.jpg" alt="SignupWindow.qml"/>
+  <img src="Screenshots/SignupWindowIncorrectData.jpg" alt="Incorrect input and checking username">
+  <img src="Screenshots/SignupWindowUserCreated.jpg" alt="Success user created">
 </p>
 
 ### Main menu:

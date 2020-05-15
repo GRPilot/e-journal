@@ -26,3 +26,11 @@ bool SignupProfile::newUser(const QString &login,
 
     return false;
 }
+
+bool SignupProfile::checkUser(const QString& login)
+{
+    if (login.isEmpty())
+        return false;
+
+    return m_manager->checkUser(login);
+}
