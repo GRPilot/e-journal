@@ -26,8 +26,8 @@ SOURCES += \
 
 RESOURCES += \
          $$files(qmls/*.qrc) \
-         $$files(images/*.svg) \
-         $$files(images/*.png)
+         $$files(images/*.qrc) \
+         #images/imgs.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =

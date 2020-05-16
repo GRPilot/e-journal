@@ -8,34 +8,39 @@ FramelessWindow {
     width: 1024;
     height: 512;
 
-    title: qsTr("e-journal")
+    title: qsTr("e-journal | Profile")
 
     // for login out
     signal signalLogout
 
-    property string bg_color: "#242246"
-    readonly property string page_color: "#332258"
+    property string bg_color:            "#242246"
+    readonly property string page_color: "#32305C"
     readonly property int unColumnedPages: 1
+    readonly property int commonMargin: 5
     property int widthOfTabs: 150
     property int heightOfTabs: 50
     property bool isMinimize: false
 
+    property string profileTitle:    "Профиль"
+    property string journalTitle:    "Журнал"
+    property string statisticsTitle: "Сатистика"
+    property string settingTitle:    "Настройки"
+
     property var imgs: [
-            "images/collaps.png", // hide
-            "images/user.png", // profile
-            "images/cross.png",
-            "images/cross.png",
-            "images/cross.png",
-            "images/cross.png",
-            "images/cross.png",
-            "images/collaps.png", // setting
+            "imgs/arrow", // hide
+            "imgs/user", // profile
+            "imgs/cross",
+            "imgs/cross",
+            "imgs/cross",
+            "imgs/cross",
+            "imgs/cross",
+            "imgs/collaps", // setting
     ]
 
     color: bg_color
 
     Row {
         anchors.fill: parent
-
 
         Column {
             id: columns
@@ -54,6 +59,7 @@ FramelessWindow {
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.bottom: parent.bottom
+                    anchors.margins: commonMargin
                     width: height
                     fillMode: Image.PreserveAspectFit
                 }
@@ -63,6 +69,8 @@ FramelessWindow {
                     anchors.left: _imgHide.right
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
+                    anchors.margins: commonMargin
+
                     verticalAlignment: Qt.AlignVCenter
                     text: "Скрыть панель"
                     color: "white"
@@ -97,6 +105,7 @@ FramelessWindow {
                         anchors.top: parent.top
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
+                        anchors.margins: commonMargin
                         width: height
                         fillMode: Image.PreserveAspectFit
                     }
@@ -106,6 +115,7 @@ FramelessWindow {
                         anchors.left: _img.right
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
+                        anchors.margins: commonMargin
                         verticalAlignment: Qt.AlignVCenter
                         text: view.getTab(index).title
                         color: "white"
@@ -125,9 +135,11 @@ FramelessWindow {
                         onClicked: {
                             view.currentIndex = index;
                             focus = true;
+                            _mainWin.title = qsTr("e-journal | %1".arg(view.getTab(index).title))
                         }
                     }
                 }
+                Component.onCompleted: view.getTab(0).forceActiveFocus();
             }
         }
 
@@ -150,6 +162,7 @@ FramelessWindow {
                 anchors.top: parent.top
                 anchors.left: parent.left
                 anchors.bottom: parent.bottom
+                anchors.margins: commonMargin
                 width: height
                 fillMode: Image.PreserveAspectFit
             }
@@ -159,6 +172,7 @@ FramelessWindow {
                 anchors.left: _settingImg.right
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
+                anchors.leftMargin: commonMargin
                 verticalAlignment: Qt.AlignVCenter
                 text: view.getTab(view.count - unColumnedPages).title
                 color: "white"
@@ -177,6 +191,7 @@ FramelessWindow {
 
                 onClicked: {
                     view.currentIndex = view.count - unColumnedPages;
+                    title = qsTr("e-journal | %1".arg(settingTitle));
                     focus = true;
                 }
             }
@@ -186,7 +201,6 @@ FramelessWindow {
             id: view
             style: TabViewStyle {
                 tab: Rectangle {
-
                     border.width: 0
                     color: bg_color
                 }
@@ -197,32 +211,66 @@ FramelessWindow {
             anchors.top: parent.top
 
             Tab {
-                title: "Профиль"
+                title: profileTitle
 
                 Profile {
                     color: page_color;
                 }
             }
             Tab {
-                title: "Журнал"
+                title: journalTitle
                 Rectangle {
                     color: page_color
                 }
             }
             Tab {
-                title: "Статистика"
+                title: statisticsTitle
                 Statistics {
                     color: page_color
                 }
             }
-
             Tab {
-                title: "Настройки"
+                title: settingTitle
                 Setting {
                     color: page_color
                 }
             }
         }
+    }
+
+    NumberAnimation {
+        id: minimizeImgAnim
+        target: _imgHide
+        property: "rotation"
+        from: 0
+        to: 180
+        duration: 200
+        easing.type: Easing.InOutBounce
+    }
+    NumberAnimation {
+        id: maximizeImgAnim
+        target: _imgHide
+        property: "rotation"
+        to: 360
+        duration: 200
+        easing.type: Easing.InOutBounce
+    }
+
+    NumberAnimation {
+        id: maximizeAnim;
+        target: _mainWin
+        property: "widthOfTabs"
+        to: 150
+        duration: 200
+        easing.type: Easing.InOutQuad
+    }
+    NumberAnimation {
+        id: minimizeAnim;
+        target: _mainWin
+        property: "widthOfTabs"
+        to: heightOfTabs
+        duration: 200
+        easing.type: Easing.InOutQuad
     }
 
     onWidthChanged: {
@@ -236,11 +284,13 @@ FramelessWindow {
 
     function tabMinimize() {
         isMinimize = true;
-        widthOfTabs = heightOfTabs;
+        minimizeImgAnim.start();
+        minimizeAnim.start();
     }
 
     function tabMaximize() {
         isMinimize = false;
-        widthOfTabs = 150;
+        maximizeImgAnim.start();
+        maximizeAnim.start();
     }
 }

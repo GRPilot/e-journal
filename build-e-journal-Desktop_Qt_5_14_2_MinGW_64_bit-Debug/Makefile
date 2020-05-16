@@ -283,8 +283,7 @@ Makefile: ../e-journal/e-journal.pro D:/PROGRAMS/Qt/5.14.2/mingw73_64/mkspecs/wi
 		D:/PROGRAMS/Qt/5.14.2/mingw73_64/mkspecs/features/build_pass.prf \
 		../e-journal/qmls/qml.qrc \
 		../e-journal/qmls/Windows.qrc \
-		debug/qmake_qmake_immediate.qrc \
-		release/qmake_qmake_immediate.qrc
+		../e-journal/images/imgs.qrc
 	$(QMAKE) -o Makefile ..\e-journal\e-journal.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 D:/PROGRAMS/Qt/5.14.2/mingw73_64/mkspecs/features/spec_pre.prf:
 D:/PROGRAMS/Qt/5.14.2/mingw73_64/mkspecs/qdevice.pri:
@@ -499,8 +498,7 @@ D:/PROGRAMS/Qt/5.14.2/mingw73_64/lib/qtmain.prl:
 D:/PROGRAMS/Qt/5.14.2/mingw73_64/mkspecs/features/build_pass.prf:
 ../e-journal/qmls/qml.qrc:
 ../e-journal/qmls/Windows.qrc:
-debug/qmake_qmake_immediate.qrc:
-release/qmake_qmake_immediate.qrc:
+../e-journal/images/imgs.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\e-journal\e-journal.pro -spec win32-g++ "CONFIG+=debug" "CONFIG+=qml_debug"
 

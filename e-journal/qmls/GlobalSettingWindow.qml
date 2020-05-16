@@ -10,6 +10,8 @@ FramelessWindow {
     minimumWidth: 500
     minimumHeight: 500
 
+    hasDropMenu: false
+
     property string backColor: "#242246"
     property string blockColor: "#32305C"
     property int widthOfBlock: width / 1.1

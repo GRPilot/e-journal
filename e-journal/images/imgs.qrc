@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/imgs">
+        <file alias="collaps">collaps.png</file>
+        <file alias="cross">cross.png</file>
+        <file alias="expand">expand.png</file>
+        <file alias="login">login.svg</file>
+        <file alias="login_old">login_old.svg</file>
+        <file alias="password">pass.svg</file>
+        <file alias="password_old">pass_old.svg</file>
+        <file alias="restore">restore.png</file>
+        <file alias="space">space.png</file>
+        <file alias="user">user.png</file>
+        <file alias="arrow">arrow.svg</file>
+    </qresource>
+</RCC>

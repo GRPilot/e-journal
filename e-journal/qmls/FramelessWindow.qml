@@ -14,17 +14,23 @@ ApplicationWindow {
 
 /// Properties
 
-    property string headerColor: "transparent"//"#242246"
-    property string backColor:   "transparent"//"#242246"
+    property string headerColor: "transparent"
+    property string backColor:   "transparent"
     property string borderColor: "transparent"
+    property string menuColor:   "#212045"
+    property string textColor:   "white"
     property bool isBorderEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
     property bool isDragWindowEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
+    property bool hasDropMenu: true
 
     property string title: "New window"
     property string iconImg: qsTr("none")
+    property string menuItemTextSetting: qsTr("Settings")
+    property string menuItemTextExit: qsTr("Exit")
 
     property int borderSize: 5
     property int commonMenuItemHeight: 25
+
     // Свойства, которые будут хранить позицию зажатия курсора мыши
     property int previousX: 0
     property int previousY: 0
@@ -37,7 +43,6 @@ ApplicationWindow {
     readonly property int defaultWindowPositionY: Screen.height / 2 - height / 2
 
 /// Content
-
 
     // Custom header with exit button and also
     header: Rectangle {
@@ -115,37 +120,94 @@ ApplicationWindow {
                 verticalAlignment: Qt.AlignVCenter
                 id: titleText
                 text: qsTr(title)
-                color: "white"
+                color: textColor
 
                 MouseArea {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton
-                    onClicked: _menu.open();
+                    onClicked: {
+                        _menu.open();
+                        _openMenuAmin.start();
+                    }
                 }
                 Menu {
                     id: _menu
                     y: parent.height
-                    background.opacity: 20
+                    enabled: hasDropMenu
+                    background.opacity: 0
+                    width: 140
+                    height: 1
+                    Rectangle {
+                        id: _cont
+                        anchors.fill: parent
+                        color: menuColor
 
-                    MenuItem {
-                        text: qsTr("Settings")
-                        height: commonMenuItemHeight
-                        onTriggered: settingShow();
+
+                        radius: 5
+                        MenuItem {
+                            id: _settingMenuItem
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.top: parent.top
+                            Text {
+                                text: menuItemTextSetting
+                                color: textColor
+                                anchors.centerIn: parent;
+                            }
+                            height: commonMenuItemHeight
+                            onTriggered: settingShow();
+
+                        }
+
+                        Rectangle {
+                            id: _separator
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.top: _settingMenuItem.bottom
+                            height: 2
+                            color: textColor
+                        }
+
+                        MenuItem {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            anchors.top: _separator.bottom
+                            Text {
+                                text: menuItemTextExit
+                                color: textColor
+                                anchors.centerIn: parent;
+                            }
+                            height: commonMenuItemHeight
+                            onTriggered: close();
+
+                        }
+
+
+                        NumberAnimation {
+                            id: _openMenuAmin
+                            running: false;
+                            target: _menu
+                            property: "height"
+                            to: _cont.height
+                            duration: 200
+                            easing.type: Easing.InOutQuad
+                        }
+                        NumberAnimation {
+                            id: _closeMenuAmin
+                            running: false;
+                            target: _menu
+                            property: "height"
+                            to: 0
+                            duration: 200
+                            easing.type: Easing.InOutQuad
+                        }
                     }
 
-                    MenuSeparator {
-                        height: 5
-                    }
-
-                    MenuItem {
-                        text: qsTr("Exit")
-                        height: commonMenuItemHeight
-                        onTriggered: close();
+                    onClosed: {
+                        _closeMenuAmin.start();
                     }
                 }
             }
-
-
         }
 
         Rectangle {
@@ -173,7 +235,7 @@ ApplicationWindow {
                     id: crossImg
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
-                    source: "images/cross.png"
+                    source: "imgs/cross"//"images/cross.png"
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -210,7 +272,7 @@ ApplicationWindow {
                     id: maximizeImg
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
-                    source: "images/expand.png"
+                    source: "imgs/expand"
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -251,7 +313,7 @@ ApplicationWindow {
                     id: minimizeImg
                     anchors.fill: parent
                     fillMode: Image.PreserveAspectFit
-                    source: "images/collaps.png"
+                    source: "imgs/collaps"
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -514,13 +576,13 @@ ApplicationWindow {
         showMaximized();
         isBorderEnabled = false;
         isDragWindowEnabled = false;
-        maximizeImg.source = "images/restore.png";
+        maximizeImg.source = "imgs/restore";
     }
     function normolizing() {
         showNormal();
         isBorderEnabled = true;
         isDragWindowEnabled = true;
-        maximizeImg.source = "images/expand.png";
+        maximizeImg.source = "imgs/expand";
     }
 
     onVisibleChanged: {

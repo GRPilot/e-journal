@@ -10,7 +10,7 @@ Rectangle {
     // Data
     //TODO: Подгрузка данных из бд
     property string userName:    qsTr("Силахина\nТатьяна Валентиновна")
-    property string userImg:     qsTr("images/user.png")
+    property string userImg:     qsTr("imgs/user")
     property string userSubject: qsTr("Аппаратно-программные средства, Технические средства информатизации")
     property string userGroups:  qsTr("ИП-18-4, ИП-18-3")
 

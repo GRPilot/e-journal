@@ -10,6 +10,8 @@ FramelessWindow {
     minimumWidth: 500
     minimumHeight: 500
 
+    hasDropMenu: false;
+
     SignupHelper {
         id: _signupHelper
     }
@@ -85,6 +87,9 @@ FramelessWindow {
             anchors.top: _blockTitle.bottom
             anchors.left: parent.left
             anchors.right: parent.right
+            anchors.leftMargin: 10
+            anchors.rightMargin: 10
+            radius: height
             height: heightOfLine
             color: "white"
             opacity: 0.5
@@ -569,18 +574,21 @@ FramelessWindow {
         var status = false;
         var login = _blockLoginTextInput.text
 
-        var passChecker = isPasswordValid(_blockPassTextInput.text) && isPasswordsEqual();
-        var loginChecker = !_signupHelper.checkUser(login);
+        var isPasswordsCorrect = isPasswordValid(_blockPassTextInput.text) && isPasswordsEqual();
+        var isLoginAlreadyExsist = _signupHelper.checkUser(login);
 
-        if (!loginChecker) {
+        console.log(isLoginAlreadyExsist);
+
+        if (isLoginAlreadyExsist) {
             incorLoginComfAnim.start();
-        } else if (!passChecker) {
+        } else if (!isPasswordsCorrect) {
             incorPassAnim.start();
             incorPassComfAnim.start();
         } else {
             status = createUser();
-            correctAnimStart();
         }
+
+        if (status) correctAnimStart();
 
         return status;
     }

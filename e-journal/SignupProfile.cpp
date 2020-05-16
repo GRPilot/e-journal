@@ -18,8 +18,7 @@ bool SignupProfile::newUser(const QString &login,
                             const QString &name) {
     bool status{ false };
 
-    if (!m_manager->checkUser(login))
-        status = m_manager->createNewUser(login, password);
+    status = m_manager->createNewUser(login, password);
 
     if (status)
         status = m_manager->setUserName(login, name);
