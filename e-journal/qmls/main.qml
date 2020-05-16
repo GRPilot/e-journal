@@ -17,13 +17,12 @@ Loader {
     GlobalSettingWindow {
         id: _GlobalSettingWindow
         title: qsTr("e-journal | Global Settings")
-
     }
 
     SignInWindow {
         id: _SignInWin
-        width: 500
-        height: 500
+        width: 600
+        height: 650
 
         title: qsTr("e-journal | Authorization")
 
@@ -32,7 +31,7 @@ Loader {
             _MainWindow.show();
         }
 
-        onForgorButtonPressed: {
+        onForgotButtonPressed: {
             _SignInWin.hide();
             _ReductionWindow.show();
         }

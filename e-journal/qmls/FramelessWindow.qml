@@ -8,14 +8,14 @@ ApplicationWindow {
     id: _framelessWin
     flags: Qt.FramelessWindowHint
     minimumHeight: 100
-    minimumWidth: 100
+    minimumWidth: 100 
 
     signal settingShow
 
 /// Properties
 
-    property string headerColor: "#242246"
-    property string backColor:   "#242246"
+    property string headerColor: "transparent"//"#242246"
+    property string backColor:   "transparent"//"#242246"
     property string borderColor: "transparent"
     property bool isBorderEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
     property bool isDragWindowEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
@@ -49,11 +49,10 @@ ApplicationWindow {
 
         readonly property int speedOfAnim: 200
         readonly property int maxButtonSize: 50
-        property string hatColor: headerColor
         property int widthOfButtons: maxButtonSize
 
 
-        color: hatColor
+        color: headerColor
 
         MouseArea {
             anchors.fill: parent

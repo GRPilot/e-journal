@@ -1,8 +1,10 @@
 import QtQuick 2.14
 import QtQuick.Controls 2.12
+
 import loc.SignupProfile 1.0
 
 FramelessWindow {
+    id: _SignUpWinLocal
     width: 500
     height: 650
     minimumWidth: 500
@@ -17,11 +19,11 @@ FramelessWindow {
     property string textColor:              "white"
     property string inputBoxColor:          "#242246"
     property string inputBoxActiveColor:    "#222233"
-    property string inputBoxIncorrectColor: "red"
+    property string inputBoxIncorrectColor: "#B16264"
     property string buttonColor:            "#c82f63"
     property string buttonHoverColor:       "#912247"
-    property string buttonClickColor:       "green"
-    property string correctCollor:          "green"
+    property string buttonClickColor:       "#5CA665"
+    property string correctCollor:          "#5CA665"
     property string blockTitle:             "РЕГИСТРАЦИЯ"
     property string blockName:              "Введите ФИО:"
     property string blockLogin:             "Введите логин:"
@@ -44,6 +46,7 @@ FramelessWindow {
     readonly property int commonMargins:      5
 
     color: backColor
+    headerColor: backColor
 
     Rectangle {
         id: _block
@@ -511,25 +514,53 @@ FramelessWindow {
             _blockNameForm,
             _blockLoginForm,
             _blockPassForm,
-            _blockPassComfirmForm
+            _blockPassComfirmForm,
+            _SignUpWinLocal
         ]
         properties: "color"
         running: false
         to: correctCollor
         duration: 200
     }
+    ColorAnimation {
+        id: headerCorrectAnim
+        target: _SignUpWinLocal
+        properties: "headerColor"
+        running: false;
+        to: correctCollor
+        duration: 200
+    }
+
     ColorAnimation on color {
         id: setStandartColors
         targets: [
             _blockNameForm,
             _blockLoginForm,
             _blockPassForm,
-            _blockPassComfirmForm
+            _blockPassComfirmForm,
+            _SignUpWinLocal
         ]
         properties: "color"
         running: false
-        to: inputBoxColor
+        to: backColor
         duration: 200
+    }
+    ColorAnimation {
+        id: headerStandartAnim
+        target: _SignUpWinLocal
+        properties: "headerColor"
+        running: false;
+        to: backColor;
+        duration: 200
+    }
+
+    function correctAnimStart() {
+        userCreatedSuccessAnim.start();
+        headerCorrectAnim.start();
+    }
+    function standartAnimStart() {
+        setStandartColors.start();
+        headerStandartAnim.start();
     }
 
     function buttonPressed() {
@@ -548,7 +579,7 @@ FramelessWindow {
             incorPassComfAnim.start();
         } else {
             status = createUser();
-            userCreatedSuccessAnim.start()
+            correctAnimStart();
         }
 
         return status;
@@ -586,6 +617,6 @@ FramelessWindow {
         _blockPassTextInput.text = "";
         _blockPassComfirmTextInput.text = "";
 
-        setStandartColors.start();
+        standartAnimStart();
     }
 }
