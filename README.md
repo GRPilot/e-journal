@@ -12,8 +12,8 @@ It's just my current individual project from my college practice
 
 <p align="center">
   <img src="Screenshots/SignupWindow.jpg" alt="SignupWindow.qml"/>
-  <img src="Screenshots/SignupWindowIncorrectData.jpg" alt="Incorrect input and checking username">
   <img src="Screenshots/SignupWindowUserCreated.jpg" alt="Success user created">
+  <img src="Screenshots/SignupWindowIncorrectData.jpg" alt="Incorrect input and checking username">
 </p>
 
 ### Main menu:
@@ -46,7 +46,7 @@ It's just my current individual project from my college practice
 
 #### The scheme of database:
 <p align="center">
-  <img src="Screenshots/e_journal_db_view.jpeg" alt="The scheme of database"/>
+  <img src="Screenshots/e_journal_db_view.svg" alt="The scheme of database"/>
 </p>
 
 
