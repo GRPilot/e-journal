@@ -9,7 +9,7 @@ class AuthorizationValidator : public QObject
     Q_OBJECT
 
  public:
-    const int minimumLenghtForPasswords = 4;
+    const int minimumLenghtForPasswords{ 4 };
     AuthorizationValidator(QObject *parent = nullptr);
     AuthorizationValidator(const AuthorizationValidator& other);
 

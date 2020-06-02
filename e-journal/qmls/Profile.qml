@@ -1,18 +1,40 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
+import loc.ProfileInfo 1.0
+
 Rectangle {
     id: _profile
     anchors.fill: parent
 
     property int commonHeight: height / 4
 
+    ProfileInfo {
+        id: profileInfo
+
+    }
+
+    property string login
     // Data
     //TODO: Подгрузка данных из бд
-    property string userName:    qsTr("Силахина\nТатьяна Валентиновна")
-    property string userImg:     qsTr("imgs/user")
-    property string userSubject: qsTr("Аппаратно-программные средства, Технические средства информатизации")
-    property string userGroups:  qsTr("ИП-18-4, ИП-18-3")
+    property string userName
+    property string userSubject
+    property string userGroups
+    property Image userImg
+
+    onLoginChanged: {
+        profileInfo.setUsername(login);
+
+           userName = profileInfo.name();
+         userGroups = profileInfo.groups();
+        userSubject = profileInfo.subjects();
+
+        if (userGroups === qsTr("<no items>"))
+            userGroups = qsTr("нет групп");
+
+        if (userSubject === qsTr("<no items>"))
+            userSubject = qsTr("нет предметов");
+    }
 
     Column {
         id: row
@@ -38,9 +60,9 @@ Rectangle {
                 radius: width / 2
                 color: "grey"
 
+
                 Image {
                     id: img
-                    source: userImg
 
                     anchors.fill: parent
                     layer.enabled: true
@@ -87,7 +109,7 @@ Rectangle {
             Text {
                 id: _subject
 
-                text: qsTr("Предмет:")
+                text: qsTr("Предметы:")
                 wrapMode: Text.Wrap
 
                 color: "white"

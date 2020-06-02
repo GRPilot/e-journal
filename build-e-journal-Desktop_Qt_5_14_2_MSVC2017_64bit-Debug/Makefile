@@ -266,6 +266,7 @@ Makefile: ..\e-journal\e-journal.pro D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\w
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\qt_config.prf \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\win32-msvc\qmake.conf \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\spec_post.prf \
+		.qmake.stash \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\exclusive_builds.prf \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\common\msvc-version.conf \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\toolchain.prf \
@@ -298,11 +299,10 @@ Makefile: ..\e-journal\e-journal.pro D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\w
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Sql.prl \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Core.prl \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\qtmain.prl \
-		.qmake.stash \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\build_pass.prf \
 		..\e-journal\qmls\qml.qrc \
 		..\e-journal\qmls\Windows.qrc \
-		debug\qmake_qmake_immediate.qrc \
+		..\e-journal\images\imgs.qrc \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Quickd.prl \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Guid.prl \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5QmlModelsd.prl \
@@ -310,8 +310,7 @@ Makefile: ..\e-journal\e-journal.pro D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\w
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Networkd.prl \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Sqld.prl \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Cored.prl \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\qtmaind.prl \
-		release\qmake_qmake_immediate.qrc
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\qtmaind.prl
 	$(QMAKE) -o Makefile ..\e-journal\e-journal.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\spec_pre.prf:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\common\angle.conf:
@@ -495,6 +494,7 @@ D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\qt_functions.prf:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\qt_config.prf:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\win32-msvc\qmake.conf:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\spec_post.prf:
+.qmake.stash:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\exclusive_builds.prf:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\common\msvc-version.conf:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\toolchain.prf:
@@ -527,11 +527,10 @@ D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Network.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Sql.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Core.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\qtmain.prl:
-.qmake.stash:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\mkspecs\features\build_pass.prf:
 ..\e-journal\qmls\qml.qrc:
 ..\e-journal\qmls\Windows.qrc:
-debug\qmake_qmake_immediate.qrc:
+..\e-journal\images\imgs.qrc:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Quickd.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Guid.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5QmlModelsd.prl:
@@ -540,7 +539,6 @@ D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Networkd.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Sqld.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\Qt5Cored.prl:
 D:\PROGRAMS\Qt\5.14.2\msvc2017_64\lib\qtmaind.prl:
-release\qmake_qmake_immediate.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile ..\e-journal\e-journal.pro -spec win32-msvc "CONFIG+=debug" "CONFIG+=qml_debug"
 

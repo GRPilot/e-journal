@@ -18,6 +18,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         DBHelper.cpp \
         HashHelper.cpp \
+        ProfileData.cpp \
+        ProfileInfo.cpp \
         ProfileManager.cpp \
         SignupProfile.cpp \
         main.cpp \
@@ -27,7 +29,6 @@ SOURCES += \
 RESOURCES += \
          $$files(qmls/*.qrc) \
          $$files(images/*.qrc) \
-         #images/imgs.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -43,6 +44,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     DBHelper.h \
     HashHelper.h \
+    ProfileData.h \
+    ProfileInfo.h \
     ProfileManager.h \
     SignupProfile.h \
     authorizationvalidator.h

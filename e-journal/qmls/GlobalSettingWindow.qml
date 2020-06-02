@@ -12,9 +12,14 @@ FramelessWindow {
 
     hasDropMenu: false
 
-    property string backColor: "#242246"
-    property string blockColor: "#32305C"
+    property string backColor:      "#242246"
+    property string blockColor:     "#32305C"
+    property string rectangleColor: "transparent"
     property int widthOfBlock: width / 1.1
+    property int commonSpacing: 4
+
+    property string localeBlockTitle: "Язык интерфейса:"
+    property string themeBlockTitle:  "Цветовая тема приложения:"
 
     color: backColor
 
@@ -31,7 +36,7 @@ FramelessWindow {
             SettingBlockPrefub {
                 width: widthOfBlock
                 height: 100
-                header: "first"
+                header: localeBlockTitle
                 color: blockColor
 
                 Rectangle {
@@ -41,14 +46,17 @@ FramelessWindow {
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 5
 
-                    color: "transparent"
+                    color: rectangleColor
+
+
+
                 }
             }
 
             SettingBlockPrefub {
                 width: widthOfBlock
                 height: 100
-                header: "second"
+                header: themeBlockTitle
                 color: blockColor
 
                 Rectangle {
@@ -58,7 +66,7 @@ FramelessWindow {
                     anchors.bottom: parent.bottom
                     anchors.bottomMargin: 5
 
-                    color: "transparent"
+                    color: rectangleColor
                 }
             }
         }

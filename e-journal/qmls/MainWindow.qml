@@ -13,12 +13,12 @@ FramelessWindow {
     // for login out
     signal signalLogout
 
-    property string bg_color:            "#242246"
-    readonly property string page_color: "#32305C"
+    property string bg_color:   "#242246"
+    property string page_color: "#32305C"
     readonly property int unColumnedPages: 1
-    readonly property int commonMargin: 5
+    readonly property int commonMargin:    5
+    readonly property int heightOfTabs:    50
     property int widthOfTabs: 150
-    property int heightOfTabs: 50
     property bool isMinimize: false
 
     property string profileTitle:    "Профиль"
@@ -26,9 +26,11 @@ FramelessWindow {
     property string statisticsTitle: "Сатистика"
     property string settingTitle:    "Настройки"
 
+    property string signedUpLogin
+
     property var imgs: [
-            "imgs/arrow", // hide
-            "imgs/user", // profile
+            "imgs/arrow",  // hide
+            "imgs/user",   // profile
             "imgs/cross",
             "imgs/cross",
             "imgs/cross",
@@ -215,6 +217,7 @@ FramelessWindow {
 
                 Profile {
                     color: page_color;
+                    login: signedUpLogin;
                 }
             }
             Tab {

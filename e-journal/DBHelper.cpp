@@ -7,15 +7,15 @@ DBHelper::DBHelper(const Tables table)
 {}
 
 DBHelper &DBHelper::select_all() {
-    return select(Val_List{"*"});
+    return select(Values_t{"*"});
 }
 
-DBHelper &DBHelper::select(Val_List columns) {
+DBHelper &DBHelper::select(Values_t columns) {
    if (columns.empty())
         return *this;
 
     QString curTabel = currentTabel();
-    QString cols = valListToQString(columns);
+    QString cols = valuesToQString(columns);
 
     m_query = QString("SELECT %1 FROM %2 ")
               .arg(cols).arg(curTabel);
@@ -30,12 +30,12 @@ DBHelper &DBHelper::insert() {
     return *this;
 }
 
-DBHelper &DBHelper::insert(Val_List columns) {
+DBHelper &DBHelper::insert(Values_t columns) {
     if (columns.empty())
         return *this;
 
     QString curTabel = currentTabel();
-    QString cols = valListToQString(columns);
+    QString cols = valuesToQString(columns);
 
     m_query = QString("INSERT INTO %1(%2) ")
               .arg(curTabel).arg(cols);
@@ -43,12 +43,12 @@ DBHelper &DBHelper::insert(Val_List columns) {
     return *this;
 }
 
-DBHelper &DBHelper::update(Val_List values) {
+DBHelper &DBHelper::update(Values_t values) {
     if (values.empty())
         return *this;
 
     QString curTabel = currentTabel();
-    QString vals = valListToQString(values);
+    QString vals = valuesToQString(values);
 
     m_query = QString("UPDATE %1 SET %2 ")
               .arg(curTabel).arg(vals);
@@ -76,14 +76,14 @@ DBHelper &DBHelper::where(const QString condition) {
     return *this;
 }
 
-DBHelper &DBHelper::values(Val_List values) {
+DBHelper &DBHelper::values(Values_t values) {
     if (values.empty() || m_query.isEmpty() || m_query.isNull())
         return *this;
 
     if (!m_query.contains("INSERT INTO"))
         return *this;
 
-    QString vals = valListToQString(values);
+    QString vals = valuesToQString(values);
 
     m_query.append(QString("VALUES (%2) ")
                    .arg(vals));
@@ -124,7 +124,7 @@ QString DBHelper::currentTabel() const {
 }
 
 
-QString DBHelper::valListToQString(Val_List vals) const {
+QString DBHelper::valuesToQString(Values_t vals) const {
     QString result{""};
     if (vals.empty())
         return result;

@@ -50,6 +50,11 @@ FramelessWindow {
     color: backColor
     headerColor: backColor
 
+    MouseArea {
+        anchors.fill: parent;
+        onClicked: standartAnimStart();
+    }
+
     Rectangle {
         id: _block
         anchors.centerIn: parent
@@ -59,6 +64,9 @@ FramelessWindow {
         radius: commonRadius
 
         Keys.onReturnPressed: buttonPressed();
+        Keys.onEscapePressed: buttonBackPressed();
+
+
 
         // Title
         Item {

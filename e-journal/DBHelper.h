@@ -15,23 +15,22 @@ enum Tables {
 
 class DBHelper
 {
-    using Val_List = std::vector<QString>;
+    using Values_t = std::vector<QString>;
 
  public:
     DBHelper(const Tables table);
 
     DBHelper &select_all();
-    DBHelper &select(Val_List columns);
+    DBHelper &select(Values_t columns);
     DBHelper &insert();
-    DBHelper &insert(Val_List columns);
-    DBHelper &update(Val_List values);
+    DBHelper &insert(Values_t columns);
+    DBHelper &update(Values_t values);
     DBHelper &delete_from();
 
     DBHelper &where(const QString condition);
-    DBHelper &values(Val_List values);
+    DBHelper &values(Values_t values);
 
     void exist();
-    int  last_id();
     void clearQuery();
 
     QString currentTabel() const;
@@ -46,5 +45,5 @@ private:
     const Tables  m_currentTabel;
     QString       m_query;
 
-    QString valListToQString(Val_List vals) const;
+    QString valuesToQString(Values_t vals) const;
 };

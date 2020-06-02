@@ -23,7 +23,7 @@ bool SignupProfile::newUser(const QString &login,
     if (status)
         status = m_manager->setUserName(login, name);
 
-    return false;
+    return status;
 }
 
 bool SignupProfile::checkUser(const QString& login)

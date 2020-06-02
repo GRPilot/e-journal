@@ -1,5 +1,6 @@
 release/DBHelper.o
 release/HashHelper.o
+release/ProfileData.o
 release/ProfileManager.o
 release/SignupProfile.o
 release/main.o

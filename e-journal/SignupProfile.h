@@ -16,6 +16,7 @@ class SignupProfile : public QObject
                              const QString &password,
                              const QString &name = "username");
     Q_INVOKABLE bool checkUser(const QString &login);
+
  private:
     ProfileManager *m_manager;
 };

@@ -24,9 +24,10 @@ FramelessWindow {
     property string blockColor: "#32305C"
     property string login: ""
 
-    readonly property int commonScale:     5
-    readonly property int commonRadius:    20
-    readonly property int inputBoxMargins: 5
+    readonly property int commonScale:       5
+    readonly property int commonRadius:      20
+    readonly property int inputBoxMargins:   5
+    readonly property int authBloksPaddings: 10
 
     readonly property string transparent:           "transparent"
     readonly property string commonFontFamily:      "arial"
@@ -93,7 +94,19 @@ FramelessWindow {
                     font.pointSize: 25
                     font.family: commonFontFamily
                 }
+                // Line
+                Rectangle {
+                    width: parent.width - parent.width / 5
+                    height: 5
+                    color: "white"
+                    opacity: 0.5
+                    radius: height
+                    anchors.top: _Title.bottom
+                    anchors.topMargin: inputBoxMargins
+                    anchors.horizontalCenter: parent.horizontalCenter
+                }
             }
+
             // login
             AuthBlockPrefab {
                 heightScale: commonScale
@@ -102,7 +115,9 @@ FramelessWindow {
                 Item {
                     id: container_login
                     anchors.fill: parent
-                    anchors.margins: 10
+                    anchors.leftMargin: authBloksPaddings;
+                    anchors.rightMargin: authBloksPaddings;
+
 
                     Rectangle {
                         id: space
@@ -192,7 +207,8 @@ FramelessWindow {
                 Item {
                     id: container_password
                     anchors.fill: parent
-                    anchors.margins: 10
+                    anchors.leftMargin: authBloksPaddings;
+                    anchors.rightMargin: authBloksPaddings;
 
                     Rectangle {
                         id: space_pas
@@ -405,6 +421,7 @@ FramelessWindow {
     function checkUser() {
         if (_validator.checkUser(_textLoginInput.text.toString())) {
             if (_validator.checkPassWithUser(_textLoginInput.text.toString(), _textPasswordInput.text.toString())) {
+                login = _textLoginInput.text.toString();
                 _SignInWin.logined();
             } else {
                 incorrectPassAnim.start();

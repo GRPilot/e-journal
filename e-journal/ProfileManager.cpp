@@ -26,7 +26,7 @@ bool ProfileManager::createNewUser(const QString& username,
 
     QString query{ m_db_users_helper.query() };
 
-    bool status{ execQuery(query, m_db_users_helper.path()) };
+    bool status{ exec(query, m_db_users_helper.path()) };
     return status;
 }
 
@@ -50,7 +50,7 @@ bool ProfileManager::checkUser(const QString& username) {
                      .exist();
 
     QString query{ m_db_users_helper.query() };
-    bool status { existQuery(query, m_db_users_helper.path()) };
+    bool status { exsist(query, m_db_users_helper.path()) };
 
     m_db_users_helper.clearQuery();
 
@@ -72,7 +72,7 @@ bool ProfileManager::checkPassAndUser(const QString& username,
                      .exist();
 
     QString query{ m_db_users_helper.query() };
-    bool status { existQuery(query, m_db_users_helper.path()) };
+    bool status { exsist(query, m_db_users_helper.path()) };
 
     m_db_users_helper.clearQuery();
 
@@ -96,13 +96,13 @@ bool ProfileManager::setUserName(const QString& username,
                         .where(condition);
 
     QString query{ m_db_teachers_helper.query() };
-    bool status{ execQuery(query, m_db_teachers_helper.path()) };
+    bool status{ exec(query, m_db_teachers_helper.path()) };
 
     return status;
 }
 
 
-bool ProfileManager::execQuery(const QString& query, const QString& pathToDatabase) {
+bool ProfileManager::exec(const QString& query, const QString& pathToDatabase) {
     if (query.isEmpty() || pathToDatabase.isEmpty())
         return false;
 
@@ -120,7 +120,7 @@ bool ProfileManager::execQuery(const QString& query, const QString& pathToDataba
     return status;
 }
 
-bool ProfileManager::existQuery(const QString& query, const QString& pathToDatabase) {
+bool ProfileManager::exsist(const QString& query, const QString& pathToDatabase) {
     if (query.isEmpty())
         return false;
 

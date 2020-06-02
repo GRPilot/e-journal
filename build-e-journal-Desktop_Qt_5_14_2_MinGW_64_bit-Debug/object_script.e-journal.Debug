@@ -1,5 +1,6 @@
 debug/DBHelper.o
 debug/HashHelper.o
+debug/ProfileData.o
 debug/ProfileManager.o
 debug/SignupProfile.o
 debug/main.o

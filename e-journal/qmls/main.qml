@@ -27,6 +27,7 @@ Loader {
         title: qsTr("e-journal | Authorization")
 
         onLogined: {
+            _MainWindow.signedUpLogin = _SignInWin.login;
             _SignInWin.close();
             _MainWindow.show();
         }
