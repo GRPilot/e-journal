@@ -16,14 +16,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        DBHelper.cpp \
+        AuthValidator.cpp \
         HashHelper.cpp \
         ProfileData.cpp \
         ProfileInfo.cpp \
         ProfileManager.cpp \
+        QueryBuilder.cpp \
         SignupProfile.cpp \
-        main.cpp \
-        authorizationvalidator.cpp
+        main.cpp
 
 
 RESOURCES += \
@@ -42,12 +42,12 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    DBHelper.h \
+    AuthValidator.h \
     HashHelper.h \
     ProfileData.h \
     ProfileInfo.h \
     ProfileManager.h \
-    SignupProfile.h \
-    authorizationvalidator.h
+    QueryBuilder.h \
+    SignupProfile.h
 
 DISTFILES +=

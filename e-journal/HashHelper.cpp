@@ -19,5 +19,7 @@ QString HashHelper::hash() const {
 }
 
 void HashHelper::setHash(const QString &hash){
-    m_hash = QString(QCryptographicHash::hash((hash.toLocal8Bit()), m_type).toHex());
+    m_hash = QString{
+        QCryptographicHash::hash((hash.toLocal8Bit()), m_type).toHex()
+    };
 }

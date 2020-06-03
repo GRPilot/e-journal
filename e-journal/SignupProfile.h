@@ -1,3 +1,8 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * SignupProfile - связующий класс между логикой работы с базой данных и       *
+ * и окном регистрации нового пользователя.                                    *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #pragma once
 
 #include <QObject>
@@ -9,13 +14,18 @@ class SignupProfile : public QObject
 
  public:
     SignupProfile(QObject *parent = nullptr);
-    SignupProfile(const SignupProfile &other);
+    SignupProfile(const SignupProfile &other) = delete;
     ~SignupProfile();
 
-    Q_INVOKABLE bool newUser(const QString &login,
-                             const QString &password,
-                             const QString &name = "username");
-    Q_INVOKABLE bool checkUser(const QString &login);
+    SignupProfile& operator=(const SignupProfile other) = delete;
+
+    /// Создать нового пользователя
+    Q_INVOKABLE bool newUser(const QString& login,
+                             const QString& password,
+                             const QString& name = "username");
+
+    /// Проверить логин на наличае в базе данных
+    Q_INVOKABLE bool checkUser(const QString& login);
 
  private:
     ProfileManager *m_manager;

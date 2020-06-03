@@ -3,12 +3,10 @@
 ProfileInfo::ProfileInfo(QObject *parent)
     : QObject(parent)
     , m_name    { "<username>"   }
-    , m_subjects{ "<no items"    }
-    , m_groups  { "<no items"    }
+    , m_subjects{ "<no items>"   }
+    , m_groups  { "<no items>"   }
     , m_image   { ":/imgs/user"  }
-{
-
-}
+{}
 
 ProfileInfo::ProfileInfo(const QString& username, QObject* parent)
     : ProfileInfo(parent)

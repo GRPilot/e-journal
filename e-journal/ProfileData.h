@@ -1,6 +1,11 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ProfileData работает с получением данных из базы данных и предоставлении    *
+ * этих данных в классы, которые связаны с qml                                 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #pragma once
 
-#include "DBHelper.h"
+#include "QueryBuilder.h"
 #include <QtSql>
 #include <QBitmap>
 #include <vector>
@@ -20,12 +25,14 @@ class ProfileData {
 
     ProfileData(const QString& username);
 
+    /// Возвращает данные о пользователе в виде условного "пакета" с данными
     Profile_type currentProfile() const;
 
  private:
-    DBHelper     m_db_users_helper;
+    QueryBuilder m_queryUsersBuilder;
     Profile_type m_currentProfile;
 
+    /// Помогает достать из базы данных данные о пользователе
     Profile_type getProfileFromDB(const QString& username);
 };
 

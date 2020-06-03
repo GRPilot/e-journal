@@ -1,20 +1,23 @@
 #include "ProfileData.h"
 
+using profile_t = ProfileData::Profile_type;
+
 ProfileData::ProfileData(const QString& username)
-    : m_db_users_helper{ Tables::Users }
+    : m_queryUsersBuilder{ Tabels::Users }
 {
     m_currentProfile = getProfileFromDB(username);
 }
 
-ProfileData::Profile_type ProfileData::currentProfile() const
+profile_t ProfileData::currentProfile() const
 {
     return m_currentProfile;
 }
 
-ProfileData::Profile_type ProfileData::getProfileFromDB(const QString& username)
+// TODO: Разбить метод, дополнив функционал QueryBuilder и ProfileManager
+profile_t ProfileData::getProfileFromDB(const QString& username)
 {
     auto getNameQueryString{
-        [username](DBHelper builder) -> QString {
+        [username](QueryBuilder builder) -> QString {
             builder.select(Strings{QString{"teachers.full_name"}});
             QString query{
                 builder.query()
@@ -27,7 +30,7 @@ ProfileData::Profile_type ProfileData::getProfileFromDB(const QString& username)
         }
     };
     auto getSubjectsQueryString{
-        [username](DBHelper builder) -> QString {
+        [username](QueryBuilder builder) -> QString {
             builder.select(Strings{QString{"subjects.subject"}});
             QString query{
                 builder.query()
@@ -40,7 +43,7 @@ ProfileData::Profile_type ProfileData::getProfileFromDB(const QString& username)
         }
     };
     auto getGroupsQueryString{
-        [username](DBHelper builder) -> QString {
+        [username](QueryBuilder builder) -> QString {
             builder.select(Strings{QString{"groups.name"}});
             QString query{
                 builder.query()
@@ -53,7 +56,7 @@ ProfileData::Profile_type ProfileData::getProfileFromDB(const QString& username)
         }
     };
     auto getImageQueryString{
-        [username](DBHelper builder) -> QString {
+        [username](QueryBuilder builder) -> QString {
             builder.select(Strings{QString{"teachers.image"}});
             QString query{
                 builder.query()
@@ -90,11 +93,11 @@ ProfileData::Profile_type ProfileData::getProfileFromDB(const QString& username)
         }
     };
 
-    QString     nameQuery{ getNameQueryString(m_db_users_helper)     };
-    QString subjectsQuery{ getSubjectsQueryString(m_db_users_helper) };
-    QString   groupsQuery{ getGroupsQueryString(m_db_users_helper)   };
-    QString    imageQuery{ getImageQueryString(m_db_users_helper)    };
-    QString  databaseName{ m_db_users_helper.path() };
+    QString     nameQuery{ getNameQueryString(m_queryUsersBuilder)     };
+    QString subjectsQuery{ getSubjectsQueryString(m_queryUsersBuilder) };
+    QString   groupsQuery{ getGroupsQueryString(m_queryUsersBuilder)   };
+    QString    imageQuery{ getImageQueryString(m_queryUsersBuilder)    };
+    QString  databaseName{ m_queryUsersBuilder.path() };
 
     QString name{
         getValues(nameQuery, databaseName).back().toString()

@@ -5,25 +5,21 @@ SignupProfile::SignupProfile(QObject *parent)
       m_manager{ new ProfileManager() }
 {}
 
-SignupProfile::SignupProfile(const SignupProfile &other)
-    : SignupProfile(other.parent())
-{}
-
 SignupProfile::~SignupProfile() {
     delete m_manager;
 }
 
-bool SignupProfile::newUser(const QString &login,
-                            const QString &password,
-                            const QString &name) {
-    bool status{ false };
+bool SignupProfile::newUser(const QString& login,
+                            const QString& password,
+                            const QString& name) {
 
-    status = m_manager->createNewUser(login, password);
+    if (!m_manager->createNewUser(login, password))
+        return false;
 
-    if (status)
-        status = m_manager->setUserName(login, name);
+    if (!m_manager->setUserName(login, name))
+        return false;
 
-    return status;
+    return true;
 }
 
 bool SignupProfile::checkUser(const QString& login)

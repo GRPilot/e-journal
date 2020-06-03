@@ -1,7 +1,13 @@
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * ProfileInfo служит связующим классом с qml отображением данных пользователя *
+ *                                                                             *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 #pragma once
 
 #include <QObject>
 #include <QBitmap>
+#include <QDir>
 
 #include "ProfileData.h"
 
@@ -20,6 +26,7 @@ class ProfileInfo : public QObject
     Q_INVOKABLE QImage  image()    const;
 
     Q_INVOKABLE bool    setUsername(const QString& username);
+
 private:
     QString m_name;
     Strings m_subjects;

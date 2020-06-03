@@ -3,6 +3,9 @@ import QtGraphicalEffects 1.0
 
 import loc.ProfileInfo 1.0
 
+// TODO: Разберись с изображением
+
+
 Rectangle {
     id: _profile
     anchors.fill: parent
@@ -20,7 +23,7 @@ Rectangle {
     property string userName
     property string userSubject
     property string userGroups
-    property Image userImg
+    property string userImgPath
 
     onLoginChanged: {
         profileInfo.setUsername(login);
@@ -28,6 +31,7 @@ Rectangle {
            userName = profileInfo.name();
          userGroups = profileInfo.groups();
         userSubject = profileInfo.subjects();
+        //var image = profileInfo.image();
 
         if (userGroups === qsTr("<no items>"))
             userGroups = qsTr("нет групп");
@@ -63,6 +67,7 @@ Rectangle {
 
                 Image {
                     id: img
+                    source: userImgPath
 
                     anchors.fill: parent
                     layer.enabled: true

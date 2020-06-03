@@ -1,14 +1,16 @@
 #include "ProfileManager.h"
 
 ProfileManager::ProfileManager()
-    : m_db_teachers_helper{ Tables::Teachers },
-      m_db_users_helper   { Tables::Users }
+    : m_queryTeachersBuilder{ Tabels::Teachers },
+      m_queryUsersBuilder   { Tabels::Users    }
 {}
 
 bool ProfileManager::createNewUser(const QString& username,
                                    const QString& password) {
-    if (username.length() <= 4 || password.length() <= 4)
+    if (username.length() <= c_minLenght ||
+        password.length() <= c_minLenght) {
         return false;
+    }
 
     std::vector tables {
         QString{ "username" },
@@ -22,22 +24,43 @@ bool ProfileManager::createNewUser(const QString& username,
         QString{ "'%1'" }.arg(hHelper.hash())
     };
 
-    m_db_users_helper.insert(tables).values(values);
+    // Составляем запрос на вставку нового пользователя
+    m_queryUsersBuilder.insert(tables).values(values);
 
-    QString query{ m_db_users_helper.query() };
+    QString query{ m_queryUsersBuilder.query() };
 
-    bool status{ exec(query, m_db_users_helper.path()) };
-    return status;
+    // отчищаем запрос для последующего использования
+    m_queryUsersBuilder.clearQuery();
+
+    // выполняем запрос и получаем в ответ true,
+    // если запрос был обработан и false в противном случае
+    return exec(query, m_queryUsersBuilder.path());
 }
 
 bool ProfileManager::deleteUser(const QString& username,
                                 const QString& password) {
-    if (username.length() <= 4 || password.length() <= 4)
+    if (username.length() <= c_minLenght ||
+        password.length() <= c_minLenght)
         return false;
 
-    bool status{ false };
+    // при инициализации HashHelper сразу генерирует хэш стандартным алгоритмом
+    HashHelper hHelper{ password };
 
-    return status;
+    QString condition{
+        QString{"username='%1' AND password='%2'"}
+        .arg(username).arg(hHelper.hash())
+    };
+
+    // составляем запрос на удаление пользователя
+    m_queryUsersBuilder.delete_from().where(condition);
+
+    // сохраняем запрос
+    QString query{ m_queryUsersBuilder.query() };
+
+    // отчищаем запрос для последующего использования
+    m_queryUsersBuilder.clearQuery();
+
+    return exec(query, m_queryUsersBuilder.path());
 }
 
 bool ProfileManager::checkUser(const QString& username) {
@@ -45,14 +68,14 @@ bool ProfileManager::checkUser(const QString& username) {
         return false;
     }
 
-    m_db_users_helper.select_all()
+    m_queryUsersBuilder.select_all()
                      .where(QString("username='%1'").arg(username.toLower()))
                      .exist();
 
-    QString query{ m_db_users_helper.query() };
-    bool status { exsist(query, m_db_users_helper.path()) };
+    QString query{ m_queryUsersBuilder.query() };
+    bool status { exsist(query, m_queryUsersBuilder.path()) };
 
-    m_db_users_helper.clearQuery();
+    m_queryUsersBuilder.clearQuery();
 
     return status;
 }
@@ -66,15 +89,16 @@ bool ProfileManager::checkPassAndUser(const QString& username,
     HashHelper hHelper(password);
 
 
-    m_db_users_helper.select_all()
+    m_queryUsersBuilder.select_all()
                      .where(QString("username='%1' AND password='%2'")
                             .arg(username.toLower()).arg(hHelper.hash()))
                      .exist();
 
-    QString query{ m_db_users_helper.query() };
-    bool status { exsist(query, m_db_users_helper.path()) };
+    QString query{ m_queryUsersBuilder.query() };
+    bool status { exsist(query, m_queryUsersBuilder.path()) };
 
-    m_db_users_helper.clearQuery();
+    // отчищаем запрос для последующего использования
+    m_queryUsersBuilder.clearQuery();
 
     return status;
 }
@@ -91,16 +115,18 @@ bool ProfileManager::setUserName(const QString& username,
     QString condition{ QString{"id_user='%1'"}.arg(user_id) };
     QString updateTarget{ QString{ "full_name='%1'" }.arg(newName) };
 
-    m_db_teachers_helper.update(std::vector<QString>{ updateTarget })
-                        .values(std::vector<QString>{ newName })
-                        .where(condition);
+    m_queryTeachersBuilder.update(std::vector<QString>{ updateTarget })
+                          .values(std::vector<QString>{ newName })
+                          .where(condition);
 
-    QString query{ m_db_teachers_helper.query() };
-    bool status{ exec(query, m_db_teachers_helper.path()) };
+    QString query{ m_queryTeachersBuilder.query() };
+    m_queryTeachersBuilder.clearQuery();
+
+
+    bool status{ exec(query, m_queryTeachersBuilder.path()) };
 
     return status;
 }
-
 
 bool ProfileManager::exec(const QString& query, const QString& pathToDatabase) {
     if (query.isEmpty() || pathToDatabase.isEmpty())
@@ -116,11 +142,13 @@ bool ProfileManager::exec(const QString& query, const QString& pathToDatabase) {
 
     QSqlQuery sqlQuery;
     bool status{ sqlQuery.exec(query) };
+
     dbase.close();
     return status;
 }
 
-bool ProfileManager::exsist(const QString& query, const QString& pathToDatabase) {
+bool ProfileManager::exsist(const QString& query,
+                            const QString& pathToDatabase) {
     if (query.isEmpty())
         return false;
 
@@ -144,18 +172,19 @@ bool ProfileManager::exsist(const QString& query, const QString& pathToDatabase)
     return status;
 }
 
+// Требуется переписать, разделив на функцию getExecutedResult
 int ProfileManager::getUserID(const QString& username) {
     if (username.isEmpty())
         return -1;
 
     QString condition{ QString("username='%1'").arg(username.toLower()) };
 
-    m_db_users_helper.select(
+    m_queryUsersBuilder.select(
                     std::vector<QString>{"id"}
                 ).where(condition);
 
     QSqlDatabase dbase = QSqlDatabase::addDatabase("QSQLITE");
-    dbase.setDatabaseName(m_db_users_helper.path());
+    dbase.setDatabaseName(m_queryUsersBuilder.path());
 
     if (!dbase.open()) {
         return false;
@@ -165,7 +194,7 @@ int ProfileManager::getUserID(const QString& username) {
 
     int user_id{ -1 };
 
-    sqlQuery.exec(m_db_users_helper.query());
+    sqlQuery.exec(m_queryUsersBuilder.query());
 
     if (sqlQuery.next()) {
         user_id = sqlQuery.value(0).toInt();
