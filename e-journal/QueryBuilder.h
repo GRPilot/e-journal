@@ -33,13 +33,23 @@ class QueryBuilder
     QueryBuilder(const Tables table);
 
     QueryBuilder& select_all();
+    QueryBuilder& select(const QString& column);
     QueryBuilder& select(Values_t columns);
+
     QueryBuilder& insert();
+    QueryBuilder& insert(const QString& column);
     QueryBuilder& insert(Values_t columns);
+
+    QueryBuilder& update(const QString& value);
     QueryBuilder& update(Values_t values);
     QueryBuilder& delete_from();
 
-    QueryBuilder& where(const QString condition);
+
+    QueryBuilder& inner_join_on(const QString& tablename,
+                                const QString& onCondition);
+
+
+    QueryBuilder& where(const QString& condition);
     QueryBuilder& values(Values_t values);
 
     void exist();

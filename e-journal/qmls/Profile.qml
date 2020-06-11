@@ -14,7 +14,6 @@ Rectangle {
 
     ProfileInfo {
         id: profileInfo
-
     }
 
     property string login
@@ -31,7 +30,9 @@ Rectangle {
            userName = profileInfo.name();
          userGroups = profileInfo.groups();
         userSubject = profileInfo.subjects();
-        //var image = profileInfo.image();
+        userImgPath = profileInfo.image();
+
+        console.log(userImgPath);
 
         if (userGroups === qsTr("<no items>"))
             userGroups = qsTr("нет групп");
@@ -68,13 +69,13 @@ Rectangle {
                 Image {
                     id: img
                     source: userImgPath
+                    fillMode: Image.PreserveAspectFit
 
                     anchors.fill: parent
                     layer.enabled: true
                     layer.effect: OpacityMask {
                         maskSource: mask
                     }
-
                 }
 
                 //TODO: Сделать возможность изменения фотографии

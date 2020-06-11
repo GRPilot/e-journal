@@ -23,7 +23,7 @@ class ProfileInfo : public QObject
     Q_INVOKABLE QString name()     const;
     Q_INVOKABLE QString subjects() const;
     Q_INVOKABLE QString groups()   const;
-    Q_INVOKABLE QImage  image()    const;
+    Q_INVOKABLE QString image()    const;
 
     Q_INVOKABLE bool    setUsername(const QString& username);
 
@@ -31,7 +31,7 @@ private:
     QString m_name;
     Strings m_subjects;
     Strings m_groups;
-    QBitmap m_image;
+    QImage  m_image;
 
     QString stringsToString(const Strings& strings) const;
 };

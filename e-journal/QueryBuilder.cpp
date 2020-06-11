@@ -1,26 +1,35 @@
 #include "QueryBuilder.h"
 
-QueryBuilder::QueryBuilder(const Tabels table)
+QueryBuilder::QueryBuilder(const Tables table)
     : m_nameOfDB{ "e-journal-database" },
       m_path{ QDir::currentPath() + '/' + m_nameOfDB },
       m_currentTable{ table }
 {}
 
 QueryBuilder &QueryBuilder::select_all() {
-    return select(Values_t{"*"});
+    return select("*");
+}
+
+QueryBuilder& QueryBuilder::select(const QString& column)
+{
+    if (column.isEmpty())
+        return this->select_all();
+
+    QString curTabel = currentTable();
+
+    m_query = QString("SELECT %1 FROM %2 ")
+              .arg(column).arg(curTabel);
+
+    return *this;
 }
 
 QueryBuilder &QueryBuilder::select(Values_t columns) {
-   if (columns.empty())
+    if (columns.empty())
         return *this;
 
-    QString curTabel = currentTable();
     QString cols = valuesToQString(columns);
 
-    m_query = QString("SELECT %1 FROM %2 ")
-              .arg(cols).arg(curTabel);
-
-    return *this;
+    return this->select(cols);
 }
 
 QueryBuilder &QueryBuilder::insert() {
@@ -30,15 +39,36 @@ QueryBuilder &QueryBuilder::insert() {
     return *this;
 }
 
+QueryBuilder& QueryBuilder::insert(const QString& column) {
+    if (column.isEmpty())
+        return this->insert();
+
+    QString curTabel = currentTable();
+
+    m_query = QString("INSERT INTO %1(%2) ")
+              .arg(curTabel).arg(column);
+
+    return *this;
+}
+
 QueryBuilder &QueryBuilder::insert(Values_t columns) {
     if (columns.empty())
+        return this->insert();
+
+    QString cols = valuesToQString(columns);
+
+    return this->insert(cols);
+}
+
+QueryBuilder& QueryBuilder::update(const QString& value)
+{
+    if (value.isEmpty())
         return *this;
 
     QString curTabel = currentTable();
-    QString cols = valuesToQString(columns);
 
-    m_query = QString("INSERT INTO %1(%2) ")
-              .arg(curTabel).arg(cols);
+    m_query = QString("UPDATE %1 SET %2 ")
+              .arg(curTabel).arg(value);
 
     return *this;
 }
@@ -47,23 +77,31 @@ QueryBuilder &QueryBuilder::update(Values_t values) {
     if (values.empty())
         return *this;
 
-    QString curTabel = currentTable();
     QString vals = valuesToQString(values);
 
-    m_query = QString("UPDATE %1 SET %2 ")
-              .arg(curTabel).arg(vals);
-
-    return *this;
+    return this->update(vals);
 }
 
 QueryBuilder &QueryBuilder::delete_from() {
-    m_query = QString("DELETE FROM %1 ")
+    m_query = QString{"DELETE FROM %1 "}
               .arg(currentTable());
 
     return *this;
 }
 
-QueryBuilder &QueryBuilder::where(const QString condition) {
+QueryBuilder& QueryBuilder::inner_join_on(const QString& tablename,
+                                          const QString& onCondition)
+{
+    if (tablename.isEmpty())
+        return *this;
+
+    m_query.append(QString{" INNER JOIN %1 ON %2 "}
+                   .arg(tablename).arg(onCondition));
+
+    return *this;
+}
+
+QueryBuilder& QueryBuilder::where(const QString& condition) {
     if (condition.isEmpty() || condition.isNull())
         return *this;
 
@@ -105,17 +143,17 @@ void QueryBuilder::clearQuery()  {
 
 QString QueryBuilder::currentTable() const {
     switch (m_currentTable) {
-    case Tabels::Groups:
+    case Tables::Groups:
         return QString("groups");
-    case Tabels::Marks:
+    case Tables::Marks:
         return QString("marks");
-    case Tabels::Students:
+    case Tables::Students:
         return QString("students");
-    case Tabels::Subjects:
+    case Tables::Subjects:
         return QString("students");
-    case Tabels::Teachers:
+    case Tables::Teachers:
         return QString("teachers");
-    case Tabels::Users:
+    case Tables::Users:
         return QString("users");
 
     default:
@@ -141,17 +179,13 @@ QString QueryBuilder::valuesToQString(Values_t vals) const {
 }
 
 QString QueryBuilder::query() const {
-    if (m_query.isEmpty())
-        return {};
-
     return m_query;
 }
 
 void QueryBuilder::setQuery(const QString& query) {
     if (!query.isEmpty())
         m_query = query;
-    else
-        m_query = "";
+
 }
 
 QString QueryBuilder::path() const {

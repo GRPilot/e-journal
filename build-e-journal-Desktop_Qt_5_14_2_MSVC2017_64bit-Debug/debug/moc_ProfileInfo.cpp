@@ -71,7 +71,7 @@ static const uint qt_meta_data_ProfileInfo[] = {
     QMetaType::QString,
     QMetaType::QString,
     QMetaType::QString,
-    QMetaType::QImage,
+    QMetaType::QString,
     QMetaType::Bool, QMetaType::QString,    7,
 
        0        // eod
@@ -89,8 +89,8 @@ void ProfileInfo::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 2: { QString _r = _t->groups();
             if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
-        case 3: { QImage _r = _t->image();
-            if (_a[0]) *reinterpret_cast< QImage*>(_a[0]) = std::move(_r); }  break;
+        case 3: { QString _r = _t->image();
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
         case 4: { bool _r = _t->setUsername((*reinterpret_cast< const QString(*)>(_a[1])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         default: ;

@@ -19,7 +19,7 @@ class ProfileData {
         QString mName;
         Strings mSubjects;
         Strings mGroups;
-        QBitmap mProfileImg;
+        QImage  mProfileImg;
     };
 
 
@@ -33,6 +33,7 @@ class ProfileData {
     Profile_type m_currentProfile;
 
     /// Помогает достать из базы данных данные о пользователе
-    Profile_type getProfileFromDB(const QString& username);
+    Profile_type getProfile(const QString& username)   const;
+    QVariantList getValuesFromDB(const QString& query) const;
 };
 

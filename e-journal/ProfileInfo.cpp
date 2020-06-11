@@ -27,8 +27,20 @@ QString ProfileInfo::groups() const {
     return stringsToString(m_groups);
 }
 
-QImage ProfileInfo::image() const {
-    return m_image.toImage();
+QString ProfileInfo::image() const {
+    QString pathToImg{"imgs/user"};
+
+    QFile file("tempImg.jpg");
+    file.open(QIODevice::WriteOnly);
+
+    if (m_image.save(&file, "JPG")) {
+        pathToImg = QString{"%1%2/%3"}
+                    .arg("file:///")
+                    .arg(QDir::currentPath())
+                    .arg("tempImg.jpg");
+    }
+
+    return pathToImg;
 }
 
 bool ProfileInfo::setUsername(const QString& username) {

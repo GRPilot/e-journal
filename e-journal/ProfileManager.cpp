@@ -1,8 +1,8 @@
 #include "ProfileManager.h"
 
 ProfileManager::ProfileManager()
-    : m_queryTeachersBuilder{ Tabels::Teachers },
-      m_queryUsersBuilder   { Tabels::Users    }
+    : m_queryTeachersBuilder{ Tables::Teachers },
+      m_queryUsersBuilder   { Tables::Users    }
 {}
 
 bool ProfileManager::createNewUser(const QString& username,

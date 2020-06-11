@@ -24,7 +24,7 @@
 #include <QtSql>
 
 class ProfileManager {
-    // Ограничение на ввод логина или пароля, состоящих менее чем из 4 символов
+    /// Ограничение на ввод логина или пароля, состоящих менее чем из 4 символов
     const int c_minLenght{ 4 };
 
  public:
@@ -43,6 +43,8 @@ class ProfileManager {
     /// Изменение инициалов пользователя по логину
     bool setUserName(const QString &username, const QString& newName);
 
+
+
  private:
     QueryBuilder m_queryTeachersBuilder;
     QueryBuilder m_queryUsersBuilder;
@@ -50,6 +52,7 @@ class ProfileManager {
     /// Выполнить запрос (query) для базы данных (pathToDatabase).
     /// При успешном выполнении (даже при пустом ответе) возвращает true
     bool exec     (const QString& query, const QString& pathToDatabase);
+
     /// Выполняет запрос с учетом ответа
     bool exsist   (const QString& query, const QString& pathToDatabase);
     int  getUserID(const QString& username);
