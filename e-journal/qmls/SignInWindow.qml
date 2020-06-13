@@ -419,9 +419,13 @@ FramelessWindow {
     }
 
     function checkUser() {
-        if (_validator.checkUser(_textLoginInput.text.toString())) {
-            if (_validator.checkPassWithUser(_textLoginInput.text.toString(), _textPasswordInput.text.toString())) {
-                login = _textLoginInput.text.toString();
+        var userLogin = _textLoginInput.text.toString();
+        var userPass  = _textPasswordInput.text.toString();
+
+        if (_validator.checkUser(userLogin)) {
+            if (_validator.checkPassWithUser(userLogin, userPass)) {
+                login = userLogin;
+                setWindowDefault();
                 _SignInWin.logined();
             } else {
                 incorrectPassAnim.start();
@@ -432,6 +436,13 @@ FramelessWindow {
             _textLoginInput.forceActiveFocus();
         }
     }
+
+    function setWindowDefault() {
+        _textLoginInput.clear();
+        _textPasswordInput.clear();
+        normolizing()
+    }
+
     function onWinLoaded() {
         _SignInWin.show()
         _SignInWin.visible = true;

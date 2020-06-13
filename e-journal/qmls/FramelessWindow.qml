@@ -11,6 +11,7 @@ ApplicationWindow {
     minimumWidth: 100 
 
     signal settingShow
+    visible: true;
 
 /// Properties
 
@@ -126,8 +127,10 @@ ApplicationWindow {
                     anchors.fill: parent
                     acceptedButtons: Qt.LeftButton
                     onClicked: {
-                        _menu.open();
-                        _openMenuAmin.start();
+                        if (hasDropMenu) {
+                            _menu.open();
+                            _openMenuAmin.start();
+                        }
                     }
                 }
                 Menu {
@@ -203,7 +206,9 @@ ApplicationWindow {
                         }
                     }
 
+
                     onClosed: {
+                        _menu.open();
                         _closeMenuAmin.start();
                     }
                 }
@@ -580,9 +585,15 @@ ApplicationWindow {
     }
     function normolizing() {
         showNormal();
+        centeringWindow();
         isBorderEnabled = true;
         isDragWindowEnabled = true;
         maximizeImg.source = "imgs/expand";
+    }
+
+    function centeringWindow() {
+        setX(defaultWindowPositionX);
+        setY(defaultWindowPositionY);
     }
 
     onVisibleChanged: {
@@ -593,7 +604,10 @@ ApplicationWindow {
 
         setWidth(defaultWindowWidth);
         setHeight(defaultWindowHeight);
-        setX(defaultWindowPositionX);
-        setY(defaultWindowPositionY);
+        centeringWindow();
+    }
+
+    onSettingShow: {
+        _GlobalSettingWindow.show();
     }
 }

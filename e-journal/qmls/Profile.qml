@@ -1,45 +1,17 @@
 import QtQuick 2.0
 import QtGraphicalEffects 1.0
 
-import loc.ProfileInfo 1.0
-
-// TODO: Разберись с изображением
-
-
 Rectangle {
     id: _profile
     anchors.fill: parent
 
     property int commonHeight: height / 4
 
-    ProfileInfo {
-        id: profileInfo
-    }
-
     property string login
-    // Data
-    //TODO: Подгрузка данных из бд
     property string userName
     property string userSubject
     property string userGroups
     property string userImgPath
-
-    onLoginChanged: {
-        profileInfo.setUsername(login);
-
-           userName = profileInfo.name();
-         userGroups = profileInfo.groups();
-        userSubject = profileInfo.subjects();
-        userImgPath = profileInfo.image();
-
-        console.log(userImgPath);
-
-        if (userGroups === qsTr("<no items>"))
-            userGroups = qsTr("нет групп");
-
-        if (userSubject === qsTr("<no items>"))
-            userSubject = qsTr("нет предметов");
-    }
 
     Column {
         id: row
@@ -49,8 +21,6 @@ Rectangle {
 
         Rectangle {
             id: _FIO_block
-            //anchors.right: parent.right
-            //anchors.left: parent.left
             height: commonHeight
             color: "transparent"
 
@@ -65,11 +35,10 @@ Rectangle {
                 radius: width / 2
                 color: "grey"
 
-
                 Image {
                     id: img
                     source: userImgPath
-                    fillMode: Image.PreserveAspectFit
+                    fillMode: Image.PreserveAspectCrop
 
                     anchors.fill: parent
                     layer.enabled: true

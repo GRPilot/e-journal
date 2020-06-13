@@ -299,6 +299,20 @@ release\moc_AuthValidator.cpp: ..\e-journal\AuthValidator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvarlengtharray.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontainerfwd.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobject_impl.h \
+		..\e-journal\ProfileManager.h \
+		..\e-journal\QueryBuilder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QDir \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdir.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfiledevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qiodevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qshareddata.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhash.h \
+		..\e-journal\HashHelper.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QCryptographicHash \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcryptographichash.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\QtSql \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\QtSqlDepends \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QtCore \
@@ -310,11 +324,8 @@ release\moc_AuthValidator.cpp: ..\e-journal\AuthValidator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvariant.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmap.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdebug.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhash.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtextstream.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qiodevice.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlocale.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qshareddata.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qset.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontiguouscache.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsharedpointer.h \
@@ -348,14 +359,9 @@ release\moc_AuthValidator.cpp: ..\e-journal\AuthValidator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcommandlineparser.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcoreapplication.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconcatenatetablesproxymodel.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcryptographichash.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdatastream.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdeadlinetimer.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qelapsedtimer.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdir.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileinfo.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfile.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfiledevice.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdiriterator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qeasingcurve.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qendian.h \
@@ -508,12 +514,6 @@ release\moc_AuthValidator.cpp: ..\e-journal\AuthValidator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqltablemodel.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlresult.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qtsqlversion.h \
-		..\e-journal\ProfileManager.h \
-		..\e-journal\QueryBuilder.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QDir \
-		..\e-journal\HashHelper.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QCryptographicHash \
 		release\moc_predefs.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\bin\moc.exe
 	D:\PROGRAMS\Qt\5.14.2\msvc2017_64\bin\moc.exe $(DEFINES) --compiler-flavor=msvc --include D:/Programming/Qt/MyProjects/E-Journal/build-e-journal-Desktop_Qt_5_14_2_MSVC2017_64bit-Debug/release/moc_predefs.h -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/mkspecs/win32-msvc -ID:/Programming/Qt/MyProjects/E-Journal/e-journal -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtQuick -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtGui -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtANGLE -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtQmlModels -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtQml -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtNetwork -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtSql -ID:/PROGRAMS/Qt/5.14.2/msvc2017_64/include/QtCore -I. -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\ATLMFC\include" -I"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.25.28610\include" -I"C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt" -I"C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\cppwinrt" ..\e-journal\AuthValidator.h -o release\moc_AuthValidator.cpp
@@ -1080,7 +1080,275 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-release\AuthValidator.obj: ..\e-journal\AuthValidator.cpp 
+release\AuthValidator.obj: ..\e-journal\AuthValidator.cpp ..\e-journal\AuthValidator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QObject \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobject.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobjectdefs.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qnamespace.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qglobal.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconfig.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtcore-config.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsystemdetection.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qprocessordetection.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcompilerdetection.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtypeinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsysinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlogging.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qflags.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbasicatomic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic_bootstrap.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qgenericatomic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic_cxx11.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic_msvc.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qglobalstatic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmutex.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qnumeric.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qversiontagging.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstring.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qchar.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbytearray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qrefcount.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qarraydata.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringliteral.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringalgorithms.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringview.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringbuilder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qalgorithms.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qiterator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhashfunctions.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpair.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvector.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontainertools_impl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpoint.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbytearraylist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringlist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qregexp.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringmatcher.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcoreevent.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qscopedpointer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmetatype.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvarlengtharray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontainerfwd.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobject_impl.h \
+		..\e-journal\ProfileManager.h \
+		..\e-journal\QueryBuilder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QDir \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdir.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfiledevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qiodevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qshareddata.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhash.h \
+		..\e-journal\HashHelper.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QCryptographicHash \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcryptographichash.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\QtSql \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\QtSqlDepends \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QtCore \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QtCoreDepends \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstractanimation.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstracteventdispatcher.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qeventloop.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstractitemmodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvariant.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmap.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdebug.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtextstream.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlocale.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qset.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontiguouscache.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsharedpointer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsharedpointer_impl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstractnativeeventfilter.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstractproxymodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstractstate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qabstracttransition.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qanimationgroup.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qarraydataops.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qarraydatapointer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbasictimer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbitarray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbuffer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbytearraymatcher.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcache.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcalendar.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcborarray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcborvalue.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdatetime.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcborcommon.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qregularexpression.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qurl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qurlquery.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\quuid.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcbormap.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcborstream.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfloat16.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcollator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcommandlineoption.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcommandlineparser.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcoreapplication.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconcatenatetablesproxymodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdatastream.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdeadlinetimer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qelapsedtimer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdiriterator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qeasingcurve.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qendian.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qeventtransition.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qexception.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfactoryinterface.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileselector.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QStringList \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfilesystemwatcher.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfinalstate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfuture.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfutureinterface.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qrunnable.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qresultstore.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfuturesynchronizer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfuturewatcher.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhistorystate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qidentityproxymodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qisenum.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qitemselectionmodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qjsonarray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qjsonvalue.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qjsondocument.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qjsonobject.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlibrary.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlibraryinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qversionnumber.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qline.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlinkedlist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlockfile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qloggingcategory.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmargins.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmath.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmessageauthenticationcode.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmetaobject.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmimedata.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmimedatabase.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmimetype.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobjectcleanuphandler.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qoperatingsystemversion.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qparallelanimationgroup.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpauseanimation.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qplugin.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpointer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpluginloader.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qprocess.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpropertyanimation.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvariantanimation.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qqueue.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qrandom.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qreadwritelock.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qrect.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsize.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qresource.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsavefile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qscopedvaluerollback.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qscopeguard.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsemaphore.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsequentialanimationgroup.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsettings.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsharedmemory.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsignalmapper.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsignaltransition.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsocketnotifier.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsortfilterproxymodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstack.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstandardpaths.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstatemachine.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstorageinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringlistmodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsystemsemaphore.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtemporarydir.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtemporaryfile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtextboundaryfinder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtextcodec.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qthread.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qthreadpool.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qthreadstorage.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtimeline.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtimer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtimezone.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtranslator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtransposeproxymodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtypetraits.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qwaitcondition.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qwineventnotifier.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qxmlstream.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtcoreversion.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qtsqlglobal.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qtsql-config.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqldatabase.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqldriver.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqldriverplugin.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlerror.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlfield.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlindex.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlrecord.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlquery.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlquerymodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlrelationaldelegate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qitemdelegate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qtwidgetsglobal.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qtguiglobal.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qtgui-config.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qtwidgets-config.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qabstractitemdelegate.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qstyleoption.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qabstractspinbox.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qwidget.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qwindowdefs.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qwindowdefs_win.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qpaintdevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qpalette.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qcolor.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qrgb.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qrgba64.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qbrush.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qmatrix.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qpolygon.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qregion.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qtransform.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qpainterpath.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qimage.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qpixelformat.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qpixmap.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qfont.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qfontmetrics.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qfontinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qsizepolicy.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qcursor.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qkeysequence.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qevent.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qvector2d.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qtouchdevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qvalidator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\qicon.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qslider.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qabstractslider.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qstyle.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qtabbar.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qtabwidget.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qrubberband.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qframe.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qlistview.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qabstractitemview.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qabstractscrollarea.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtWidgets\qcombobox.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlrelationaltablemodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqltablemodel.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlresult.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qtsqlversion.h
 
 release\HashHelper.obj: ..\e-journal\HashHelper.cpp ..\e-journal\HashHelper.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
@@ -1928,7 +2196,68 @@ release\ProfileManager.obj: ..\e-journal\ProfileManager.cpp ..\e-journal\Profile
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlresult.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qtsqlversion.h
 
-release\QueryBuilder.obj: ..\e-journal\QueryBuilder.cpp 
+release\QueryBuilder.obj: ..\e-journal\QueryBuilder.cpp ..\e-journal\QueryBuilder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstring.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qchar.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qglobal.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconfig-bootstrapped.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconfig.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtcore-config.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsystemdetection.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qprocessordetection.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcompilerdetection.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qtypeinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qsysinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlogging.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qflags.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbasicatomic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic_bootstrap.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qgenericatomic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic_cxx11.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qatomic_msvc.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qglobalstatic.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmutex.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qnumeric.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qversiontagging.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbytearray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qrefcount.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qnamespace.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qarraydata.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringliteral.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringalgorithms.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringview.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringbuilder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QDir \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdir.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfiledevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qiodevice.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobject.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobjectdefs.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobjectdefs_impl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qlist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qalgorithms.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qiterator.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhashfunctions.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpair.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvector.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontainertools_impl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qpoint.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qbytearraylist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringlist.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qregexp.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qstringmatcher.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcoreevent.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qscopedpointer.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qmetatype.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qvarlengtharray.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcontainerfwd.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qobject_impl.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qshareddata.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qhash.h
 
 release\SignupProfile.obj: ..\e-journal\SignupProfile.cpp ..\e-journal\SignupProfile.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QObject \
@@ -2299,6 +2628,17 @@ release\main.obj: ..\e-journal\main.cpp D:\PROGRAMS\Qt\5.14.2\msvc2017_64\includ
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtQml\qqmlcontext.h \
 		..\e-journal\AuthValidator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QObject \
+		..\e-journal\ProfileManager.h \
+		..\e-journal\QueryBuilder.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QDir \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdir.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileinfo.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfile.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfiledevice.h \
+		..\e-journal\HashHelper.h \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QCryptographicHash \
+		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcryptographichash.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\QtSql \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\QtSqlDepends \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QtCore \
@@ -2332,14 +2672,9 @@ release\main.obj: ..\e-journal\main.cpp D:\PROGRAMS\Qt\5.14.2\msvc2017_64\includ
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcommandlineoption.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcommandlineparser.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qconcatenatetablesproxymodel.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qcryptographichash.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdatastream.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdeadlinetimer.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qelapsedtimer.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdir.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfileinfo.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfile.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qfiledevice.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qdiriterator.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qeasingcurve.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\qendian.h \
@@ -2484,12 +2819,6 @@ release\main.obj: ..\e-journal\main.cpp D:\PROGRAMS\Qt\5.14.2\msvc2017_64\includ
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqltablemodel.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qsqlresult.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtSql\qtsqlversion.h \
-		..\e-journal\ProfileManager.h \
-		..\e-journal\QueryBuilder.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QString \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QDir \
-		..\e-journal\HashHelper.h \
-		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtCore\QCryptographicHash \
 		..\e-journal\SignupProfile.h \
 		..\e-journal\ProfileInfo.h \
 		D:\PROGRAMS\Qt\5.14.2\msvc2017_64\include\QtGui\QBitmap \

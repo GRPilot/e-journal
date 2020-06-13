@@ -2,16 +2,22 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 1.4
 import QtQuick.Controls.Styles 1.4
+import QtGraphicalEffects 1.0
+
+import loc.ProfileInfo 1.0
+
 
 FramelessWindow {
     id: _mainWin
     width: 1024;
     height: 512;
 
-    title: qsTr("e-journal | Profile")
+    title: qsTr("e-journal | " + profileTitle)
 
     // for login out
     signal signalLogout
+
+    hasDropMenu: true;
 
     property string bg_color:   "#242246"
     property string page_color: "#32305C"
@@ -39,6 +45,20 @@ FramelessWindow {
             "imgs/collaps", // setting
     ]
 
+   // data from DB
+    ProfileInfo {
+        id: userInfo
+    }
+
+    onSignedUpLoginChanged: {
+        userInfo.setUsername(signedUpLogin);
+        imgs[1] = userInfo.image;
+
+        // setting image to the left panel's button
+        repeaterPages.itemAt(0).children[0].source = imgs[1];
+    }
+   // end data from DB
+
     color: bg_color
 
     Row {
@@ -55,20 +75,33 @@ FramelessWindow {
                 height: heightOfTabs
                 color: page_color
                 opacity: 0.5
+
                 Image {
                     id: _imgHide
                     source: imgs[0]
+                    anchors.fill: mask;
+
+                    fillMode: Image.PreserveAspectCrop
+                    layer.enabled: true
+                    layer.effect: OpacityMask {
+                        maskSource: mask
+                    }
+                }
+
+                Rectangle {
+                    id: mask
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.bottom: parent.bottom
                     anchors.margins: commonMargin
                     width: height
-                    fillMode: Image.PreserveAspectFit
+                    opacity: 0;
+
                 }
                 Text {
                     id: _textHide
                     anchors.right: parent.right
-                    anchors.left: _imgHide.right
+                    anchors.left: mask.right
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
                     anchors.margins: commonMargin
@@ -92,9 +125,10 @@ FramelessWindow {
 
             // pages
             Repeater {
+                id: repeaterPages
                 model: view.count - unColumnedPages
                 Rectangle {
-
+                    id: rect
                     width: widthOfTabs
                     height: heightOfTabs
                     color: page_color
@@ -102,19 +136,32 @@ FramelessWindow {
 
                     Image {
                         id: _img
-
                         source: imgs[index + unColumnedPages]
+                        anchors.fill: _mask;
+
+                        fillMode: Image.PreserveAspectCrop
+                        layer.enabled: true
+                        layer.effect: OpacityMask {
+                            maskSource: _mask
+                        }
+                    }
+
+                    Rectangle {
+                        id: _mask
                         anchors.top: parent.top
                         anchors.left: parent.left
                         anchors.bottom: parent.bottom
                         anchors.margins: commonMargin
                         width: height
-                        fillMode: Image.PreserveAspectFit
+                        radius: width / 2;
+                        opacity: 0
+
+
                     }
                     Text {
                         id: _text
                         anchors.right: parent.right
-                        anchors.left: _img.right
+                        anchors.left: _mask.right
                         anchors.top: parent.top
                         anchors.bottom: parent.bottom
                         anchors.margins: commonMargin
@@ -123,6 +170,7 @@ FramelessWindow {
                         color: "white"
                     }
                     MouseArea {
+                        id: mouseAreaOfRect
                         anchors.fill: parent
                         cursorShape: Qt.PointingHandCursor
                         onFocusChanged: {
@@ -136,12 +184,12 @@ FramelessWindow {
 
                         onClicked: {
                             view.currentIndex = index;
-                            focus = true;
+                            forceActiveFocus();
                             _mainWin.title = qsTr("e-journal | %1".arg(view.getTab(index).title))
                         }
                     }
                 }
-                Component.onCompleted: view.getTab(0).forceActiveFocus();
+
             }
         }
 
@@ -193,7 +241,7 @@ FramelessWindow {
 
                 onClicked: {
                     view.currentIndex = view.count - unColumnedPages;
-                    title = qsTr("e-journal | %1".arg(settingTitle));
+                    title = qsTr("e-journal | " + settingTitle);
                     focus = true;
                 }
             }
@@ -213,16 +261,33 @@ FramelessWindow {
             anchors.top: parent.top
 
             Tab {
+                id: profieTab
                 title: profileTitle
 
                 Profile {
+                    id: proflePage
                     color: page_color;
                     login: signedUpLogin;
+
+                    onLoginChanged: {
+                        proflePage.userName    = userInfo.name;
+                        proflePage.userGroups  = userInfo.groups;
+                        proflePage.userSubject = userInfo.subjects;
+                        proflePage.userImgPath = userInfo.image;
+
+                        if (userGroups === qsTr("<no items>"))
+                            userGroups = qsTr("нет групп");
+
+                        if (userSubject === qsTr("<no items>"))
+                            userSubject = qsTr("нет предметов");
+                    }
                 }
+
+
             }
             Tab {
                 title: journalTitle
-                Rectangle {
+                Statistics {
                     color: page_color
                 }
             }
@@ -265,7 +330,7 @@ FramelessWindow {
         property: "widthOfTabs"
         to: 150
         duration: 200
-        easing.type: Easing.InOutQuad
+        easing.type: Easing.OutBack
     }
     NumberAnimation {
         id: minimizeAnim;
@@ -273,7 +338,7 @@ FramelessWindow {
         property: "widthOfTabs"
         to: heightOfTabs
         duration: 200
-        easing.type: Easing.InOutQuad
+        easing.type: Easing.OutBack
     }
 
     onWidthChanged: {

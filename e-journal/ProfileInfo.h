@@ -15,15 +15,21 @@ class ProfileInfo : public QObject
 {
     using Strings = std::vector<QString>;
     Q_OBJECT
+
+    Q_PROPERTY(QString name     READ name)
+    Q_PROPERTY(QString subjects READ subjects)
+    Q_PROPERTY(QString groups   READ groups)
+    Q_PROPERTY(QString image    READ image)
+
  public:
     explicit ProfileInfo(QObject *parent = nullptr);
     explicit ProfileInfo(const QString& username,
                          QObject *parent = nullptr);
 
-    Q_INVOKABLE QString name()     const;
-    Q_INVOKABLE QString subjects() const;
-    Q_INVOKABLE QString groups()   const;
-    Q_INVOKABLE QString image()    const;
+    QString name()     const;
+    QString subjects() const;
+    QString groups()   const;
+    QString image()    const;
 
     Q_INVOKABLE bool    setUsername(const QString& username);
 

@@ -26,7 +26,7 @@ Loader {
 
         title: qsTr("e-journal | Authorization")
 
-        onLogined: {
+        onLogined: {            
             _MainWindow.signedUpLogin = _SignInWin.login;
             _SignInWin.close();
             _MainWindow.show();
@@ -42,9 +42,7 @@ Loader {
             _SignUpWin.show();
         }
 
-        onSettingShow: {
-            _GlobalSettingWindow.show();
-        }
+
     }
 
     ReductionWindow {
