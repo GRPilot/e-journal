@@ -5,7 +5,8 @@ ProfileInfo::ProfileInfo(QObject *parent)
     , m_name    { "<username>"   }
     , m_subjects{ "<no items>"   }
     , m_groups  { "<no items>"   }
-    , m_image   { ":/imgs/user"  }
+    , m_image   { "imgs/user"  }
+    , m_imgPath { "imgs/user"  }
 {}
 
 ProfileInfo::ProfileInfo(const QString& username, QObject* parent)
@@ -20,7 +21,12 @@ QString ProfileInfo::name() const {
 }
 
 QString ProfileInfo::subjects() const {
-    return stringsToString(m_subjects);
+    QString outstring{ stringsToString(m_subjects) };
+    if (outstring == "<no items>")
+        return outstring;
+
+    outstring.prepend(" • ");
+    return outstring.replace(", ", "\n • ");
 }
 
 QString ProfileInfo::groups() const {
@@ -28,19 +34,19 @@ QString ProfileInfo::groups() const {
 }
 
 QString ProfileInfo::image() const {
-    QString pathToImg{"imgs/user"};
+    qDebug() << "[DEBUG] : " << m_imgPath;
+    return m_imgPath;
+}
 
-    QFile file("tempImg.jpg");
-    file.open(QIODevice::WriteOnly);
+bool ProfileInfo::clearUserData() {
+    m_name.clear();
+    m_subjects.clear();
+    m_groups.clear();
 
-    if (m_image.save(&file, "JPG")) {
-        pathToImg = QString{"%1%2/%3"}
-                    .arg("file:///")
-                    .arg(QDir::currentPath())
-                    .arg("tempImg.jpg");
-    }
+    bool status{ QFile::remove(m_imgPath) };
+    m_imgPath = ":/imgs/user";
 
-    return pathToImg;
+    return status;
 }
 
 bool ProfileInfo::setUsername(const QString& username) {
@@ -48,7 +54,6 @@ bool ProfileInfo::setUsername(const QString& username) {
 
     if (username.isEmpty())
         return false;
-
 
     ProfileData data{ username.toLower() };
     profile_t curProfile{ data.currentProfile() };
@@ -58,7 +63,26 @@ bool ProfileInfo::setUsername(const QString& username) {
     m_groups   = curProfile.mGroups;
     m_image    = curProfile.mProfileImg;
 
+    if (!m_image.isNull())
+        saveImg();
+
     return true;
+}
+
+bool ProfileInfo::saveImg()
+{
+    QFile file("tempImg.jpg");
+    file.open(QIODevice::WriteOnly);
+
+    m_imgPath = QString{"%1%2/%3"}
+                .arg("file:///")
+                .arg(QDir::currentPath())
+                .arg("tempImg.jpg");
+
+    bool status{ m_image.save(&file, "JPG") };
+
+    file.close();
+    return status;
 }
 
 QString ProfileInfo::stringsToString(const ProfileInfo::Strings& strings) const {

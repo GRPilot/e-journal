@@ -56,8 +56,10 @@ Loader {
     SignupWindow {
         id: _SignUpWin
         title: "e-journal | Sign up"
+
         onClosing: {
             _SignInWin.login = lastRegProfile;
+            console.log( lastRegProfile);
             lastRegProfile = "";
             clearFields();
             _SignInWin.show();
@@ -67,7 +69,7 @@ Loader {
     MainWindow {
         id: _MainWindow
 
-        onSignalLogout: {
+        onClosing: {
             _SignInWin.show();
         }
     }

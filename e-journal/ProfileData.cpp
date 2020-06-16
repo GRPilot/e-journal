@@ -104,15 +104,17 @@ profile_t ProfileData::getProfile(const QString& username) const
     for (const auto iter : getValuesFromDB(groupsQuery))
         groups.push_back(iter.toString());
 
-    QVariantList imgs{ getValuesFromDB(imageQuery) };
-    QVariant img{ imgs.back() };
-    QByteArray byteArr {
-        img.value<QByteArray>()
-    };
 
     QImage image;
-    image.loadFromData(byteArr);
+    QVariantList imgs{ getValuesFromDB(imageQuery) };
+    QVariant img{ imgs.back() };
+    if (!img.isNull()){
+        QByteArray byteArr {
+            img.value<QByteArray>()
+        };
 
+        image.loadFromData(byteArr);
+    }
     return Profile_type{
         name,
         subjects,

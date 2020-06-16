@@ -31,13 +31,17 @@ class ProfileInfo : public QObject
     QString groups()   const;
     QString image()    const;
 
-    Q_INVOKABLE bool    setUsername(const QString& username);
+    Q_INVOKABLE bool clearUserData();
+    Q_INVOKABLE bool setUsername(const QString& username);
 
 private:
     QString m_name;
     Strings m_subjects;
     Strings m_groups;
     QImage  m_image;
+    QString m_imgPath;
+
+    bool saveImg();
 
     QString stringsToString(const Strings& strings) const;
 };

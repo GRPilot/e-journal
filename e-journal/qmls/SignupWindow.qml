@@ -585,8 +585,6 @@ FramelessWindow {
         var isPasswordsCorrect = isPasswordValid(_blockPassTextInput.text) && isPasswordsEqual();
         var isLoginAlreadyExsist = _signupHelper.checkUser(login);
 
-        console.log(isLoginAlreadyExsist);
-
         if (isLoginAlreadyExsist) {
             incorLoginComfAnim.start();
         } else if (!isPasswordsCorrect) {

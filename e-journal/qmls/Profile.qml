@@ -1,4 +1,5 @@
-import QtQuick 2.0
+import QtQuick 2.14
+import QtQuick.Controls 2.12
 import QtGraphicalEffects 1.0
 
 Rectangle {
@@ -13,53 +14,57 @@ Rectangle {
     property string userGroups
     property string userImgPath
 
-    Column {
-        id: row
-        anchors.fill: parent
-        anchors.margins: 20
-        spacing: 5
+    readonly property int commonPaddings: 15
+    readonly property int commonSpacing: 10
 
-        Rectangle {
-            id: _FIO_block
-            height: commonHeight
-            color: "transparent"
+    property Gradient backColorGrad: Gradient {
+        GradientStop { position: 0.5;  color: _profile.color }
+        GradientStop { position: 1.0; color: "transparent" }
+    }
 
-            Rectangle {
-                id: mask
-                anchors.top: parent.top
-                anchors.bottom: parent.bottom
-                anchors.left: parent.left
+    Image {
+        id: img
+        source: userImgPath
+        fillMode: Image.PreserveAspectCrop
 
-                height: commonHeight
-                width: height
-                radius: width / 2
-                color: "grey"
+        anchors.right: _profile.right
+        anchors.top: _profile.top
+        anchors.bottom: _profile.bottom
+        width: parent.width / 2
 
-                Image {
-                    id: img
-                    source: userImgPath
-                    fillMode: Image.PreserveAspectCrop
+        layer.enabled: true
 
-                    anchors.fill: parent
-                    layer.enabled: true
-                    layer.effect: OpacityMask {
-                        maskSource: mask
-                    }
-                }
+    }
 
-                //TODO: Сделать возможность изменения фотографии
-                MouseArea {
-                    cursorShape: Qt.PointingHandCursor
-                }
-            }
+    Rectangle {
+        id: backgroundRect
+        width: _profile.height
+        height: _profile.width
+
+        anchors.centerIn: _profile
+
+        gradient: backColorGrad
+        rotation: -90;
+    }
+
+    ScrollView {
+        id: scroll
+        height: _profile.height
+        width: _profile.width / 2
+        clip: true
+
+        Column {
+            id: rows
+            width: parent.width
+            spacing:  commonSpacing
+
+            clip: true
+
+            padding: commonPaddings
 
             Text {
                 id: name_block
-                anchors.left: mask.right
-                anchors.top: parent.top
-                anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.leftMargin: height / 10
+                width: rows.width
                 text: userName
                 wrapMode: Text.Wrap
                 color: "white"
@@ -68,18 +73,30 @@ Rectangle {
                 verticalAlignment: Text.AlignVCenter
             }
 
+            Rectangle {
+                id: line
+                width: rows.width
+                height: 5
+                color: "white"
+                opacity: 0.8
+            }
         }
-
-        Grid {
-            columns: 2
-            columnSpacing: height / 15
-            rowSpacing: height / 20
-            anchors.top: _FIO_block.bottom
+        Column {
+            id: rowsOfInfo
+            anchors.top: rows.bottom
             anchors.left: parent.left
-            anchors.right: parent.right
             anchors.bottom: parent.bottom
-            anchors.topMargin: 20
+            width: parent.width
+
+            //        columns: 2
+            //        columnSpacing: height / 15
+            //        rowSpacing: height / 20
+
+            spacing: commonPaddings
+
             clip: true
+
+            padding: commonSpacing
 
             Text {
                 id: _subject
@@ -95,32 +112,25 @@ Rectangle {
                 id: subjects
                 width: parent.width - _subject.width
                 wrapMode: Text.WordWrap
-                text: userSubject
+                text: userSubject;
                 color: "white"
                 font.pointSize: 18
+                leftPadding: commonPaddings
 
             }
 
             Text {
                 id: groups_block
-
-                text: qsTr("Группы:")
+                width: parent.width
+                text: qsTr("Группы: ") + userGroups;
                 wrapMode: Text.Wrap
                 color: "white"
                 font.pointSize: 18
             }
 
-            Text {
-                id: groups
 
-                width: parent.width - groups_block.width
-                wrapMode: Text.WrapAnywhere
-                text: userGroups
-                color: "white"
-                font.pointSize: 18
-
-            }
         }
+
     }
 
 

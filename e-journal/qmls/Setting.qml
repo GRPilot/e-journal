@@ -17,7 +17,7 @@ Rectangle {
             Rectangle {
                 id: personalInfo
 
-                width: mainContainer
+                width: mainContainer.width
 
             }
 
@@ -35,3 +35,34 @@ Rectangle {
     }
 
 }
+
+/*
+            Image {
+                id: img
+                source: userImgPath
+                fillMode: Image.PreserveAspectCrop
+
+                anchors.fill: mask
+                layer.enabled: true
+                layer.effect: OpacityMask {
+                    maskSource: mask
+                }
+            }
+
+            Rectangle {
+                id: mask
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+
+                height: commonHeight
+                width: height
+                radius: width / 2
+                opacity: 0;
+
+                //TODO: Сделать возможность изменения фотографии
+                MouseArea {
+                    cursorShape: Qt.PointingHandCursor
+                }
+            }
+  */

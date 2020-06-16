@@ -12,6 +12,9 @@ FramelessWindow {
     width: 1024;
     height: 512;
 
+    minimumWidth: 512;
+    minimumHeight: 512;
+
     title: qsTr("e-journal | " + profileTitle)
 
     // for login out
@@ -29,7 +32,7 @@ FramelessWindow {
 
     property string profileTitle:    "Профиль"
     property string journalTitle:    "Журнал"
-    property string statisticsTitle: "Сатистика"
+    property string statisticsTitle: "Статистика"
     property string settingTitle:    "Настройки"
 
     property string signedUpLogin
@@ -53,6 +56,7 @@ FramelessWindow {
     onSignedUpLoginChanged: {
         userInfo.setUsername(signedUpLogin);
         imgs[1] = userInfo.image;
+        console.log(userInfo.image);
 
         // setting image to the left panel's button
         repeaterPages.itemAt(0).children[0].source = imgs[1];
@@ -347,6 +351,7 @@ FramelessWindow {
     }
 
     onSignalLogout: {
+        userInfo.clearUserData();
         _mainWin.close();
     }
 

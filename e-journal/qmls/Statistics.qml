@@ -5,5 +5,4 @@ Rectangle {
     id: _statistics
     anchors.fill: parent
 
-
 }
