@@ -10,6 +10,8 @@ FramelessWindow {
     minimumWidth: 500
     minimumHeight: 500
 
+    title: qsTr("e-journal | Global Settings")
+
     hasDropMenu: false
 
     property string backColor:      "#242246"
@@ -73,6 +75,5 @@ FramelessWindow {
 
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff;
     }
-
 
 }

@@ -7,6 +7,8 @@ FramelessWindow {
     minimumHeight: 100
     minimumWidth: 100
 
+    title: qsTr("e-journal | Rediction login or password")
+
     hasDropMenu: false;
 
     property string backColor:  "#242246"

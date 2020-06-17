@@ -11,6 +11,9 @@ FramelessWindow {
     minimumHeight: 500
 
     hasDropMenu: false;
+    title: "e-journal | Sign up"
+
+    signal newProfileCreated(string newLogin)
 
     SignupHelper {
         id: _signupHelper
@@ -567,6 +570,12 @@ FramelessWindow {
         duration: 200
     }
 
+    onClosing: {
+        console.log("Closed1");
+        lastRegProfile = "";
+        clearFields();
+    }
+
     function correctAnimStart() {
         userCreatedSuccessAnim.start();
         headerCorrectAnim.start();
@@ -594,7 +603,10 @@ FramelessWindow {
             status = createUser();
         }
 
-        if (status) correctAnimStart();
+        if (status) {
+            correctAnimStart();
+            newProfileCreated(login);
+        }
 
         return status;
     }

@@ -59,7 +59,6 @@ FramelessWindow {
 
         // setting image to the left panel's button
         repeaterPages.itemAt(0).children[0].source = imgs[1];
-
     }
    // end data from DB
 

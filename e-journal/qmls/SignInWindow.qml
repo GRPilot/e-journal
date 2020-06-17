@@ -6,16 +6,20 @@ import QtQuick.Controls 2.12
 import loc.validator 1.0
 
 FramelessWindow {
+    id: signinWindow
+    visible: true
     minimumWidth: 600
     minimumHeight: 600
     maximumHeight: width * 2
 
-    color: backColor
+    title: qsTr("e-journal | Authorization")
 
+    color: backColor
+/*
     signal logined
     signal forgotButtonPressed
     signal signupButtomPressed
-
+*/
     Validator {
         id: _validator
     }
@@ -53,6 +57,27 @@ FramelessWindow {
         GradientStop { position: 0.5;  color: "#FE0069" }
         GradientStop { position: 0.75; color: "#FE00FF" }
         GradientStop { position: 1.0;  color: "#F3FEFA" }
+    }
+
+    Loader {
+        id: loader;
+    }
+
+    Connections {
+        target: loader.item
+        onClosing: {
+            signinWindow.show();
+        }
+
+        // SignupWindow.qml
+        onNewProfileCreated: {
+            login = newLogin;
+        }
+
+        // MainWindow.qml
+        onSignalLogout: {
+            openWindow("SignInWindow.qml")
+        }
     }
 
     Component.onCompleted: {
@@ -106,7 +131,6 @@ FramelessWindow {
                     anchors.horizontalCenter: parent.horizontalCenter
                 }
             }
-
             // login
             AuthBlockPrefab {
                 heightScale: commonScale
@@ -382,7 +406,8 @@ FramelessWindow {
                         onExited: { forgotText.localColor = hyperlinkColor; }
                         onClicked: {
                             forgotText.localColor = hyperlinkPressedColor;
-                            _SignInWin.forgotButtonPressed();
+//                            _SignInWin.forgotButtonPressed();
+                            openReductionWindow();
                         }
                     }
                 }
@@ -410,7 +435,8 @@ FramelessWindow {
                         onExited: { signupText.localColor = hyperlinkColor; }
                         onClicked: {
                             signupText.localColor = hyperlinkPressedColor;
-                            _SignInWin.signupButtomPressed();
+//                            _SignInWin.signupButtomPressed();
+                            openSignupWindow();
                         }
                     }
                 }
@@ -426,7 +452,8 @@ FramelessWindow {
             if (_validator.checkPassWithUser(userLogin, userPass)) {
                 login = userLogin;
                 setWindowDefault();
-                _SignInWin.logined();
+                //_SignInWin.logined();
+                openMainWindow();
             } else {
                 incorrectPassAnim.start();
                 _textPasswordInput.forceActiveFocus();
@@ -443,9 +470,20 @@ FramelessWindow {
         normolizing()
     }
 
-    function onWinLoaded() {
-        _SignInWin.show()
-        _SignInWin.visible = true;
+    function openMainWindow() {
+        openWindow("MainWindow.qml");
+        loader.item.signedUpLogin = login;
+    }
+    function openSignupWindow() {
+        openWindow("SignupWindow.qml");
+    }
+    function openReductionWindow() {
+        openWindow("ReductionWindow.qml");
+    }
+
+    function openWindow(name) {
+        loader.setSource(name.toString());
+        signinWindow.hide();
     }
 }
 

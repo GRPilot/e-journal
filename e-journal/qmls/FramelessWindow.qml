@@ -7,6 +7,8 @@ import QtQuick.Window 2.12
 ApplicationWindow {
     id: _framelessWin
     flags: Qt.FramelessWindowHint
+    width: 600
+    height: 600
     minimumHeight: 100
     minimumWidth: 100 
 
@@ -597,17 +599,17 @@ ApplicationWindow {
     }
 
     onVisibleChanged: {
-        if (defaultWindowHeight === -1)
+        if (defaultWindowHeight === -1 && height > 0) {
             defaultWindowHeight = height;
-        if (defaultWindowWidth === -1)
+        }
+        if (defaultWindowWidth === -1 && width > 0) {
             defaultWindowWidth = width;
+        }
 
         setWidth(defaultWindowWidth);
         setHeight(defaultWindowHeight);
         centeringWindow();
     }
 
-    onSettingShow: {
-        _GlobalSettingWindow.show();
-    }
+
 }
