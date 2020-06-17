@@ -127,11 +127,6 @@ Rectangle {
                 color: "white"
                 font.pointSize: 18
             }
-
-
         }
-
     }
-
-
 }

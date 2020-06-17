@@ -8,6 +8,8 @@ It's just my current individual project from my college practice
   <img src="Screenshots/AuthPage.jpeg" alt="LoginWindow.qml"/>
 </p>
 
+***
+
 ### Sign-up window:
 
 <p align="center">
@@ -15,6 +17,8 @@ It's just my current individual project from my college practice
   <img src="Screenshots/SignupWindowUserCreated.jpg" alt="Success user created">
   <img src="Screenshots/SignupWindowIncorrectData.jpg" alt="Incorrect input and checking username">
 </p>
+
+***
 
 ### Main menu:
 
@@ -33,6 +37,8 @@ It's just my current individual project from my college practice
   <img src="Screenshots/GlobalSettingWindow.jpg" alt="GlobalSettingWindow.qml"/>
 </p>
 
+***
+
 ### Schemes:
 #### The scheme of all project:
 <p align="center">
@@ -42,6 +48,9 @@ It's just my current individual project from my college practice
 #### The scheme of qml side:
 <p align="center">
   <img src="Screenshots/Front-End.svg" alt="The scheme of qml windows ierarchy"/>
+</p>
+<p align="center">
+  <img src="Screenshots/QML files ierarchy.svg" alt="The scheme of qml files' ierarchy"/>
 </p>
 
 #### The scheme of database:

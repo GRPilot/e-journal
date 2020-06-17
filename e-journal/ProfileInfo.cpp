@@ -34,8 +34,7 @@ QString ProfileInfo::groups() const {
 }
 
 QString ProfileInfo::image() const {
-    qDebug() << "[DEBUG] : " << m_imgPath;
-    return m_imgPath;
+    return QString{ "file:///" + m_imgPath };
 }
 
 bool ProfileInfo::clearUserData() {
@@ -74,8 +73,7 @@ bool ProfileInfo::saveImg()
     QFile file("tempImg.jpg");
     file.open(QIODevice::WriteOnly);
 
-    m_imgPath = QString{"%1%2/%3"}
-                .arg("file:///")
+    m_imgPath = QString{"%1/%2"}
                 .arg(QDir::currentPath())
                 .arg("tempImg.jpg");
 

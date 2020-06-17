@@ -45,7 +45,7 @@ FramelessWindow {
             "imgs/cross",
             "imgs/cross",
             "imgs/cross",
-            "imgs/collaps", // setting
+            "imgs/settings", // setting
     ]
 
    // data from DB
@@ -56,10 +56,10 @@ FramelessWindow {
     onSignedUpLoginChanged: {
         userInfo.setUsername(signedUpLogin);
         imgs[1] = userInfo.image;
-        console.log(userInfo.image);
 
         // setting image to the left panel's button
         repeaterPages.itemAt(0).children[0].source = imgs[1];
+
     }
    // end data from DB
 
@@ -131,7 +131,7 @@ FramelessWindow {
             Repeater {
                 id: repeaterPages
                 model: view.count - unColumnedPages
-                Rectangle {
+                delegate: Rectangle {
                     id: rect
                     width: widthOfTabs
                     height: heightOfTabs
@@ -346,13 +346,17 @@ FramelessWindow {
     }
 
     onWidthChanged: {
-        if (width <= widthOfTabs)
+        if (width <= minimumWidth + widthOfTabs)
             tabMinimize();
     }
 
     onSignalLogout: {
-        userInfo.clearUserData();
         _mainWin.close();
+    }
+
+    onClosing: {
+        imgs[1] = "imgs/user";
+        userInfo.clearUserData();
     }
 
     function tabMinimize() {

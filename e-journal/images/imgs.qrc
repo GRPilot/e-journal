@@ -11,5 +11,7 @@
         <file alias="space">space.png</file>
         <file alias="user">user.png</file>
         <file alias="arrow">arrow.svg</file>
+        <file alias="settings">settings.png</file>
     </qresource>
+    <qresource prefix="/"/>
 </RCC>
