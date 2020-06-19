@@ -1,19 +1,29 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.12
+import QtGraphicalEffects 1.0
 import QtQuick.Window 2.12
 
 //TODO: Доделать масштабирование кнопок
 
 ApplicationWindow {
     id: _framelessWin
-    flags: Qt.FramelessWindowHint
+    flags: Qt.FramelessWindowHint | Qt.Window
     width: 600
     height: 600
     minimumHeight: 100
     minimumWidth: 100 
 
-    signal settingShow
     visible: true;
+
+    signal settingShow
+
+    Loader {
+        id: settingLoader
+    }
+
+    onSettingShow: {
+        settingLoader.setSource("GlobalSettingWindow.qml")
+    }
 
 /// Properties
 
@@ -22,8 +32,12 @@ ApplicationWindow {
     property string borderColor: "transparent"
     property string menuColor:   "#212045"
     property string textColor:   "white"
-    property bool isBorderEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
-    property bool isDragWindowEnabled: _framelessWin.visibility !== ApplicationWindow.Maximized
+    property bool isBorderEnabled:
+        _framelessWin.visibility !== ApplicationWindow.Maximized
+
+    property bool isDragWindowEnabled:
+        _framelessWin.visibility !== ApplicationWindow.Maximized
+
     property bool hasDropMenu: true
 
     property string title: "New window"
@@ -39,8 +53,8 @@ ApplicationWindow {
     property int previousY: 0
 
     // Начальные параметры
-    property int defaultWindowWidth: -1
-    property int defaultWindowHeight: -1
+    property int defaultWindowWidth: 500
+    property int defaultWindowHeight: 500
     readonly property int zOfBorders: 2
     readonly property int defaultWindowPositionX: Screen.width / 2 - width / 2
     readonly property int defaultWindowPositionY: Screen.height / 2 - height / 2
@@ -59,10 +73,10 @@ ApplicationWindow {
         readonly property int maxButtonSize: 50
         property int widthOfButtons: maxButtonSize
 
-
         color: headerColor
 
         MouseArea {
+            id: hatMouseArea
             anchors.fill: parent
 
             onDoubleClicked: {
@@ -587,10 +601,10 @@ ApplicationWindow {
     }
     function normolizing() {
         showNormal();
-        centeringWindow();
         isBorderEnabled = true;
         isDragWindowEnabled = true;
         maximizeImg.source = "imgs/expand";
+        centeringWindow();
     }
 
     function centeringWindow() {
@@ -599,10 +613,10 @@ ApplicationWindow {
     }
 
     onVisibleChanged: {
-        if (defaultWindowHeight === -1 && height > 0) {
+        if (defaultWindowHeight === 500 && height > 0) {
             defaultWindowHeight = height;
         }
-        if (defaultWindowWidth === -1 && width > 0) {
+        if (defaultWindowWidth === 500 && width > 0) {
             defaultWindowWidth = width;
         }
 
@@ -611,5 +625,14 @@ ApplicationWindow {
         centeringWindow();
     }
 
-
+    DropShadow {
+      anchors.fill: _hat
+      horizontalOffset: 1
+      verticalOffset: 1
+      radius: hatMouseArea.pressed ? 8 : 5
+      samples: 10
+      source: _hat
+      color: "black"
+      Behavior on radius { PropertyAnimation { duration: 100 } }
+    }
 }

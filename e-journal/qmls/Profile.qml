@@ -47,85 +47,80 @@ Rectangle {
         rotation: -90;
     }
 
-    ScrollView {
-        id: scroll
-        height: _profile.height
-        width: _profile.width / 2
+
+    Column {
+        id: rows
+        width: parent.width / 2
+        spacing: commonSpacing
+        padding: commonPaddings
         clip: true
 
-        Column {
-            id: rows
-            width: parent.width
-            spacing:  commonSpacing
-
-            clip: true
-
-            padding: commonPaddings
-
-            Text {
-                id: name_block
-                width: rows.width
-                text: userName
-                wrapMode: Text.Wrap
-                color: "white"
-                font.pointSize: 24
-                font.italic: true
-                verticalAlignment: Text.AlignVCenter
-            }
-
-            Rectangle {
-                id: line
-                width: rows.width
-                height: 5
-                color: "white"
-                opacity: 0.8
-            }
+        Text {
+            id: name_block
+            width: rows.width
+            text: userName
+            wrapMode: Text.Wrap
+            color: "white"
+            font.pointSize: 24
+            font.italic: true
+            verticalAlignment: Text.AlignVCenter
         }
-        Column {
-            id: rowsOfInfo
-            anchors.top: rows.bottom
-            anchors.left: parent.left
-            anchors.bottom: parent.bottom
-            width: parent.width
 
-            //        columns: 2
-            //        columnSpacing: height / 15
-            //        rowSpacing: height / 20
+        Rectangle {
+            id: line
+            width: rows.width
+            height: 5
+            color: "white"
+            opacity: 0.8
+        }
+    }
 
-            spacing: commonPaddings
+    Item {
+        id: cont
+        anchors.top: rows.bottom
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        width: parent.width / 2
 
-            clip: true
+        clip: true
 
-            padding: commonSpacing
+        ScrollView {
+            anchors.fill: cont
+            Column {
+                id: rowsOfInfo
 
-            Text {
-                id: _subject
+                spacing: commonPaddings
+                padding: commonSpacing
 
-                text: qsTr("Предметы:")
-                wrapMode: Text.Wrap
+                Text {
+                    id: _subject
 
-                color: "white"
-                font.pointSize: 18
-            }
+                    text: qsTr("Предметы:")
+                    wrapMode: Text.Wrap
 
-            Text {
-                id: subjects
-                width: parent.width - _subject.width
-                wrapMode: Text.WordWrap
-                text: userSubject;
-                color: "white"
-                font.pointSize: 18
-                leftPadding: commonPaddings
+                    color: "white"
+                    font.pointSize: 18
+                    font.bold: true
+                }
 
-            }
+                Text {
+                    id: subjectList
+                    width: cont.width - commonPaddings * 2
+                    wrapMode: Text.WordWrap
+                    text: userSubject;
+                    color: "white"
+                    font.pointSize: 18
+                    leftPadding: commonPaddings
+                }
 
-            Text {
-                id: groups_block
-                width: parent.width
-                text: qsTr("Группы: ") + userGroups;
-                wrapMode: Text.Wrap
-                color: "white"
-                font.pointSize: 18
+                Text {
+                    id: groups_block
+                    width: cont.width - commonPaddings * 2
+                    text: qsTr("<b>" + "Группы:" + "</b> " + userGroups);
+                    wrapMode: Text.Wrap
+                    color: "white"
+                    font.pointSize: 18
+                }
             }
         }
     }

@@ -34,6 +34,9 @@ QString ProfileInfo::groups() const {
 }
 
 QString ProfileInfo::image() const {
+    if (m_imgPath == "imgs/user")
+        return  m_imgPath;
+
     return QString{ "file:///" + m_imgPath };
 }
 
@@ -43,7 +46,7 @@ bool ProfileInfo::clearUserData() {
     m_groups.clear();
 
     bool status{ QFile::remove(m_imgPath) };
-    m_imgPath = ":/imgs/user";
+    m_imgPath = "imgs/user";
 
     return status;
 }

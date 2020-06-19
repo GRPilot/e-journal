@@ -245,7 +245,8 @@ FramelessWindow {
                 onClicked: {
                     view.currentIndex = view.count - unColumnedPages;
                     title = qsTr("e-journal | " + settingTitle);
-                    focus = true;
+                    settingPage.loadUserData();
+                    forceActiveFocus();
                 }
             }
         }
@@ -303,7 +304,23 @@ FramelessWindow {
             Tab {
                 title: settingTitle
                 Setting {
+                    id: settingPage
+
                     color: page_color
+
+                    function loadUserData() {
+                        settingPage.login       = signedUpLogin;
+                        settingPage.userName    = userInfo.name;
+                        settingPage.userGroups  = userInfo.groups;
+                        settingPage.userSubject = userInfo.subjects;
+                        settingPage.userImgPath = userInfo.image;
+
+                        if (userGroups === qsTr("<no items>"))
+                            userGroups = qsTr("нет групп");
+
+                        if (userSubject === qsTr("<no items>"))
+                            userSubject = qsTr("нет предметов");
+                    }
                 }
             }
         }

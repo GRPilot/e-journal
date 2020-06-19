@@ -8,6 +8,7 @@ Rectangle {
     clip: true
     width: 50;
 
+    property int headerWidht: 25
     property string header: qsTr("<header>")
     property alias headerBottomAnchor: _header.bottom
 
@@ -15,7 +16,7 @@ Rectangle {
         id: _header
         anchors.left: _settingBlock.left
         anchors.right: _settingBlock.right
-        height: 25
+        height: headerWidht
         color: Qt.rgba(0, 0, 0, 0.3)
         radius: _settingBlock.radius
         Text {

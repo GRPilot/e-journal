@@ -15,13 +15,30 @@ FramelessWindow {
     title: qsTr("e-journal | Authorization")
 
     color: backColor
-/*
-    signal logined
-    signal forgotButtonPressed
-    signal signupButtomPressed
-*/
+
     Validator {
         id: _validator
+    }
+
+    Loader {
+        id: loader;
+    }
+
+    Connections {
+        target: loader.item
+        onClosing: {
+            signinWindow.show();
+        }
+
+        // SignupWindow.qml
+        onNewProfileCreated: {
+            login = newLogin;
+        }
+
+        // MainWindow.qml
+        onSignalLogout: {
+            signinWindow.show()
+        }
     }
 
     property string backColor:  "#242246"
@@ -59,26 +76,7 @@ FramelessWindow {
         GradientStop { position: 1.0;  color: "#F3FEFA" }
     }
 
-    Loader {
-        id: loader;
-    }
 
-    Connections {
-        target: loader.item
-        onClosing: {
-            signinWindow.show();
-        }
-
-        // SignupWindow.qml
-        onNewProfileCreated: {
-            login = newLogin;
-        }
-
-        // MainWindow.qml
-        onSignalLogout: {
-            openWindow("SignInWindow.qml")
-        }
-    }
 
     Component.onCompleted: {
         setX(Screen.width / 2 - width / 2);
@@ -406,7 +404,6 @@ FramelessWindow {
                         onExited: { forgotText.localColor = hyperlinkColor; }
                         onClicked: {
                             forgotText.localColor = hyperlinkPressedColor;
-//                            _SignInWin.forgotButtonPressed();
                             openReductionWindow();
                         }
                     }
@@ -435,7 +432,6 @@ FramelessWindow {
                         onExited: { signupText.localColor = hyperlinkColor; }
                         onClicked: {
                             signupText.localColor = hyperlinkPressedColor;
-//                            _SignInWin.signupButtomPressed();
                             openSignupWindow();
                         }
                     }
@@ -486,9 +482,3 @@ FramelessWindow {
         signinWindow.hide();
     }
 }
-
-
-
-
-
-
